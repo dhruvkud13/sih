@@ -20,7 +20,7 @@ export const signin = async (req, res, next) => {
       const user = await User.findOne({ sapid: req.body.sapid });
       if (!user) return next(createError(404, "user not found!"));
 
-      if (user.email!==req.body.email) return next(createError(404, "email mismatch!"));
+      if (user.username!==req.body.username) return next(createError(404, "username mismatch!"));
       if (user.password!==req.body.password) return next(createError(404, "password mismatch!"));
   
       const token = jwt.sign({ id: user._id }, process.env.JWT);

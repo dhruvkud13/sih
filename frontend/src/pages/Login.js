@@ -5,36 +5,36 @@ import {
   AiOutlineEye,
   AiOutlineLogin,
 } from "react-icons/ai";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 import { loginFailure, loginSuccess, loginStart } from "../redux/userSlice";
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const [passwordShown, setPasswordShown] = useState(false);
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordShown, setPasswordShown] = useState(false);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        dispatch(loginStart());
-        try {
-            const res = await axios.post("/auth/signin", { username, password });
-            // console.log(res.data);
-            dispatch(loginSuccess(res.data));
-            if (res.data.typeofuser === "admin") {
-                navigate("/admin");
-            }
-            if (res.data.typeofuser === "user") {
-                navigate('/user');
-            }
-        } catch (err) {
-            dispatch(loginFailure());
-        }
-    };
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    try {
+      const res = await axios.post("/auth/signin", { username, password });
+      // console.log(res.data);
+      dispatch(loginSuccess(res.data));
+      if (res.data.typeofuser === "admin") {
+        navigate("/admin");
+      }
+      if (res.data.typeofuser === "user") {
+        navigate("/user");
+      }
+    } catch (err) {
+      dispatch(loginFailure());
+    }
+  };
   return (
     <div className="flex flex-col items-center justify-center min-h-screen min-w-full font-raleway">
       <div className="h-96 w-96 rounded-xl bg-bgblue flex flex-col items-center justify-center">
@@ -54,7 +54,7 @@ const Login = () => {
               <input
                 type="text"
                 className="text-black relative  border-none bg-transparent outline-none w-64"
-                onChange={e => setUsername(e.target.value)}
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
@@ -70,7 +70,7 @@ const Login = () => {
               <input
                 type={passwordShown ? "text" : "password"}
                 className="text-black relative  border-none bg-transparent outline-none w-64"
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -96,11 +96,18 @@ const Login = () => {
           </div>
         </div>
         <div className="flex justify-between w-72 mt-3 text-white text-xs ">
-          <div className="hover:font-semibold duration-100">New here? Sign up</div>
-          <div className="hover:font-semibold duration-100">Forgot Password?</div> 
+          <div className="hover:font-semibold duration-100">
+            New here? Sign up
+          </div>
+          <div className="hover:font-semibold duration-100">
+            Forgot Password?
+          </div>
         </div>
         <div className="mt-6">
-          <button className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold">
+          <button
+            onClick={handleLogin}
+            className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
+          >
             LOGIN
           </button>
         </div>
