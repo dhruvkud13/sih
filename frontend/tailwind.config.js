@@ -11,8 +11,12 @@ module.exports = {
         txtgrey: "#979797",
         govtblue: "#093C7C",
         bgblue: "#2C67B2",
+        logoblue: "#282C83"
       },
-      fontFamily: { raleway: ["Raleway", "sans-serif"] },
+      fontFamily: {
+        raleway: ["Raleway", "sans-serif"],
+        league: ["League Spartan", "sans-serif"],
+      },
     },
   },
   plugins: [],
