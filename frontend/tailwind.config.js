@@ -9,6 +9,8 @@ module.exports = {
         purple: "#9C7CA5",
         bgdark: "#202124",
         txtgrey: "#979797",
+        govtblue: "#093C7C",
+        bgblue: "#2C67B2",
       },
       fontFamily: { raleway: ["Raleway", "sans-serif"] },
     },
