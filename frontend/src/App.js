@@ -5,7 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import Signup from "./pages/Signup";
 function App() {
   return (
-    <div className="App">
+    <div className="App bg-white">
       <Router>
         <Navbar />
         <Routes>
