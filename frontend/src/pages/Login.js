@@ -53,7 +53,7 @@ const Login = () => {
               <div className=" text-txtgrey text-[12px]">Username</div>
               <input
                 type="text"
-                className="text-black relative  border-none bg-transparent outline-none w-64"
+                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setUsername(e.target.value)}
               />
             </div>
@@ -69,7 +69,7 @@ const Login = () => {
               <div className=" text-txtgrey text-[12px]">Password</div>
               <input
                 type={passwordShown ? "text" : "password"}
-                className="text-black relative  border-none bg-transparent outline-none w-64"
+                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
