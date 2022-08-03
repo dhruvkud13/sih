@@ -2,13 +2,7 @@ import mongoose from "mongoose";
 
 const UserSchema = new mongoose.Schema(
   {
-    sapid:{
-      type: Number,
-      required: true,
-      size:10,
-      unique: true
-    },
-    name: {
+    username: {
       type: "string",
       required: true,
       unique: true,
@@ -22,20 +16,13 @@ const UserSchema = new mongoose.Schema(
       type: "string",
       required: true,
     },
-    profileimg: {
-      type: "string",
-    },
-    typeofuser:{
-      type: "string",
-      required: true,
-    },
-    teams:{
-      type: ["string"],
-      default: []
-    },
-    studentid:{
-      type: "string",
-    }
+    // profileimg: {
+    //   type: "string",
+    // },
+    // typeofuser:{
+    //   type: "string",
+    //   required: true,
+    // },
   },
   {
     timestamps: true,
