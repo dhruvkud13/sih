@@ -19,10 +19,10 @@ const UserSchema = new mongoose.Schema(
     // profileimg: {
     //   type: "string",
     // },
-    // typeofuser:{
-    //   type: "string",
-    //   required: true,
-    // },
+    typeofuser:{
+      type: "string",
+      required: true,
+    },
   },
   {
     timestamps: true,
