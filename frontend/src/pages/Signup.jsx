@@ -17,7 +17,7 @@ const SignUp = () => {
           <div className="flex justify-center items-center pr-2">
             <AiOutlineLogin size={30} color="#ffffff" />
           </div>
-          <div className=" font-semibold text-white text-[30px]">signup</div>
+          <div className=" font-semibold text-white text-[30px]">Signup</div>
         </div>
         <div className="rounded-full mt-2">
           <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl ">
