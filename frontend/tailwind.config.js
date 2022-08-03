@@ -8,6 +8,7 @@ module.exports = {
         bright_pink: "#F9627D",
         purple: "#9C7CA5",
         bgdark: "#202124",
+        txtgrey: "#979797",
       },
       fontFamily: { raleway: ["Raleway", "sans-serif"] },
     },
