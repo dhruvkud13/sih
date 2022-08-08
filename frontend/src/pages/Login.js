@@ -23,12 +23,12 @@ const Login = () => {
     dispatch(loginStart());
     try {
       const res = await axios.post("/auth/signin", { username, password });
-      // console.log(res.data);
+      console.log(res.data);
       dispatch(loginSuccess(res.data));
       if (res.data.typeofuser === "admin") {
         navigate("/admin");
       }
-      if (res.data.typeofuser === "user") {
+      else {
         navigate("/user");
       }
     } catch (err) {

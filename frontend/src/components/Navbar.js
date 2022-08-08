@@ -1,13 +1,32 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { logout } from '../redux/userSlice';
+import axios from "axios";
 const Navbar = () => {
   var [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const navigate= useNavigate();
+  const dispatch= useDispatch();
+
+  const logoutUser = async () => {
+    dispatch(logout());
+    navigate("/");
+    try {
+        const res = await axios.get("auth/logout")
+        console.log(res);
+
+    } catch (e) {
+        console.log(e.response);
+
+    }
+}
   return (
     <div className={style.navbarStyle}>
       <div className="font-raleway  text-2xl cursor-pointer text-white">
         ICCR<span className="font-extrabold ml-1">DMS</span>
       </div>
       {isLoggedIn ? (
-        <button type="button" className={style.buttonStyle}>
+        <button onClick={logoutUser} type="button" className={style.buttonStyle}>
           Logout
         </button>
       ) : (

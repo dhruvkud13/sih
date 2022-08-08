@@ -21,7 +21,6 @@ const UserSchema = new mongoose.Schema(
     // },
     typeofuser:{
       type: "string",
-      required: true,
     },
   },
   {

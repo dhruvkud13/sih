@@ -7,7 +7,7 @@ import jwt from "jsonwebtoken";
 export const signup = async (req, res, next) => {
     try {
       const newUser = new User({ ...req.body});
-      console.log(newUser);
+      // console.log(newUser);
       await newUser.save();
       res.status(200).send("user has been created");
     } catch (err) {
@@ -17,7 +17,7 @@ export const signup = async (req, res, next) => {
 
 export const signin = async (req, res, next) => {
     try {
-      const user = await User.findOne({ sapid: req.body.sapid });
+      const user = await User.findOne({ username: req.body.username });
       if (!user) return next(createError(404, "user not found!"));
 
       if (user.username!==req.body.username) return next(createError(404, "username mismatch!"));
