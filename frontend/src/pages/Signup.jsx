@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { useState } from "react";
 import {
   AiOutlineUser,
@@ -6,10 +7,36 @@ import {
   AiOutlineLogin,
   AiOutlineMail,
 } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
+  //signup functionality
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    if (password !== confirmPassword) {
+      alert("Password does not match");
+    } else {
+      try {
+        await axios.post("/auth/signup", {
+          username,
+          email,
+          password: confirmPassword,
+        });
+        navigate("/login");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen min-w-full bg-white font-raleway">
       <div className="h-[32rem] w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center">
@@ -25,7 +52,9 @@ const SignUp = () => {
               <div className=" text-txtgrey text-[12px]">Username</div>
               <input
                 type="text"
+                // value={username}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setUsername(e.target.value)}
               />
             </div>
 
@@ -40,7 +69,9 @@ const SignUp = () => {
               <div className=" text-txtgrey text-[12px]">Email</div>
               <input
                 type="text"
+                // value={email}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -55,7 +86,9 @@ const SignUp = () => {
               <div className=" text-txtgrey text-[12px]">Password</div>
               <input
                 type={passwordShown ? "text" : "password"}
+                // value={password}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
@@ -86,7 +119,9 @@ const SignUp = () => {
               <div className=" text-txtgrey text-[12px]">Confirm Password</div>
               <input
                 type={cPassShown ? "text" : "password"}
+                // value={confirmPassword}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setConfirmPassword(e.target.value)}
               />
             </div>
 
@@ -112,7 +147,10 @@ const SignUp = () => {
           </div>
         </div>
         <div className="mt-8">
-          <button className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold">
+          <button
+            onClick={handleSignup}
+            className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold"
+          >
             SIGNUP
           </button>
         </div>
