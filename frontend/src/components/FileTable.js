@@ -1,8 +1,7 @@
 import React from "react";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
-import "react-data-table-component-extensions/dist/index.css";
-
+import "./FileTable.css";
 import { columns, data } from "../data";
 
 function FileTable() {
@@ -12,19 +11,17 @@ function FileTable() {
   };
 
   return (
-    <div className="main">
+    <div className="">
       <DataTableExtensions {...tableData}>
-        <div className="m-3">
-          <DataTable
-            columns={columns}
-            data={data}
-            noHeader
-            defaultSortField="id"
-            defaultSortAsc={false}
-            pagination
-            highlightOnHover
-          />
-        </div>
+        <DataTable
+          columns={columns}
+          data={data}
+          noHeader
+          defaultSortField="id"
+          defaultSortAsc={false}
+          pagination
+          highlightOnHover
+        />
       </DataTableExtensions>
     </div>
   );
