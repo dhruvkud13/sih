@@ -9,6 +9,8 @@ import { useDispatch } from "react-redux";
 import { loginFailure, loginSuccess, loginStart } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import loginimage from '../images/loginimage.svg';
+import Fade from "react-reveal/Fade";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -36,7 +38,13 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen min-w-full font-raleway">
+    <div className="flex">
+    <div className="min-h-screen justify-center items-center flex w-1/2">
+        <img src={loginimage} alt="login" height="800" width="800" />
+    </div>
+    <Fade right>
+    <div className="flex flex-col items-center justify-center min-h-screen font-raleway w-1/2">
+      
       <div className="h-96 w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center">
         <div className="flex flex-row">
           <div className="flex justify-center items-center pr-2">
@@ -112,6 +120,8 @@ const Login = () => {
           </button>
         </div>
       </div>
+    </div>
+    </Fade>
     </div>
   );
 };

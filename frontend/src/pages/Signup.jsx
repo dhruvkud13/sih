@@ -8,6 +8,8 @@ import {
   AiOutlineMail,
 } from "react-icons/ai";
 import { useNavigate } from "react-router-dom";
+import signupimage from '../images/signupimage.svg';
+import Fade from "react-reveal/Fade";
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -38,7 +40,12 @@ const SignUp = () => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen min-w-full bg-white font-raleway">
+    <div className="flex min-h-screen">
+    <div className="justify-center items-center flex w-1/2">
+        <img src={signupimage} alt="login" height="800" width="800" />
+    </div>
+    <Fade right>
+    <div className="flex flex-col items-center justify-center w-1/2 font-raleway">
       <div className="h-[32rem] w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center">
         <div className="flex flex-row mb-5">
           <div className="flex justify-center items-center pr-2">
@@ -155,6 +162,8 @@ const SignUp = () => {
           </button>
         </div>
       </div>
+    </div>
+    </Fade>
     </div>
   );
 };

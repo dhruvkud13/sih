@@ -14,7 +14,7 @@ const Navbar = () => {
     try {
         const res = await axios.get("auth/logout")
         console.log(res);
-
+setIsLoggedIn(false);
     } catch (e) {
         console.log(e.response);
 
