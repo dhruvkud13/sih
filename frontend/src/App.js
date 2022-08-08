@@ -5,6 +5,7 @@ import LandingPage from "./pages/LandingPage";
 import Signup from "./pages/Signup";
 import AdminHome from "./pages/admin/Home";
 import UserHome from "./pages/user/Home";
+import Filesys from "./pages/FileSystem";
 function App() {
   return (
     <div className="App bg-white">
@@ -16,6 +17,7 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/user" element={<UserHome />} />
+          <Route path="/files" element={<Filesys />} />
         </Routes>
       </Router>
     </div>
