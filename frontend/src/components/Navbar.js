@@ -3,11 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { logout } from '../redux/userSlice';
 import axios from "axios";
+import { useSelector } from "react-redux";
 const Navbar = () => {
-  var [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const navigate= useNavigate();
   const dispatch= useDispatch();
-
+  const{user}=useSelector(state=>state.user);
   const logoutUser = async () => {
     dispatch(logout());
     navigate("/");
@@ -25,7 +25,7 @@ const Navbar = () => {
       <div className="font-raleway  text-2xl cursor-pointer text-white">
         ICCR<span className="font-extrabold ml-1">DMS</span>
       </div>
-      {isLoggedIn ? (
+      {user!=null ? (
         <button onClick={logoutUser} type="button" className={style.buttonStyle}>
           Logout
         </button>
