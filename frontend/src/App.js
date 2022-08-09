@@ -6,6 +6,7 @@ import Signup from "./pages/Signup";
 import AdminHome from "./pages/admin/Home";
 import UserHome from "./pages/user/Home";
 import Filesys from "./pages/FileSystem";
+import FileViewer from "./components/FileViewer";
 function App() {
   return (
     <div className="App bg-white scrollbar-hide">
@@ -19,6 +20,7 @@ function App() {
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/user" element={<UserHome />} />
           <Route path="/files" element={<Filesys />} />
+          <Route path="/viewer" element={<FileViewer />} />
         </Routes>
       </Router>
     </div>

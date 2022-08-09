@@ -153,7 +153,13 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-2">
+        <div 
+                className="hover:font-semibold duration-100 mb-6 text-white"
+                onClick={()=>navigate("/login")}
+              >
+                Already a user? Login
+              </div>
           <button
             onClick={handleSignup}
             className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold"
