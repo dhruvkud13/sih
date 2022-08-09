@@ -8,7 +8,7 @@ import UserHome from "./pages/user/Home";
 import Filesys from "./pages/FileSystem";
 function App() {
   return (
-    <div className="App bg-white">
+    <div className="App bg-white scrollbar-hide">
       <Router>
         <Navbar />
         <Routes>
