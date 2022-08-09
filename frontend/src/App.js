@@ -20,7 +20,7 @@ function App() {
           <Route path="/admin" element={<AdminHome />} />
           <Route path="/user" element={<UserHome />} />
           <Route path="/files" element={<Filesys />} />
-          <Route path="/viewer" element={<FileViewer />} />
+          {/* <Route path="/viewer" element={<FileViewer />} /> */}
         </Routes>
       </Router>
     </div>
