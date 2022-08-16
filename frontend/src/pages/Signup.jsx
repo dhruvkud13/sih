@@ -6,16 +6,19 @@ import {
   AiOutlineEye,
   AiOutlineLogin,
   AiOutlineMail,
+  AiOutlinePhone,
 } from "react-icons/ai";
+import {BsCalendarDate} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import signupimage from '../images/signupimage.svg';
 import Fade from "react-reveal/Fade";
+import './Signup.css';
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
   //signup functionality
-  const [username, setUsername] = useState("");
+  const [fullname, setFullname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -28,7 +31,7 @@ const SignUp = () => {
     } else {
       try {
         await axios.post("/auth/signup", {
-          username,
+          fullname,
           email,
           password: confirmPassword,
         });
@@ -46,8 +49,8 @@ const SignUp = () => {
     </div>
     <Fade right>
     <div className="flex flex-col items-center justify-center w-1/2 font-raleway">
-      <div className="h-[32rem] w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center">
-        <div className="flex flex-row mb-5">
+      <div className="h-[40rem] w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center mt-10">
+        <div className="flex flex-row mb-2">
           <div className="flex justify-center items-center pr-2">
             <AiOutlineLogin size={30} color="#ffffff" />
           </div>
@@ -56,17 +59,53 @@ const SignUp = () => {
         <div className="rounded-full mt-2">
           <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl ">
             <div className="flex flex-col ">
-              <div className=" text-txtgrey text-[12px]">Username</div>
+              <div className=" text-txtgrey text-[12px]">Fullname</div>
               <input
                 type="text"
                 // value={username}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setFullname(e.target.value)}
               />
             </div>
 
             <div className="flex items-center justify-center mt-1">
               <AiOutlineUser size={20} color="#979797" />
+            </div>
+          </div>
+        </div>
+        <div className="rounded-full mt-4">
+          <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl ">
+            <div className="flex flex-col ">
+              <div className=" text-txtgrey text-[12px]">Contact No.</div>
+              <input
+                type="number"
+                // value={username}
+                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setFullname(e.target.value)}
+              />
+            </div>
+
+            <div className="flex items-center justify-center mt-1">
+              <AiOutlinePhone size={20} color="#979797" />
+            </div>
+          </div>
+        </div>
+        <div className="rounded-full mt-4">
+          <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl">
+            <div className="flex flex-col ">
+              <div className=" text-txtgrey text-[12px]">Date Of Birth</div>
+              <input
+                type="date"
+                style={{color:"grey"}}
+                
+                // value={username}
+                className="text-black border-none bg-transparent outline-none w-[22rem]"
+                onChange={(e) => setFullname(e.target.value)}
+              />
+            </div>
+
+            <div className="flex items-center justify-center mt-1 absolute">
+              {/* <BsCalendarDate size={30} color="#979797" className="pr-4"  /> */}
             </div>
           </div>
         </div>
@@ -155,7 +194,7 @@ const SignUp = () => {
         </div>
         <div className="mt-2">
         <div 
-                className="hover:font-semibold duration-100 mb-6 text-white"
+                className="hover:font-semibold duration-100 mb-4 text-white"
                 onClick={()=>navigate("/login")}
               >
                 Already a user? Login
