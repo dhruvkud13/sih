@@ -4,11 +4,13 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     /* color: rgba(160, 160, 160, 0); */
     /* opacity: 1; */
     /* padding-left: 20px; */
-    margin-left: 200px;
+    /* margin-left: 150px; */
     display: block;
-    background: url('C:/Users/Dhruv/Documents/GitHub/sih/frontend/src/images/new.png') no-repeat;
+    background: url('D:/Work/webDev/sih/frontend/src/images/new.png') no-repeat;
     /* width: 200px; */
-    height: 20px;
+    /* height: px; */
+    /* margin-top: 30px; */
+    padding-top: 10px;
     border-width: thin;
 }
 
