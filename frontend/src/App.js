@@ -6,7 +6,7 @@ import Signup from "./pages/Signup";
 import AdminHome from "./pages/admin/Home";
 import UserHome from "./pages/user/Home";
 import Filesys from "./pages/FileSystem";
-import {FileView} from "./components/FileViewer";
+import { FileView } from "./components/FileViewer";
 import { Worker } from "@react-pdf-viewer/core";
 function App() {
   return (

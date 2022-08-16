@@ -1,0 +1,18 @@
+
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    /* color: rgba(160, 160, 160, 0); */
+    /* opacity: 1; */
+    /* padding-left: 20px; */
+    margin-left: 200px;
+    display: block;
+    background: url('C:/Users/Dhruv/Documents/GitHub/sih/frontend/src/images/new.png') no-repeat;
+    /* width: 200px; */
+    height: 20px;
+    border-width: thin;
+}
+
+input[type="date"]{
+    width:376px;
+    
+}
