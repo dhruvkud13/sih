@@ -22,7 +22,6 @@ function App() {
             <Route path="/admin" element={<AdminHome />} />
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
-            <Route path="/viewer" element={<FileView />} />
           </Routes>
         </Router>
       </Worker>
