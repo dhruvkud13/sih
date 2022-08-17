@@ -13,8 +13,9 @@ import { useNavigate } from "react-router-dom";
 import signupimage from '../images/signupimage.svg';
 import Fade from "react-reveal/Fade";
 import './Signup.css';
-import SimpleReactValidator from 'simple-react-validator';
 import { useEffect } from "react";
+import validator from 'validator';
+
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
@@ -27,15 +28,39 @@ const SignUp = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(()=>{
-    new SimpleReactValidator();
+  const [error, setError] = useState("");
 
-  })
 
   const handleSignup = async (e) => {
     e.preventDefault();
+    const isValid=validator.isEmail(email)
+    const isNumber=validator.isMobilePhone(contact,'en-IN')
+    const isName=validator.isAlpha(fullname)
+    const isPass=validator.isStrongPassword(password,{minLength:8,minLowercase:1,minUppercase:1,minNumeric:1,minSymbol:1})
+    
+    // console.log(isValid);
+    if(!isPass){
+      console.log('validator running')
+      setError("Please enter a strong password (password must contain atleast 8 characters, 1 lowercase, 1 uppercase, 1 numeric and 1 symbol)");
+    };
+
+    if(!isValid){
+      console.log('validator running')
+      setError("Email format is invalid");
+    };
+    if(!isNumber){
+      console.log('validator running')
+      setError("Contact format is invalid");
+    };
+    if(!isName){
+      console.log('validator running')
+      setError("Name format is invalid");
+    };
+    
+    
+
     if (password !== confirmPassword) {
-      alert("Password does not match");
+      setError("Password does not match");
     } else {
       try {
         await axios.post("/auth/signup", {
@@ -73,10 +98,10 @@ const SignUp = () => {
               <div className=" text-txtgrey text-[12px]">Fullname</div>
               <input
                 type="text"
-                // value={username}
+                // value={fullname}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setFullname(e.target.value)}
-                pattern="[a-zA-Z ]{3,10}"
+
               />
             </div>
 
@@ -94,6 +119,8 @@ const SignUp = () => {
                 // value={username}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setContact(e.target.value)}
+                defaultValue="+91"
+                
               />
             </div>
 
@@ -107,9 +134,9 @@ const SignUp = () => {
             <div className="flex flex-col ">
               <div className=" text-txtgrey text-[12px]">Date Of Birth</div>
               <input
-                type="date"
-                style={{color:"grey"}}
-                
+                type="date" max={new Date().toISOString().split("T")[0]}
+                style={{color:"black"}}
+                required
                 // value={username}
                 className="text-black border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setDob(e.target.value)}
@@ -204,16 +231,23 @@ const SignUp = () => {
             </div>
           </div>
         </div>
-        <div className="mt-2">
-        <div 
+        {!error?<div 
+                className="hover:font-semibold duration-100 mb-2 text-white cursor-pointer mt-3"
+                onClick={()=>navigate("/login")}
+              >
+                Already a user? Login
+              </div> : <div className="text-black text-sm mt-4 px-10 mb-3">{error}</div>}
+        {/* {error!==""  && <div className="text-white text-sm mt-4 px-10">{error}</div>} */}
+        <div className="">
+        {/* <div 
                 className="hover:font-semibold duration-100 mb-4 text-white cursor-pointer"
                 onClick={()=>navigate("/login")}
               >
                 Already a user? Login
-              </div>
+              </div> */}
           <button
             onClick={handleSignup}
-            className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold"
+            className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold ml-5 mb-1"
           >
             SIGNUP
           </button>
