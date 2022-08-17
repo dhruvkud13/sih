@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 import signupimage from '../images/signupimage.svg';
 import Fade from "react-reveal/Fade";
 import './Signup.css';
-
+import SimpleReactValidator from 'simple-react-validator';
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
@@ -194,7 +194,7 @@ const SignUp = () => {
         </div>
         <div className="mt-2">
         <div 
-                className="hover:font-semibold duration-100 mb-4 text-white"
+                className="hover:font-semibold duration-100 mb-4 text-white cursor-pointer"
                 onClick={()=>navigate("/login")}
               >
                 Already a user? Login
