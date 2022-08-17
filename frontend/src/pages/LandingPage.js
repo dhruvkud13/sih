@@ -4,7 +4,7 @@ import Fade from "react-reveal/Fade";
 import "@fontsource/league-spartan";
 const LandingPage = () => {
   return (
-    <div className="pt-16">
+    <div className="">
       <Fade bottom>
         <div className="min-w-full px-72 pt-5">
           <img src={logo}></img>

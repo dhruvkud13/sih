@@ -36,7 +36,7 @@ const Navbar = () => {
 };
 const style = {
   navbarStyle:
-    "min-w-full fixed shadow-md w-full h-16 bg-govtblue flex justify-between px-5 items-center",
+    "min-w-full sticky-top shadow-md w-full h-16 bg-govtblue flex justify-between px-5 items-center",
   buttonStyle:
     "text-white bg-bgblue hover:bg-bgdark duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
 };
