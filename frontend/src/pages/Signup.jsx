@@ -14,15 +14,23 @@ import signupimage from '../images/signupimage.svg';
 import Fade from "react-reveal/Fade";
 import './Signup.css';
 import SimpleReactValidator from 'simple-react-validator';
+import { useEffect } from "react";
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
   //signup functionality
   const [fullname, setFullname] = useState("");
+  const [contact, setContact] = useState("");
+  const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(()=>{
+    new SimpleReactValidator();
+
+  })
 
   const handleSignup = async (e) => {
     e.preventDefault();
@@ -34,6 +42,9 @@ const SignUp = () => {
           fullname,
           email,
           password: confirmPassword,
+          dob: dob,
+          contact: contact,
+
         });
         navigate("/login");
       } catch (err) {
@@ -65,6 +76,7 @@ const SignUp = () => {
                 // value={username}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
                 onChange={(e) => setFullname(e.target.value)}
+                pattern="[a-zA-Z ]{3,10}"
               />
             </div>
 
@@ -78,10 +90,10 @@ const SignUp = () => {
             <div className="flex flex-col ">
               <div className=" text-txtgrey text-[12px]">Contact No.</div>
               <input
-                type="number"
+                type="text"
                 // value={username}
                 className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setFullname(e.target.value)}
+                onChange={(e) => setContact(e.target.value)}
               />
             </div>
 
@@ -100,7 +112,7 @@ const SignUp = () => {
                 
                 // value={username}
                 className="text-black border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setFullname(e.target.value)}
+                onChange={(e) => setDob(e.target.value)}
               />
             </div>
 
