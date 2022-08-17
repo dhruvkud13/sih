@@ -4,7 +4,7 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import { columns, data } from "../data";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { useDispatch } from "react-redux";
-import { setModal } from "../redux/fileModalSlice";
+import { setModal } from "../redux/fileModalSlice.js";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 function FileTable() {
@@ -30,7 +30,7 @@ function FileTable() {
           />
         </DataTableExtensions>
       </div>
-      {modal.isModal ? <FileView /> : <div></div>}
+      {modal.isModal ? <FileView type={"pdf"}/> : <div></div>}
     </div>
   );
 }

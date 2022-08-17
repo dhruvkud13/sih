@@ -11,7 +11,7 @@ import { Worker } from "@react-pdf-viewer/core";
 function App() {
   return (
     <div className="App bg-white scrollbar-hide">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
         <Router>
           <Navbar />
           <Routes>
