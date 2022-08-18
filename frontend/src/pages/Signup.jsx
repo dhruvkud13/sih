@@ -7,14 +7,16 @@ import {
   AiOutlineLogin,
   AiOutlineMail,
   AiOutlinePhone,
+  AiOutlineCalendar,
 } from "react-icons/ai";
-import {BsCalendarDate} from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
-import signupimage from '../images/signupimage.svg';
+import signupimage from "../images/signupimage.svg";
 import Fade from "react-reveal/Fade";
+
 import './Signup.css';
 import { useEffect } from "react";
 import validator from 'validator';
+
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -80,8 +82,9 @@ const SignUp = () => {
 
   return (
     <div className="flex min-h-screen">
-    <div className="justify-center items-center flex w-1/2">
+      <div className="justify-center items-center flex w-1/2">
         <img src={signupimage} alt="login" height="800" width="800" />
+
     </div>
     <Fade right>
     <div className="flex flex-col items-center justify-center w-1/2 font-raleway">
@@ -103,7 +106,19 @@ const SignUp = () => {
                 onChange={(e) => setFullname(e.target.value)}
 
               />
+              
             </div>
+            <div className="rounded-full mt-1">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl ">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">Fullname</div>
+                  <input
+                    type="text"
+                    // value={username}
+                    className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setFullname(e.target.value)}
+                  />
+                </div>
 
             <div className="flex items-center justify-center mt-1">
               <AiOutlineUser size={20} color="#979797" />
@@ -123,6 +138,17 @@ const SignUp = () => {
                 
               />
             </div>
+            <div className="rounded-full mt-4">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl ">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">Contact No.</div>
+                  <input
+                    type="text"
+                    // value={username}
+                    className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setFullname(e.target.value)}
+                  />
+                </div>
 
             <div className="flex items-center justify-center mt-1">
               <AiOutlinePhone size={20} color="#979797" />
@@ -142,92 +168,108 @@ const SignUp = () => {
                 onChange={(e) => setDob(e.target.value)}
               />
             </div>
+            <div className="rounded-full mt-4">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">Date Of Birth</div>
+                  <input
+                    type="date"
+                    style={{ color: "grey" }}
+                    // value={username}
+                    className="text-black border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setFullname(e.target.value)}
+                  />
+                </div>
 
-            <div className="flex items-center justify-center mt-1 absolute">
-              {/* <BsCalendarDate size={30} color="#979797" className="pr-4"  /> */}
+                <div className="flex items-center justify-center">
+                  {/* <AiOutlineCalendar size={20} color="#979797" className="fixed mr-4" /> */}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="rounded-full mt-4">
-          <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl">
-            <div className="flex flex-col ">
-              <div className=" text-txtgrey text-[12px]">Email</div>
-              <input
-                type="text"
-                // value={email}
-                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+            <div className="rounded-full mt-4">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">Email</div>
+                  <input
+                    type="text"
+                    // value={email}
+                    className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
 
-            <div className="flex items-center justify-center mt-1">
-              <AiOutlineMail size={20} color="#979797" />
+                <div className="flex items-center justify-center mt-1">
+                  <AiOutlineMail size={20} color="#979797" />
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="rounded-full mt-4">
-          <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl">
-            <div className="flex flex-col ">
-              <div className=" text-txtgrey text-[12px]">Password</div>
-              <input
-                type={passwordShown ? "text" : "password"}
-                // value={password}
-                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </div>
+            <div className="rounded-full mt-4">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">Password</div>
+                  <input
+                    type={passwordShown ? "text" : "password"}
+                    // value={password}
+                    className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
 
-            <div className="flex items-center justify-center mt-1">
-              {passwordShown ? (
-                <AiOutlineEye
-                  size={20}
-                  onClick={() => {
-                    setPasswordShown(!passwordShown);
-                  }}
-                  color="#979797"
-                />
-              ) : (
-                <AiOutlineEyeInvisible
-                  size={20}
-                  color="#979797"
-                  onClick={() => {
-                    setPasswordShown(!passwordShown);
-                  }}
-                />
-              )}
+                <div className="flex items-center justify-center mt-1">
+                  {passwordShown ? (
+                    <AiOutlineEye
+                      size={20}
+                      onClick={() => {
+                        setPasswordShown(!passwordShown);
+                      }}
+                      color="#979797"
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      color="#979797"
+                      onClick={() => {
+                        setPasswordShown(!passwordShown);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div className="rounded-full mt-4">
-          <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl">
-            <div className="flex flex-col ">
-              <div className=" text-txtgrey text-[12px]">Confirm Password</div>
-              <input
-                type={cPassShown ? "text" : "password"}
-                // value={confirmPassword}
-                className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
+            <div className="rounded-full mt-4">
+              <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-2 pt-1 rounded-2xl">
+                <div className="flex flex-col ">
+                  <div className=" text-txtgrey text-[12px]">
+                    Confirm Password
+                  </div>
+                  <input
+                    type={cPassShown ? "text" : "password"}
+                    // value={confirmPassword}
+                    className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
+                </div>
 
-            <div className="flex items-center justify-center mt-1">
-              {cPassShown ? (
-                <AiOutlineEye
-                  size={20}
-                  onClick={() => {
-                    setcPassShown(!cPassShown);
-                  }}
-                  color="#979797"
-                />
-              ) : (
-                <AiOutlineEyeInvisible
-                  size={20}
-                  color="#979797"
-                  onClick={() => {
-                    setcPassShown(!cPassShown);
-                  }}
-                />
-              )}
+                <div className="flex items-center justify-center mt-1">
+                  {cPassShown ? (
+                    <AiOutlineEye
+                      size={20}
+                      onClick={() => {
+                        setcPassShown(!cPassShown);
+                      }}
+                      color="#979797"
+                    />
+                  ) : (
+                    <AiOutlineEyeInvisible
+                      size={20}
+                      color="#979797"
+                      onClick={() => {
+                        setcPassShown(!cPassShown);
+                      }}
+                    />
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -252,9 +294,7 @@ const SignUp = () => {
             SIGNUP
           </button>
         </div>
-      </div>
-    </div>
-    </Fade>
+      </Fade>
     </div>
   );
 };

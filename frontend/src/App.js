@@ -12,7 +12,7 @@ import Form from "./components/Form";
 function App() {
   return (
     <div className="App bg-white scrollbar-hide">
-      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.min.js">
+      <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
         <Router>
           <Navbar />
           <Routes>
@@ -23,7 +23,6 @@ function App() {
             <Route path="/admin" element={<AdminHome />} />
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
-            <Route path="/viewer" element={<FileView />} />
             <Route path="/form" element={<Form />} />
           </Routes>
         </Router>
