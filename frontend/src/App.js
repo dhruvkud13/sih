@@ -9,7 +9,6 @@ import Filesys from "./pages/FileSystem";
 import { FileView } from "./components/FileViewer";
 import { Worker } from "@react-pdf-viewer/core";
 import Form from "./components/Form";
-import NewForm from "./components/NewForm";
 function App() {
   return (
     <div className="App bg-white scrollbar-hide">
