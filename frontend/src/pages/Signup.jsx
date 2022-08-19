@@ -32,7 +32,8 @@ const SignUp = () => {
     e.preventDefault();
     const isValid = validator.isEmail(email);
     const isNumber = validator.isMobilePhone(contact, "en-IN");
-    const isName = validator.isAlpha(fullname);
+    const isDob = validator.isDate(dob, "YYYY-MM-DD");
+    const isName = validator.matches(fullname,/^[a-zA-Z ]*$/);
     const isPass = validator.isStrongPassword(password, {
       minLength: 8,
       minLowercase: 1,
@@ -50,6 +51,9 @@ const SignUp = () => {
     } else if (!isValid) {
       console.log("validator running");
       setError("Email format is invalid");
+    } else if (!isDob) {
+      console.log("validator running");
+      setError("Date format is invalid");
     } else if (!isNumber) {
       console.log("validator running");
       setError("Contact format is invalid");
