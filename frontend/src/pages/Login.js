@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import loginimage from "../images/loginimage.svg";
 import Fade from "react-reveal/Fade";
-import validator from 'validator';
+import validator from "validator";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -25,29 +25,47 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
-    const isEmail=validator.isEmail(email)
-    const isPass=validator.isStrongPassword(password,{minLength:8,minLowercase:1,minUppercase:1,minNumeric:1,minSymbol:1})
-    
+    const isEmail = validator.isEmail(email);
+    const isPass = validator.isStrongPassword(password, {
+      minLength: 8,
+      minLowercase: 1,
+      minUppercase: 1,
+      minNumeric: 1,
+      minSymbol: 1,
+    });
+
     // console.log(isValid);
-    if(!isPass){
-      console.log('validator running')
+    if (!isPass) {
+      console.log("validator running");
       setError("Password Format is invalid!");
-    };
-    if(!isEmail){
-      console.log('validator running')
+    } else if (!isEmail) {
+      console.log("validator running");
       setError("Email format is invalid");
-    };
-    try {
-      const res = await axios.post("/auth/signin", { email, password });
-      console.log(res.data);
-      dispatch(loginSuccess(res.data));
-      if (res.data.typeofuser === "admin") {
-        navigate("/admin");
-      } else {
-        navigate("/user");
+    } else {
+      try {
+        //   const res = await axios.post("/auth/signin", { email, password });
+        //   console.log(res.data);
+        //   dispatch(loginSuccess(res.data));
+        //   if (res.data.typeofuser === "admin") {
+        //     navigate("/admin");
+        //   } else {
+        //     navigate("/user");
+        //   }
+        // } catch (err) {
+        //   dispatch(loginFailure());
+        // }
+        const body = { email, password };
+        console.log(JSON.stringify(body));
+        await fetch("http://localhost:3000/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }).then((res) => {
+          console.log(res.body);
+        });
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      dispatch(loginFailure());
     }
   };
   return (
@@ -115,11 +133,13 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            {error!=="" && <div className="text-red-500 text-sm mt-4">{error}</div>}
+            {error !== "" && (
+              <div className="text-red-500 text-sm mt-4">{error}</div>
+            )}
             <div className="flex justify-between w-96 mt-3 text-white text-sm cursor-pointer">
               <div
                 className="hover:font-semibold duration-100"
-                onClick={()=>navigate("/signup")}
+                onClick={() => navigate("/signup")}
               >
                 New here? Sign up
               </div>
