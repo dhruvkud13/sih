@@ -6,7 +6,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     /* padding-left: 20px; */
     /* margin-left: 150px; */
     display: block;
-    background: url('D:/Work/webDev/sih/frontend/src/images/new.png') no-repeat;
+    background: url('../images/new.png') no-repeat;
     /* width: 200px; */
     /* height: px; */
     /* margin-top: 30px; */
