@@ -1,10 +1,36 @@
 import * as React from "react";
 import { render } from "react-dom";
 import ReactEcharts from "echarts-for-react";
-
+import { useSelector} from "react-redux";
 
 //Import json file. Used in {options}.
-const data = require("./data");
+
+
+const Stats = () => {
+    const jpeg = useSelector((state) => state.stat.jpegCount);
+    const pdf = useSelector((state) => state.stat.pdfCount);
+    console.log(jpeg);
+    console.log(pdf);
+const data=[
+    {
+      "value": pdf,
+      "name": "PDFs",
+      "itemStyle": {
+        "normal": {
+          "color": "#f845f1"
+        }
+      }
+    },
+    {
+      "value": jpeg,
+      "name": "JPEGs",
+      "itemStyle": {
+        "normal": {
+          "color": "#ad46f3"
+        }
+      }
+    }
+  ]
 
 //Array of names for legend in {options}
 const dataNames = data.map(i => i.name);
@@ -33,6 +59,9 @@ let option = {
         title: "Restore"
       },
       saveAsImage: {
+        style: {
+            color: "#fff",
+        },
         show: true,
         title: "Save Image"
       }
@@ -153,7 +182,7 @@ let option = {
       label: {
         normal: {
           show: true,
-          formatter: "{c} %" // {c} data: [{value:},]
+          formatter: "{c}" // {c} data: [{value:},]
         },
         emphasis: {
           show: true
@@ -174,9 +203,10 @@ let option = {
     }
   ]
 };
-
-const Stats = () => (
+    return(
+    <div>
   <ReactEcharts option={option} style={style} className="pie-chart" />
-);
+  </div>)
+};
 
 export default Stats;
