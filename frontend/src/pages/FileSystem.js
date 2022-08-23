@@ -1,4 +1,8 @@
-import { FileOutlined, DeleteOutlined } from "@ant-design/icons";
+import {
+  FileOutlined,
+  DeleteOutlined,
+  PieChartOutlined,
+} from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
@@ -9,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { setFormModal } from "../redux/formModalSlice.js";
 import { useSelector } from "react-redux";
 import UploadForm from "../components/Form";
+import Graphs from "./Graphs";
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -23,6 +28,7 @@ function getItem(label, key, icon, children) {
 const items = [
   getItem("All Files", "1", <FileOutlined />),
   getItem("Deleted Files", "2", <DeleteOutlined />),
+  getItem("Statistics", "3", <PieChartOutlined />),
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
   //   getItem("Bill", "4"),
@@ -37,6 +43,7 @@ const items = [
 
 const Filesys = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedKey, setSelectedKey] = useState("1");
   const dispatch = useDispatch();
   const formModal = useSelector((state) => state.formModal);
   const style = {
@@ -66,6 +73,10 @@ const Filesys = () => {
             defaultSelectedKeys={["1"]}
             mode="inline"
             items={items}
+            onClick={({ key: newKey }) => {
+              setSelectedKey(newKey);
+              console.log(selectedKey);
+            }}
           />
         </Sider>
         <Layout className="site-layout">
@@ -96,19 +107,9 @@ const Filesys = () => {
                   minHeight: 360,
                 }}
               >
-                <div className="flex justify-end">
-                  <button
-                    onClick={() => {
-                      dispatch(setFormModal(true));
-                      console.log(formModal.isFormModal);
-                    }}
-                    type="button"
-                    className={style.buttonStyle}
-                  >
-                    Add New Doc
-                  </button>
-                </div>
-                <FileTable />
+                {selectedKey === "1" && <FileTable />}
+                {selectedKey === "2" && <FileTable />}
+                {selectedKey === "3" && <Graphs />}
               </div>
             </Content>
           </Fade>

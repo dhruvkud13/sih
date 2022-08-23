@@ -5,13 +5,23 @@ import { columns, loldata } from "../data";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
+import { setFormModal } from "../redux/formModalSlice";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
-import {  Modal } from "antd";
-import { setjpeg,setpdf,setAadharCard,setRationCard,setDrivingLicense,setPassport,setPANCard } from "../redux/statSlice";
+import { Modal } from "antd";
+import {
+  setjpeg,
+  setpdf,
+  setAadharCard,
+  setRationCard,
+  setDrivingLicense,
+  setPassport,
+  setPANCard,
+} from "../redux/statSlice";
+import Fade from "react-reveal/Fade";
 
 const { confirm } = Modal;
 function FileTable() {
@@ -44,136 +54,120 @@ function FileTable() {
   //     }
   //   };
   //   fetchData();
-//   const initStats = () => {
-//     var pdfCount=0;
-// var jpegCount=0;
-//     data.map((file) => {
-//       if (file.fileType === "image/jpeg") {
-//         jpegCount++;
-//       } else {
-//         pdfCount++;
-//       }
-//     })
-//     dispatch(setjpeg(jpegCount));
-//     console.log(jpegCount);
-//     dispatch(setpdf(pdfCount));
-//     console.log(pdfCount);
-//   }
-//   initStats();
-// const docStats = () => {
-//   var aadharCount=0;
-//   var rationCount=0;
-//   var passportCount=0;
-//   var panCount=0;
-//   var drivingCount=0;
-//   data.map((file)=>{
-//     if(file.docType==="Aadhar Card"){
-//       aadharCount++;
-//     }
-//     else if(file.docType==="Ration Card"){
-//       rationCount++;
-//     }
-//     else if(file.docType==="Passport"){
-//       passportCount++;
-//     }
-//     else if(file.docType==="PAN Card"){
-//       panCount++;
-//     }
-//     else if(file.docType==="Driving License"){
-//       drivingCount++;
-//     }
-//   })
-//   dispatch(setAadharCard(aadharCount));
-//   dispatch(setRationCard(rationCount));
-//   dispatch(setPassport(passportCount));
-//   dispatch(setPANCard(panCount));
-//   dispatch(setDrivingLicense(drivingCount));
-//   console.log(aadharCount);
-//   console.log(rationCount);
-//   console.log(passportCount);
-//   console.log(panCount);
-//   console.log(drivingCount);
-// }
-// docStats();
+  //   const initStats = () => {
+  //     var pdfCount=0;
+  // var jpegCount=0;
+  //     data.map((file) => {
+  //       if (file.fileType === "image/jpeg") {
+  //         jpegCount++;
+  //       } else {
+  //         pdfCount++;
+  //       }
+  //     })
+  //     dispatch(setjpeg(jpegCount));
+  //     dispatch(setpdf(pdfCount));
+  //   }
+  //   initStats();
+  // const docStats = () => {
+  //   var aadharCount=0;
+  //   var rationCount=0;
+  //   var passportCount=0;
+  //   var panCount=0;
+  //   var drivingCount=0;
+  //   data.map((file)=>{
+  //     if(file.docType==="Aadhar Card"){
+  //       aadharCount++;
+  //     }
+  //     else if(file.docType==="Ration Card"){
+  //       rationCount++;
+  //     }
+  //     else if(file.docType==="Passport"){
+  //       passportCount++;
+  //     }
+  //     else if(file.docType==="PAN Card"){
+  //       panCount++;
+  //     }
+  //     else if(file.docType==="Driving License"){
+  //       drivingCount++;
+  //     }
+  //   })
+  //   dispatch(setAadharCard(aadharCount));
+  //   dispatch(setRationCard(rationCount));
+  //   dispatch(setPassport(passportCount));
+  //   dispatch(setPANCard(panCount));
+  //   dispatch(setDrivingLicense(drivingCount));
+  // }
+  // docStats();
   // }, []);
 
   useEffect(() => {
     const initStats = () => {
-      var pdfCount=0;
-  var jpegCount=0;
+      var pdfCount = 0;
+      var jpegCount = 0;
       data.map((file) => {
         if (file.fileType === "image/jpeg") {
           jpegCount++;
         } else {
           pdfCount++;
         }
-      })
+      });
       dispatch(setjpeg(jpegCount));
-      console.log(jpegCount);
-      dispatch(setpdf(pdfCount));
-      console.log(pdfCount);
-    }
-    initStats();
-  }, [])
 
-  useEffect(()=>{
+      dispatch(setpdf(pdfCount));
+
+    };
+    initStats();
+  }, []);
+
+  useEffect(() => {
     const docStats = () => {
-      var aadharCount=0;
-      var rationCount=0;
-      var passportCount=0;
-      var panCount=0;
-      var drivingCount=0;
-      data.map((file)=>{
-        if(file.docType==="Aadhar Card"){
+      var aadharCount = 0;
+      var rationCount = 0;
+      var passportCount = 0;
+      var panCount = 0;
+      var drivingCount = 0;
+      data.map((file) => {
+        if (file.docType === "Aadhar Card") {
           aadharCount++;
-        }
-        else if(file.docType==="Ration Card"){
+        } else if (file.docType === "Ration Card") {
           rationCount++;
-        }
-        else if(file.docType==="Passport"){
+        } else if (file.docType === "Passport") {
           passportCount++;
-        }
-        else if(file.docType==="PAN Card"){
+        } else if (file.docType === "PAN Card") {
           panCount++;
-        }
-        else if(file.docType==="Driving License"){
+        } else if (file.docType === "Driving License") {
           drivingCount++;
         }
-      })
+      });
       dispatch(setAadharCard(aadharCount));
       dispatch(setRationCard(rationCount));
       dispatch(setPassport(passportCount));
       dispatch(setPANCard(panCount));
       dispatch(setDrivingLicense(drivingCount));
-      console.log(aadharCount);
-      console.log(rationCount);
-      console.log(passportCount);
-      console.log(panCount);
-      console.log(drivingCount);
-    }
+    };
     docStats();
-  })
+  });
 
-
-  
   const tableData = {
     columns,
     data,
   };
   const style = {
-    buttonStyle:
+    delStyle:
       "text-white hover:text-red-500 bg-red-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
+    buttonStyle:
+      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
   };
   const handleRowSelected = React.useCallback((state) => {
     setSelectedRows(state.selectedRows);
-    console.log(selectedRows);
+    // console.log(selectedRows);
   }, []);
   const contextActions = React.useMemo(() => {
     const handleDelete = () => {
       confirm({
         title: "Are you sure you want to delete these files?",
         icon: <ExclamationCircleOutlined />,
-        content: selectedRows.map((r) => r.fileName+", "),
+        content: selectedRows.map((r) => r.fileName + ", "),
         okText: "Yes",
         okType: "danger",
         cancelText: "No",
@@ -190,11 +184,11 @@ function FileTable() {
         },
       });
     };
-    
+
     return (
-      <button onClick={handleDelete} type="button" className={style.buttonStyle}>
-          Delete
-        </button>
+      <button onClick={handleDelete} type="button" className={style.delStyle}>
+        Delete
+      </button>
     );
   }, [data, selectedRows, toggleCleared]);
 
@@ -203,35 +197,54 @@ function FileTable() {
   return loading == true ? (
     <div>loading </div>
   ) : (
-    <div className="">
+    <Fade right>
       <div className="">
-        <DataTableExtensions {...tableData}>
-          <DataTable
-            title="Documents"
-            columns={columns}
-            data={data}
-            // noHeader
-            defaultSortField="id"
-            defaultSortAsc={false}
-            pagination
-            highlightOnHover
-            onRowClicked={(selrow) => {
-              dispatch(setModal(true));
-              console.log(selrow);
-              // setrow(row);
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              dispatch(setFormModal(true));
+              // console.log(formModal.isFormModal);
             }}
-            selectableRows
-            contextActions={contextActions}
-            onSelectedRowsChange={handleRowSelected}
-            clearSelectedRows={toggleCleared}
+            type="button"
+            className={style.buttonStyle}
+          >
+            Add New Doc
+          </button>
+        </div>
+        <div className="">
+          <DataTableExtensions {...tableData}>
+            <DataTable
+              title="Documents"
+              columns={columns}
+              data={data}
+              // noHeader
+              defaultSortField="id"
+              defaultSortAsc={false}
+              pagination
+              highlightOnHover
+              onRowClicked={(selrow) => {
+                dispatch(setModal(true));
+                // console.log(selrow);
+                // setrow(row);
+              }}
+              selectableRows
+              contextActions={contextActions}
+              onSelectedRowsChange={handleRowSelected}
+              clearSelectedRows={toggleCleared}
+            />
+          </DataTableExtensions>
+        </div>
+        {modal.isModal ? (
+          <FileView
+            type={"pdf"}
+            // rellink={row.hash}
+            rellink="QmSFr7mfrbiijCTCT8kw3vuqHg2xq86uJkHomY21KLkfNA"
           />
-        </DataTableExtensions>
+        ) : (
+          <div></div>
+        )}
       </div>
-      {modal.isModal ? <FileView type={"pdf"} 
-      // rellink={row.hash}
-        rellink="QmSFr7mfrbiijCTCT8kw3vuqHg2xq86uJkHomY21KLkfNA"
-      /> : <div></div>}
-    </div>
+    </Fade>
   );
 }
 
