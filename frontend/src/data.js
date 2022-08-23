@@ -100,6 +100,14 @@ export const loldata = [
     fileOwner:"Bhavya Gor",
     fileDesc: "Fake Card",
   },
+  {
+    fileNumber: 9,
+    fileName: "rux.pdf",
+    docType: "Driving License",
+    fileType:"application/pdf",
+    fileOwner:"ruxgav",
+    fileDesc: "Drink Drive arrest",
+  },
 ];
 // const file = {
 //   fileName, //
