@@ -3,7 +3,7 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import userReducer from "./userSlice";
 import fileModalReducer from "./fileModalSlice";
 import formModalReducer from "./formModalSlice";
-import { PersistGate } from "redux-persist/integration/react";
+import statReducer from "./statSlice";
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -21,7 +21,7 @@ const persistConfig = {
   version: 1,
   storage,
 };
-const rootReducer = combineReducers({ user: userReducer, modal: fileModalReducer, formModal: formModalReducer });
+const rootReducer = combineReducers({ user: userReducer, modal: fileModalReducer, formModal: formModalReducer, stat: statReducer });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 

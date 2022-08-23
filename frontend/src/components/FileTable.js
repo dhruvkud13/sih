@@ -11,6 +11,7 @@ import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {  Modal } from "antd";
+import { setjpeg,setpdf } from "../redux/statSlice";
 
 const { confirm } = Modal;
 function FileTable() {
@@ -43,7 +44,45 @@ function FileTable() {
   //     }
   //   };
   //   fetchData();
+//   const initStats = () => {
+//     var pdfCount=0;
+// var jpegCount=0;
+//     data.map((file) => {
+//       if (file.fileType === "image/jpeg") {
+//         jpegCount++;
+//       } else {
+//         pdfCount++;
+//       }
+//     })
+//     dispatch(setjpeg(jpegCount));
+//     console.log(jpegCount);
+//     dispatch(setpdf(pdfCount));
+//     console.log(pdfCount);
+//   }
+//   initStats();
   // }, []);
+
+  useEffect(() => {
+    const initStats = () => {
+      var pdfCount=0;
+  var jpegCount=0;
+      data.map((file) => {
+        if (file.fileType === "image/jpeg") {
+          jpegCount++;
+        } else {
+          pdfCount++;
+        }
+      })
+      dispatch(setjpeg(jpegCount));
+      console.log(jpegCount);
+      dispatch(setpdf(pdfCount));
+      console.log(pdfCount);
+    }
+    initStats();
+  }, [])
+
+
+  
   const tableData = {
     columns,
     data,
