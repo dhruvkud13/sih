@@ -10,11 +10,27 @@ import { FileView } from "./components/FileViewer";
 import { Worker } from "@react-pdf-viewer/core";
 import Form from "./components/Form";
 import Graphs from "./pages/Graphs";
+import { useSelector } from 'react-redux';
 function App() {
+  const user=useSelector(state=>state.user);
+  console.log(user.useremail);
   return (
     <div className="App bg-white scrollbar-hide">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-        <Router>
+      {user.useremail==null?<Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/logout" element={<Login />} />
+            <Route path="/admin" element={<Login />} />
+            <Route path="/user" element={<Login />} />
+            <Route path="/files" element={<Login />} />
+            <Route path="/graphs" element={<Login />} />
+
+          </Routes>
+        </Router>:<Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -26,7 +42,8 @@ function App() {
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
           </Routes>
-        </Router>
+        </Router>}
+        
       </Worker>
       ;
     </div>
