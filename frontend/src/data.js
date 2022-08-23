@@ -35,7 +35,7 @@ export const columns = [
     sortable: true,
   },
 ];
-export const data = [
+export const loldata = [
   {
     id: 1,
     title: "MiaKhalifa.mp4",
