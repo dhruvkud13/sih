@@ -29,7 +29,7 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("All Files", "1", <FileOutlined />),
-  getItem("Employee Files", "2", <FileOutlined />),
+  // getItem("Employee Files", "2", <FileOutlined />),
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
   //   getItem("Bill", "4"),
@@ -39,7 +39,7 @@ const items = [
   //   getItem("Team 1", "6"),
   //   getItem("Team 2", "8"),
   // ]),
-  getItem("User Files", "3", <FileOutlined />),
+  // getItem("User Files", "3", <FileOutlined />),
 ];
 
 const Filesys = () => {
@@ -89,8 +89,8 @@ const Filesys = () => {
                   margin: "16px 0",
                 }}
               >
-                <Breadcrumb.Item>User</Breadcrumb.Item>
-                <Breadcrumb.Item>Username</Breadcrumb.Item>
+                {/* <Breadcrumb.Item>User</Breadcrumb.Item>
+                <Breadcrumb.Item>Username</Breadcrumb.Item> */}
               </Breadcrumb>
               <div
                 className="site-layout-background flex flex-col"
