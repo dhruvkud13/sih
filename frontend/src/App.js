@@ -9,6 +9,7 @@ import Filesys from "./pages/FileSystem";
 import { FileView } from "./components/FileViewer";
 import { Worker } from "@react-pdf-viewer/core";
 import Form from "./components/Form";
+import Stats from "./components/Stats";
 function App() {
   return (
     <div className="App bg-white scrollbar-hide">
@@ -23,6 +24,7 @@ function App() {
             <Route path="/admin" element={<AdminHome />} />
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
+            <Route path="/stats" element={<Stats />} />
           </Routes>
         </Router>
       </Worker>

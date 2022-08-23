@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
-import { MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { Button, Space } from "antd";
+import {  PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import Icon from "@ant-design/icons";
-import { Form, Input, Select, Cascader, Upload, Modal } from "antd";
+import { Form, Input, Select,  Upload, Modal } from "antd";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -31,7 +29,6 @@ const UploadForm = () => {
   const [dropdown, setDropdown] = useState("");
   const handleCancel = () => setPreviewVisible(false);
   const dispatch = useDispatch();
-  const formModal = useSelector((state) => state.formModal);
   const user= useSelector((state) => state.user);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
@@ -44,7 +41,7 @@ const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
-    const url = fileList[0].type=="image/jpeg"?"http://localhost:3000/uploadJPEG":"http://localhost:3000/uploadPDF";
+    const url = fileList[0].type==="image/jpeg"?"http://localhost:3000/uploadJPEG":"http://localhost:3000/uploadPDF";
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
     formData.append("fileName", fileList[0].name);
