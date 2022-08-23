@@ -37,8 +37,8 @@ export const columns = [
 ];
 export const loldata = [
   {
-    id: 1,
-    title: "MiaKhalifa.mp4",
+    fileNumber: 1,
+    fileName: "MiaKhalifa.mp4",
     docType: "Porn",
     fileType:"Video(mp4)",
     fileOwner:"PornHub",
@@ -47,8 +47,8 @@ export const loldata = [
     lastMod: "2018-07-31",
   },
   {
-    id: 2,
-    title: "DhruvAadhar.pdf",
+    fileNumber: 2,
+    fileName: "DhruvAadhar.pdf",
     docType: "Aadhar",
     fileType:"PDF",
     fileOwner:"Dhruv Kud",
