@@ -61,10 +61,11 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }).then((res) => {
-          console.log(res.body);
+          dispatch(loginSuccess(res.body));
         });
       } catch (err) {
         console.log(err);
+        dispatch(loginFailure());
       }
     }
   };

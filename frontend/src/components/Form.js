@@ -40,11 +40,13 @@ const UploadForm = () => {
       file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
     );
   };
-  const handleUpload = async ({ file: file }) => {
+  const handleSubmit = () => {
     const url = "http://localhost:3000/uploadPDF";
     const formData = new FormData();
-    formData.append("file", file);
-    // formData.append("fileName", file.name);
+    formData.append("image", fileList[0].originFileObj);
+    formData.append("fileName", fileList[0].name);
+    formData.append("fileType", fileList[0].type);
+    formData.append("fileDesc",);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -56,6 +58,7 @@ const UploadForm = () => {
     });
   };
   const handleChange = ({ file: newFile, fileList: newFileList }) => {
+    console.log(newFileList);
     setFileList(newFileList);
   };
   const uploadButton = (
@@ -74,12 +77,16 @@ const UploadForm = () => {
     dispatch(setFormModal(false));
   };
   return (
-    <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway"> 
+    <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
       <Fade bottom>
-          <div className="h-[32rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl "> 
-          <div className="flex justify-end w-[32rem] pr-5"> <AiOutlineClose size={20} onClick={oncrossclick} /></div>
-          <div className="text-[40px] font-bold">DOCUMENT UPLOAD FORM</div>
-            {/* <Form
+        <div className="h-[40rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
+          <div className="flex justify-end w-[32rem] pr-5">
+            {" "}
+            <AiOutlineClose size={20} onClick={oncrossclick} />
+          </div>
+          <div className="text-[30px] font-bold">DOCUMENT UPLOAD FORM</div>
+
+          <Form
               labelCol={{
                 span: 30, 
               }}
@@ -105,12 +112,11 @@ const UploadForm = () => {
               </Form.Item>
               <Form.Item label="Upload Document Here!" valuePropName="fileList">
                 <Upload
-                  action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-                  // action={handleUpload}
                   listType="picture-card"
                   fileList={fileList}
                   onPreview={handlePreview}
                   onChange={handleChange}
+                  beforeUpload={()=>false}
                 >
                   {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
@@ -130,13 +136,13 @@ const UploadForm = () => {
                 </Modal>
               </Form.Item>
             
-            </Form> */}
-            {/* <div className="mt-4">
+            </Form>
+          <div className="mt-4">
           
-              <button className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold">
+              <button className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold" onClick={handleSubmit}>
                 SUBMIT
               </button>
-            </div> */}
+            </div>
         </div>
       </Fade>
     </div>
