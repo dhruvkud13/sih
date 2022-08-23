@@ -59,14 +59,6 @@ const SignUp = () => {
       setError("Passwords don't match");
     } else {
       try {
-        // await axios.post("/auth/signup", {
-        //   name,
-        //   email,
-        //   password: confirmPassword,
-        //   dob: dob,
-        //   contact: contact,
-
-        // });
         const body = { name, email, contact, dob, password };
         //console.log(JSON.stringify(body));
         await fetch("http://localhost:8000/register", {

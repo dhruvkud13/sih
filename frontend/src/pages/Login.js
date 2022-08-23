@@ -34,7 +34,6 @@ const Login = () => {
       minNumeric: 1,
       minSymbol: 1,
     });
-
     // console.log(isValid);
     if (!isEmail) {
       console.log("validator running");
@@ -45,17 +44,6 @@ const Login = () => {
       setError("Password Format is invalid");
     } else {
       try {
-        //   const res = await axios.post("/auth/signin", { email, password });
-        //   console.log(res.data);
-        //   dispatch(loginSuccess(res.data));
-        //   if (res.data.typeofuser === "admin") {
-        //     navigate("/admin");
-        //   } else {
-        //     navigate("/user");
-        //   }
-        // } catch (err) {
-        //   dispatch(loginFailure());
-        // }
         const body = { email, password };
         console.log(JSON.stringify(body));
         await fetch("http://localhost:8000/login", {
@@ -66,12 +54,11 @@ const Login = () => {
           
           return res.json()
         }).then((data)=>{
-
           console.log(data[0].value)
           dispatch(loginSuccess(data[0].value));
           console.log(user.username);
           console.log(user.useremail);
-
+          navigate("/files");
         });
       } catch (err) {
         console.log(err);
