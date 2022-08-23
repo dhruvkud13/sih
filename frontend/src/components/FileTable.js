@@ -7,6 +7,8 @@ import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
+import "./FileTable.css";
+
 function FileTable() {
   const tableData = {
     columns,

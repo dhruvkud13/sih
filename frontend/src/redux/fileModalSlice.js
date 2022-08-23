@@ -4,7 +4,7 @@ const initialState = {
   isModal: false,
 };
 
-export const userSlice = createSlice({
+export const fileModalSlice = createSlice({
   name: "modal",
   initialState,
   reducers: {
@@ -15,6 +15,6 @@ export const userSlice = createSlice({
 });
 
 export const { setModal } =
-  userSlice.actions;
+  fileModalSlice.actions;
 
-export default userSlice.reducer;
+export default fileModalSlice.reducer;
