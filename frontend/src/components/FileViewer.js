@@ -12,6 +12,7 @@ export const FileView = (props) => {
   const oncrossclick = () => {
     dispatch(setModal(false));
   };
+  // const link = "https://ishaanhello.infura-ipfs.io/ipfs/" + hash
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen">
       <div className="flex items-center justify-center shadow-2xl">
