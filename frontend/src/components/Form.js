@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import Fade from "react-reveal/Fade";
-import {  PlusOutlined } from "@ant-design/icons";
+import { PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { Form, Input, Select,  Upload, Modal } from "antd";
+import { Form, Input, Select, Upload, Modal } from "antd";
 import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
@@ -25,11 +25,11 @@ const UploadForm = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
-  const [text,setText] = useState("");
+  const [text, setText] = useState("");
   const [dropdown, setDropdown] = useState("");
   const handleCancel = () => setPreviewVisible(false);
   const dispatch = useDispatch();
-  const user= useSelector((state) => state.user);
+  const user = useSelector((state) => state.user);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -41,7 +41,10 @@ const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
-    const url = fileList[0].type=="image/jpeg"?"http://localhost:8000/uploadJPEG":"http://localhost:8000/uploadPDF";
+    const url =
+      fileList[0].type == "image/jpeg"
+        ? "http://localhost:8000/uploadJPEG"
+        : "http://localhost:8000/uploadPDF";
 
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
@@ -49,17 +52,22 @@ const UploadForm = () => {
     // formData.append("fileType", fileList[0].type);
     formData.append("fileDesc", text);
     formData.append("docType", dropdown);
-    formData.append("fileOwner",user.username);
-    formData.append("fileEmail",user.useremail);
+    formData.append("fileOwner", user.username);
+    formData.append("fileEmail", user.useremail);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
       },
     };
-    axios.post(url, formData, config).then((response) => {
-      // console.log(response.data);
-      console.log(response.data);
-    });
+    try {
+      axios.post(url, formData, config).then((response) => {
+        // console.log(response.data);
+        console.log(response.data);
+        dispatch(setFormModal(false));
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleChange = ({ file: newFile, fileList: newFileList }) => {
     console.log(newFileList);
@@ -91,63 +99,69 @@ const UploadForm = () => {
           <div className="text-[30px] font-bold">DOCUMENT UPLOAD FORM</div>
 
           <Form
-              labelCol={{
-                span: 30, 
-              }}
-              wrapperCol={{
-                span: 50,
-              }}
-              labelAlign="left"
-              layout="vertical"
-            >
-              <Form.Item label="Select document to upload">
-                <Select value={dropdown} onChange={e => setDropdown(e)}>
-                  <Select.Option value="Aadhar Card">Aadhar Card</Select.Option>
-                  <Select.Option value="Ration Card">Ration Card</Select.Option>
-                  <Select.Option value="Driving License">
-                    Driving License
-                  </Select.Option>
-                  <Select.Option value="Passport">Passport</Select.Option>
-                  <Select.Option value="PAN Card">PAN Card</Select.Option>
-                </Select>
-              </Form.Item>
-              <Form.Item label="Enter Description">
-                <TextArea rows={4} placeholder="Description:" value={text} onChange={e => setText(e.target.value)} />
-              </Form.Item>
-              <Form.Item label="Upload Document Here!" valuePropName="fileList">
-                <Upload
-                  listType="picture-card"
-                  fileList={fileList}
-                  onPreview={handlePreview}
-                  onChange={handleChange}
-                  beforeUpload={()=>false}
-                  accept=".pdf,.jpeg"
-                >
-                  {fileList.length >= 1 ? null : uploadButton}
-                </Upload>
-                <Modal
-                  visible={previewVisible}
-                  title={previewTitle}
-                  footer={null}
-                  onCancel={handleCancel}
-                >
-                  <img
-                    alt="example"
-                    style={{
-                      width: "100%",
-                    }}
-                    src={previewImage}
-                  />
-                </Modal>
-              </Form.Item>
-            
-            </Form>
+            labelCol={{
+              span: 30,
+            }}
+            wrapperCol={{
+              span: 50,
+            }}
+            labelAlign="left"
+            layout="vertical"
+          >
+            <Form.Item label="Select document to upload">
+              <Select value={dropdown} onChange={(e) => setDropdown(e)}>
+                <Select.Option value="Aadhar Card">Aadhar Card</Select.Option>
+                <Select.Option value="Ration Card">Ration Card</Select.Option>
+                <Select.Option value="Driving License">
+                  Driving License
+                </Select.Option>
+                <Select.Option value="Passport">Passport</Select.Option>
+                <Select.Option value="PAN Card">PAN Card</Select.Option>
+              </Select>
+            </Form.Item>
+            <Form.Item label="Enter Description">
+              <TextArea
+                rows={4}
+                placeholder="Description:"
+                value={text}
+                onChange={(e) => setText(e.target.value)}
+              />
+            </Form.Item>
+            <Form.Item label="Upload Document Here!" valuePropName="fileList">
+              <Upload
+                listType="picture-card"
+                fileList={fileList}
+                onPreview={handlePreview}
+                onChange={handleChange}
+                beforeUpload={() => false}
+                accept=".pdf,.jpeg"
+              >
+                {fileList.length >= 1 ? null : uploadButton}
+              </Upload>
+              <Modal
+                visible={previewVisible}
+                title={previewTitle}
+                footer={null}
+                onCancel={handleCancel}
+              >
+                <img
+                  alt="example"
+                  style={{
+                    width: "100%",
+                  }}
+                  src={previewImage}
+                />
+              </Modal>
+            </Form.Item>
+          </Form>
           <div className="mt-4">
-          
-              <button className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold" onClick={handleSubmit}>
-                SUBMIT
-              </button>
-            </div>
+            <button
+              className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
+              onClick={handleSubmit}
+            >
+              SUBMIT
+            </button>
+          </div>
         </div>
       </Fade>
     </div>
