@@ -27,6 +27,8 @@ const UploadForm = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [text,setText] = useState("");
+  const [dropdown, setDropdown] = useState("");
   const handleCancel = () => setPreviewVisible(false);
   const dispatch = useDispatch();
   const formModal = useSelector((state) => state.formModal);
@@ -45,8 +47,9 @@ const UploadForm = () => {
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
     formData.append("fileName", fileList[0].name);
-    formData.append("fileType", fileList[0].type);
-    formData.append("fileDesc",);
+    // formData.append("fileType", fileList[0].type);
+    formData.append("fileDesc", text);
+    formData.append("docType", dropdown);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -61,6 +64,9 @@ const UploadForm = () => {
     console.log(newFileList);
     setFileList(newFileList);
   };
+
+  console.log(text);
+  console.log(dropdown);
   const uploadButton = (
     <div>
       <PlusOutlined />
@@ -97,7 +103,7 @@ const UploadForm = () => {
               layout="vertical"
             >
               <Form.Item label="Select document to upload">
-                <Select>
+                <Select value={dropdown} onChange={e => setDropdown(e)}>
                   <Select.Option value="Aadhar Card">Aadhar Card</Select.Option>
                   <Select.Option value="Ration Card">Ration Card</Select.Option>
                   <Select.Option value="Driving License">
@@ -108,7 +114,7 @@ const UploadForm = () => {
                 </Select>
               </Form.Item>
               <Form.Item label="Enter Description">
-                <TextArea rows={4} placeholder="Description:" />
+                <TextArea rows={4} placeholder="Description:" value={text} onChange={e => setText(e.target.value)} />
               </Form.Item>
               <Form.Item label="Upload Document Here!" valuePropName="fileList">
                 <Upload
@@ -117,6 +123,7 @@ const UploadForm = () => {
                   onPreview={handlePreview}
                   onChange={handleChange}
                   beforeUpload={()=>false}
+                  accept=".pdf,.jpeg"
                 >
                   {fileList.length >= 1 ? null : uploadButton}
                 </Upload>
