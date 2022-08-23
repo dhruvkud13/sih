@@ -33,7 +33,7 @@ const SignUp = () => {
     const isValid = validator.isEmail(email);
     const isNumber = validator.isMobilePhone(contact, "en-IN");
     const isDob = validator.isDate(dob, "YYYY-MM-DD");
-    const isName = validator.matches(name,/^[a-zA-Z ]*$/);
+    const isName = validator.matches(name,/^[a-zA-Z ]*.{2,}$/);
     const isPass = validator.isStrongPassword(password, {
       minLength: 8,
       minLowercase: 1,
@@ -43,25 +43,20 @@ const SignUp = () => {
     });
 
     // console.log(isValid);
-    if (!isPass) {
-      console.log("validator running");
+    if (!isName) {
+      setError("Name format is invalid");
+    } else if (!isNumber) {
+      setError("Contact format is invalid");
+    } else if (!isDob) {
+      setError("Date format is invalid");
+    } else if (!isValid) {
+      setError("Email format is invalid");
+    } else if (!isPass) {
       setError(
         "Please enter a strong password (password must contain atleast 8 characters, 1 lowercase, 1 uppercase, 1 numeric and 1 symbol)"
       );
-    } else if (!isValid) {
-      console.log("validator running");
-      setError("Email format is invalid");
-    } else if (!isDob) {
-      console.log("validator running");
-      setError("Date format is invalid");
-    } else if (!isNumber) {
-      console.log("validator running");
-      setError("Contact format is invalid");
-    } else if (!isName) {
-      console.log("validator running");
-      setError("Name format is invalid");
     } else if (password !== confirmPassword) {
-      setError("Password does not match");
+      setError("Passwords don't match");
     } else {
       try {
         // await axios.post("/auth/signup", {
@@ -112,7 +107,7 @@ const SignUp = () => {
             <div className="rounded-full mt-2">
               <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl ">
                 <div className="flex flex-col ">
-                  <div className=" text-txtgrey text-[12px]">name</div>
+                  <div className=" text-txtgrey text-[12px]">Name</div>
                   <input
                     type="text"
                     // value={name}
