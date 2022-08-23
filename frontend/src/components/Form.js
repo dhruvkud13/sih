@@ -32,6 +32,7 @@ const UploadForm = () => {
   const handleCancel = () => setPreviewVisible(false);
   const dispatch = useDispatch();
   const formModal = useSelector((state) => state.formModal);
+  const user= useSelector((state) => state.user);
   const handlePreview = async (file) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
@@ -43,13 +44,15 @@ const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
-    const url = "http://localhost:3000/uploadPDF";
+    const url = fileList[0].type=="image/jpeg"?"http://localhost:3000/uploadJPEG":"http://localhost:3000/uploadPDF";
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
     formData.append("fileName", fileList[0].name);
     // formData.append("fileType", fileList[0].type);
     formData.append("fileDesc", text);
     formData.append("docType", dropdown);
+    formData.append("fileOwner",user.username);
+    formData.append("fileEmail",user.useremail);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -64,9 +67,6 @@ const UploadForm = () => {
     console.log(newFileList);
     setFileList(newFileList);
   };
-
-  console.log(text);
-  console.log(dropdown);
   const uploadButton = (
     <div>
       <PlusOutlined />
