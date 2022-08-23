@@ -10,7 +10,10 @@ import { FileView } from "./FileViewer";
 import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
 import OurButton from "./OurButton";
+import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { Button, Modal, Space } from "antd";
 
+const { confirm } = Modal;
 function FileTable() {
   const [data, setData] = useState(loldata);
   const [loading, setLoading] = useState(true);
@@ -42,19 +45,26 @@ function FileTable() {
   }, []);
   const contextActions = React.useMemo(() => {
     const handleDelete = () => {
-      if (
-        window.confirm(
-          `Are you sure you want to delete:\r ${selectedRows.map(
-            (r) => r.title
-          )}?`
-        )
-      ) {
-        //TODO: add delete post request
-        setToggleCleared(!toggleCleared);
-        setData(differenceBy(data, selectedRows, "title"));
-      }
+      confirm({
+        title: "Are you sure delete these task?",
+        icon: <ExclamationCircleOutlined />,
+        content: selectedRows.map((r) => r.title),
+        okText: "Yes",
+        okType: "danger",
+        cancelText: "No",
+
+        onOk() {
+          console.log("OK");
+          //TODO: Delete from database
+          setToggleCleared(!toggleCleared);
+          setData(differenceBy(data, selectedRows, "title"));
+        },
+
+        onCancel() {
+          console.log("Cancel");
+        },
+      });
     };
-    console.log(data);
 
     return (
       <OurButton
@@ -72,21 +82,21 @@ function FileTable() {
     <div className="">
       <div className="">
         <DataTableExtensions {...tableData}>
-        <DataTable
-          title="Documents"
-          columns={columns}
-          data={data}
-          // noHeader
-          defaultSortField="id"
-          defaultSortAsc={false}
-          pagination
-          highlightOnHover
-          onRowClicked={() => dispatch(setModal(true))}
-          selectableRows
-          contextActions={contextActions}
-          onSelectedRowsChange={handleRowSelected}
-          clearSelectedRows={toggleCleared}
-        />
+          <DataTable
+            title="Documents"
+            columns={columns}
+            data={data}
+            // noHeader
+            defaultSortField="id"
+            defaultSortAsc={false}
+            pagination
+            highlightOnHover
+            onRowClicked={() => dispatch(setModal(true))}
+            selectableRows
+            contextActions={contextActions}
+            onSelectedRowsChange={handleRowSelected}
+            clearSelectedRows={toggleCleared}
+          />
         </DataTableExtensions>
       </div>
       {modal.isModal ? <FileView type={"pdf"} /> : <div></div>}
