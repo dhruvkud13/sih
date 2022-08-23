@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../images/iccrr-logo.png";
 import Fade from "react-reveal/Fade";
+import Landing from "../images/landing.png";
 import "@fontsource/league-spartan";
 const LandingPage = () => {
   return (
@@ -14,7 +15,7 @@ const LandingPage = () => {
           <div>Document Management System</div>
         </div>
       </Fade>
-      <div className="flex justify-around mt-10">
+      <div className="flex justify-evenly mt-10 h-96 items-center pt-10">
         <div className="font-raleway font-bold text-4xl flex flex-col items-start justify-center">
           <Fade left cascade>
             <div>A secure way </div>
@@ -22,7 +23,7 @@ const LandingPage = () => {
             <div>your documents</div>
           </Fade>
         </div>
-        <div>hi</div>
+        <div className="w-[30rem]"><img src={Landing} alt="dms pic" /></div>
       </div>
     </div>
   );

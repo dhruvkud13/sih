@@ -10,6 +10,12 @@ import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../css/FileSystem.css";
 import FileTable from "../components/FileTable";
+import OurButton from "../components/OurButton";
+import Fade from "react-reveal/Fade";
+import { useDispatch } from "react-redux";
+import { setFormModal } from "../redux/formModalSlice.js";
+import { useSelector } from "react-redux";
+import UploadForm from "../components/Form";
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -38,6 +44,8 @@ const items = [
 
 const Filesys = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const dispatch = useDispatch();
+  const formModal = useSelector((state) => state.formModal);
   return (
     <div className="">
       <Layout
@@ -70,29 +78,40 @@ const Filesys = () => {
           padding: 0,
         }}
       /> */}
-          <Content
-            style={{
-              margin: "0 16px",
-            }}
-          >
-            <Breadcrumb
+          <Fade bottom>
+            <Content
               style={{
-                margin: "16px 0",
+                margin: "0 16px",
               }}
             >
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Username</Breadcrumb.Item>
-            </Breadcrumb>
-            <div
-              className="site-layout-background"
-              style={{
-                padding: 24,
-                minHeight: 360,
-              }}
-            >
-              <FileTable />
-            </div>
-          </Content>
+              <Breadcrumb
+                style={{
+                  margin: "16px 0",
+                }}
+              >
+                <Breadcrumb.Item>User</Breadcrumb.Item>
+                <Breadcrumb.Item>Username</Breadcrumb.Item>
+              </Breadcrumb>
+              <div
+                className="site-layout-background flex flex-col"
+                style={{
+                  padding: 24,
+                  minHeight: 360,
+                }}
+              >
+                <div className="flex justify-end">
+                  <OurButton
+                    title="Add New Doc"
+                    onClick={() => {
+                      dispatch(setFormModal(true));
+                      console.log(formModal.isFormModal);
+                    }}
+                  />
+                </div>
+                <FileTable />
+              </div>
+            </Content>
+          </Fade>
           <Footer
             style={{
               textAlign: "center",
@@ -102,6 +121,7 @@ const Filesys = () => {
           </Footer>
         </Layout>
       </Layout>
+      {formModal.isFormModal ? <UploadForm /> : <div></div>}
     </div>
   );
 };
