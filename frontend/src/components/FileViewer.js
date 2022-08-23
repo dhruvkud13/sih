@@ -12,14 +12,14 @@ export const FileView = (props) => {
   const oncrossclick = () => {
     dispatch(setModal(false));
   };
-  // const link = "https://ishaanhello.infura-ipfs.io/ipfs/" + hash
+  const link = "https://ishaanhello.infura-ipfs.io/ipfs/" + props.rellink
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen">
       <div className="flex items-center justify-center shadow-2xl">
         <div className=" h-[800px] w-[900px] flex">
           {props.type === "pdf" ? (
             <div className=" h-[800px] w-[900px] flex">
-              <Viewer fileUrl="sample.pdf" />
+              <Viewer fileUrl={link} />
             </div>
           ) : (
             <div className="bg-white flex items-center justify-center">
