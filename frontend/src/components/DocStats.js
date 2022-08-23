@@ -6,34 +6,63 @@ import { useSelector} from "react-redux";
 //Import json file. Used in {options}.
 
 
-const Stats = () => {
-    const jpeg = useSelector((state) => state.stat.jpegCount);
-    const pdf = useSelector((state) => state.stat.pdfCount);
-    console.log(jpeg);
-    console.log(pdf);
-const data=[
+const DocStats = () => {
+    const aadhar=useSelector((state) => state.stat.aadharCount);
+    const ration=useSelector((state) => state.stat.rationCount);
+    const passport=useSelector((state) => state.stat.passportCount);
+    const pan=useSelector((state) => state.stat.panCount);
+    const driving=useSelector((state) => state.stat.drivingCount);
+
+  const data2=[
     {
-      "value": pdf,
-      "name": "PDFs",
+      "value": aadhar,
+      "name": "Aadhar Cards",
       "itemStyle": {
         "normal": {
-          "color": "#f845f1"
+          "color": "#5045f6"
         }
       }
     },
     {
-      "value": jpeg,
-      "name": "JPEGs",
+      "value": pan,
+      "name": "PAN Cards",
       "itemStyle": {
         "normal": {
-          "color": "#ad46f3"
+          "color": "#f69846"
         }
       }
-    }
+    },
+    {
+      "value": driving,
+      "name": "Driving Licenses",
+      "itemStyle": {
+        "normal": {
+          "color": "#ff4343"
+        }
+      }
+    },
+    {
+      "value": passport,
+      "name": "Passports",
+      "itemStyle": {
+        "normal": {
+          "color": "#45dbf7"
+        }
+      }
+    },
+    {
+      "value": ration,
+      "name": "Ration Cards",
+      "itemStyle": {
+        "normal": {
+          "color": "#f6d54a"
+        }
+      }
+    },
   ]
 
 //Array of names for legend in {options}
-const dataNames = data.map(i => i.name);
+const dataNames2 = data2.map(i => i.name);
 //Chart style
 const style = {
   height: "100vh",
@@ -148,7 +177,7 @@ let option = {
     formatter: "{a}<br/><strong>{b}</strong>: {c} Numbers"
   },
   title: {
-    text: "Document Format Statistics",
+    text: "Document Statistics",
     left: "center",
     top: 20,
     textStyle: {
@@ -160,14 +189,14 @@ let option = {
     icon: "circle",
     x: "center",
     y: "50px",
-    data: dataNames,
+    data: dataNames2,
     textStyle: {
       color: "#fff"
     }
   },
   series: [
     {
-      name: "Document Format",
+      name: "Document Type",
       type: "pie",
       animationDuration: 2000,
       animationEasing: "quarticInOut",
@@ -198,7 +227,7 @@ let option = {
           show: true
         }
       },
-      data: data
+      data: data2
     }
   ]
 };
@@ -208,4 +237,4 @@ let option = {
   </div>)
 };
 
-export default Stats;
+export default DocStats;

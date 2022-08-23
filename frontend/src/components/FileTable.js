@@ -11,7 +11,7 @@ import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
 import { ExclamationCircleOutlined } from "@ant-design/icons";
 import {  Modal } from "antd";
-import { setjpeg,setpdf } from "../redux/statSlice";
+import { setjpeg,setpdf,setAadharCard,setRationCard,setDrivingLicense,setPassport,setPANCard } from "../redux/statSlice";
 
 const { confirm } = Modal;
 function FileTable() {
@@ -60,6 +60,41 @@ function FileTable() {
 //     console.log(pdfCount);
 //   }
 //   initStats();
+// const docStats = () => {
+//   var aadharCount=0;
+//   var rationCount=0;
+//   var passportCount=0;
+//   var panCount=0;
+//   var drivingCount=0;
+//   data.map((file)=>{
+//     if(file.docType==="Aadhar Card"){
+//       aadharCount++;
+//     }
+//     else if(file.docType==="Ration Card"){
+//       rationCount++;
+//     }
+//     else if(file.docType==="Passport"){
+//       passportCount++;
+//     }
+//     else if(file.docType==="PAN Card"){
+//       panCount++;
+//     }
+//     else if(file.docType==="Driving License"){
+//       drivingCount++;
+//     }
+//   })
+//   dispatch(setAadharCard(aadharCount));
+//   dispatch(setRationCard(rationCount));
+//   dispatch(setPassport(passportCount));
+//   dispatch(setPANCard(panCount));
+//   dispatch(setDrivingLicense(drivingCount));
+//   console.log(aadharCount);
+//   console.log(rationCount);
+//   console.log(passportCount);
+//   console.log(panCount);
+//   console.log(drivingCount);
+// }
+// docStats();
   // }, []);
 
   useEffect(() => {
@@ -80,6 +115,44 @@ function FileTable() {
     }
     initStats();
   }, [])
+
+  useEffect(()=>{
+    const docStats = () => {
+      var aadharCount=0;
+      var rationCount=0;
+      var passportCount=0;
+      var panCount=0;
+      var drivingCount=0;
+      data.map((file)=>{
+        if(file.docType==="Aadhar Card"){
+          aadharCount++;
+        }
+        else if(file.docType==="Ration Card"){
+          rationCount++;
+        }
+        else if(file.docType==="Passport"){
+          passportCount++;
+        }
+        else if(file.docType==="PAN Card"){
+          panCount++;
+        }
+        else if(file.docType==="Driving License"){
+          drivingCount++;
+        }
+      })
+      dispatch(setAadharCard(aadharCount));
+      dispatch(setRationCard(rationCount));
+      dispatch(setPassport(passportCount));
+      dispatch(setPANCard(panCount));
+      dispatch(setDrivingLicense(drivingCount));
+      console.log(aadharCount);
+      console.log(rationCount);
+      console.log(passportCount);
+      console.log(panCount);
+      console.log(drivingCount);
+    }
+    docStats();
+  })
 
 
   
