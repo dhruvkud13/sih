@@ -36,12 +36,13 @@ const Login = () => {
     });
 
     // console.log(isValid);
-    if (!isPass) {
-      console.log("validator running");
-      setError("Password Format is invalid!");
-    } else if (!isEmail) {
+    if (!isEmail) {
       console.log("validator running");
       setError("Email format is invalid");
+    }
+    else if (!isPass) {
+      console.log("validator running");
+      setError("Password Format is invalid");
     } else {
       try {
         //   const res = await axios.post("/auth/signin", { email, password });
