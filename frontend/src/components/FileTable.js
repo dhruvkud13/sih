@@ -1,21 +1,21 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
 import DataTableExtensions from "react-data-table-component-extensions";
-import { columns, data } from "../data";
+import { columns, loldata } from "../data";
 import "@react-pdf-viewer/core/lib/styles/index.css";
 import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
-import differenceBy from 'lodash/differenceBy';
+import differenceBy from "lodash/differenceBy";
 import OurButton from "./OurButton";
 
 function FileTable() {
-  const [fileData, setFileData] = useState(data);
+  const [data, setData] = useState(loldata);
   const [loading, setLoading] = useState(true);
   const [selectedRows, setSelectedRows] = React.useState([]);
-	const [toggleCleared, setToggleCleared] = React.useState(false);
+  const [toggleCleared, setToggleCleared] = React.useState(false);
   // useEffect(() => {
   //   const url = "http://localhost:3000/getallfiles";
   //   const fetchData = async () => {
@@ -24,7 +24,7 @@ function FileTable() {
   //       const json = await response.json();
   //       for (const file in json) {
   //         if(file.fileVisibility)
-  //         setFileData([...fileData, file]);
+  //         setData([...data, file]);
   //       }
   //       setLoading(false);
   //     } catch (error) {
@@ -35,49 +35,61 @@ function FileTable() {
   // }, []);
   const tableData = {
     columns,
-    fileData,
+    data,
   };
-  const handleRowSelected = React.useCallback(state => {
-		setSelectedRows(state.selectedRows);
-	}, []);
+  const handleRowSelected = React.useCallback((state) => {
+    setSelectedRows(state.selectedRows);
+  }, []);
   const contextActions = React.useMemo(() => {
-		const handleDelete = () => {
-			
-			if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.title)}?`)) {
-				setToggleCleared(!toggleCleared);
-				setFileData(differenceBy(fileData, selectedRows, 'title'));
-			}
-		};
-    console.log(fileData);
+    const handleDelete = () => {
+      if (
+        window.confirm(
+          `Are you sure you want to delete:\r ${selectedRows.map(
+            (r) => r.title
+          )}?`
+        )
+      ) {
+        //TODO: add delete post request
+        setToggleCleared(!toggleCleared);
+        setData(differenceBy(data, selectedRows, "title"));
+      }
+    };
+    console.log(data);
 
-		return (
-			<OurButton onClick={handleDelete} title="Delete" />
-		);
-	}, [fileData, selectedRows, toggleCleared]);
+    return (
+      <OurButton
+        onClick={handleDelete}
+        title="Delete"
+        color="red-500"
+        hoverColor="[#E3F2FD]"
+        textHoverColor="red-500"
+      />
+    );
+  }, [data, selectedRows, toggleCleared]);
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   return (
     <div className="">
       <div className="">
-        {/* <DataTableExtensions {...tableData}> */}
-          <DataTable
-            title="Documents"
-            columns={columns}
-            data={fileData}
-            // noHeader
-            defaultSortField="id"
-            defaultSortAsc={false}
-            pagination
-            highlightOnHover
-            onRowClicked={() => dispatch(setModal(true))}
-            selectableRows
-			      contextActions={contextActions}
-			      onSelectedRowsChange={handleRowSelected}
-			      clearSelectedRows={toggleCleared}
-          />
-        {/* </DataTableExtensions> */}
+        <DataTableExtensions {...tableData}>
+        <DataTable
+          title="Documents"
+          columns={columns}
+          data={data}
+          // noHeader
+          defaultSortField="id"
+          defaultSortAsc={false}
+          pagination
+          highlightOnHover
+          onRowClicked={() => dispatch(setModal(true))}
+          selectableRows
+          contextActions={contextActions}
+          onSelectedRowsChange={handleRowSelected}
+          clearSelectedRows={toggleCleared}
+        />
+        </DataTableExtensions>
       </div>
-      {modal.isModal ? <FileView type={"pdf"}/> : <div></div>}
+      {modal.isModal ? <FileView type={"pdf"} /> : <div></div>}
     </div>
   );
 }
