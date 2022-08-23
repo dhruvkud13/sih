@@ -17,7 +17,7 @@ function App() {
   return (
     <div className="App bg-white scrollbar-hide">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-      {user.useremail==null?<Router>
+      {/* {user.useremail==null?<Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -42,8 +42,20 @@ function App() {
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
           </Routes>
-        </Router>}
-        
+        </Router>} */}
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" element={<LandingPage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/logout" element={<Login />} />
+            <Route path="/admin" element={<AdminHome />} />
+            <Route path="/user" element={<UserHome />} />
+            <Route path="/files" element={<Filesys />} />
+            <Route path="/graphs" element={<Graphs />} />
+          </Routes>
+        </Router>
       </Worker>
       ;
     </div>
