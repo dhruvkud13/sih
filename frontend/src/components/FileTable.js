@@ -15,27 +15,33 @@ import { Button, Modal, Space } from "antd";
 
 const { confirm } = Modal;
 function FileTable() {
-  const [data, setData] = useState(loldata);
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
-  // useEffect(() => {
-  //   const url = "http://localhost:3000/getallfiles";
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(url);
-  //       const json = await response.json();
-  //       for (const file in json) {
-  //         if(file.fileVisibility)
-  //         setData([...data, file]);
-  //       }
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    const url = "http://localhost:8000/getallfiles";
+    const fetchData = async () => {
+      try {
+
+        setData([])
+        const response = await fetch(url);
+        const json = await response.json();
+        const files = []
+        for (const i in json) {
+        
+          console.log(json[i].value)
+          files.push(json[i].value)
+
+        }
+        setData(files)
+        setLoading(false);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, []);
   const tableData = {
     columns,
     data,
@@ -78,8 +84,8 @@ function FileTable() {
   }, [data, selectedRows, toggleCleared]);
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
-  return (
-    <div className="">
+  return  loading == true ? (<div>
+    loading </div>) : (<div className="">
       <div className="">
         <DataTableExtensions {...tableData}>
           <DataTable
@@ -99,9 +105,11 @@ function FileTable() {
           />
         </DataTableExtensions>
       </div>
-      {modal.isModal ? <FileView type={"pdf"} /> : <div></div>}
-    </div>
-  );
+      {modal.isModal ? <FileView   type={"pdf"} /> : <div></div>}
+    </div>);
+  
+    
+  
 }
 
 export default FileTable;

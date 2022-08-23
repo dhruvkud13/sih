@@ -16,8 +16,8 @@ export const userSlice = createSlice({
     },
     loginSuccess: (state, action) => {
       state.loading = false;
-      state.username = action.payload[0].name;
-      state.useremail = action.payload[0].email;
+      state.username = action.payload.name;
+      state.useremail = action.payload.email;
     },
     loginFailure: (state) => {
       state.loading = false;
