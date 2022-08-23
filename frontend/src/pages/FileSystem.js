@@ -1,9 +1,5 @@
 import {
-  DesktopOutlined,
-  FileOutlined,
-  PieChartOutlined,
-  TeamOutlined,
-  UserOutlined,
+  FileOutlined, DeleteOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
@@ -29,7 +25,7 @@ function getItem(label, key, icon, children) {
 
 const items = [
   getItem("All Files", "1", <FileOutlined />),
-  // getItem("Employee Files", "2", <FileOutlined />),
+  getItem("Deleted Files", "2", <DeleteOutlined />),
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
   //   getItem("Bill", "4"),

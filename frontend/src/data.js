@@ -1,7 +1,7 @@
 export const columns = [
   {
     name: "Title",
-    selector: "title",
+    selector: "fileName",
     sortable: true,
   },
   {
@@ -24,16 +24,16 @@ export const columns = [
     selector: "fileDesc",
     sortable: true,
   },
-  {
-    name: "File Size",
-    selector: "fileSize",
-    sortable: true,
-  },
-  {
-    name: "Last Modified",
-    selector: "lastMod",
-    sortable: true,
-  },
+  // {
+  //   name: "File Size",
+  //   selector: "fileSize",
+  //   sortable: true,
+  // },
+  // {
+  //   name: "Last Modified",
+  //   selector: "lastMod",
+  //   sortable: true,
+  // },
 ];
 export const loldata = [
   {
@@ -57,3 +57,13 @@ export const loldata = [
     lastMod: "2022-06-16",
   },
 ];
+// const file = {
+//   fileName, //
+//   docType,//aadhar
+//   fileType,// pdf/
+//   fileOwner,
+//   fileDesc,
+//   hash,
+//   fileEmail,
+//   fileVisibility: true
+// };

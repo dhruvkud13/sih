@@ -6,6 +6,7 @@ import {
   AiOutlineLogin,
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { loginFailure, loginSuccess, loginStart } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -19,7 +20,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
   const [error, setError] = useState("");
-
+  const user = useSelector((state) => state.user)
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
@@ -56,12 +57,20 @@ const Login = () => {
         // }
         const body = { email, password };
         console.log(JSON.stringify(body));
-        await fetch("http://localhost:3000/login", {
+        await fetch("http://localhost:8000/login", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }).then((res) => {
-          dispatch(loginSuccess(res.body));
+          
+          return res.json()
+        }).then((data)=>{
+
+          console.log(data[0].value)
+          dispatch(loginSuccess(data[0].value));
+          console.log(user.username);
+          console.log(user.useremail);
+
         });
       } catch (err) {
         console.log(err);

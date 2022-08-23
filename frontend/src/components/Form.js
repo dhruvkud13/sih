@@ -41,7 +41,8 @@ const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
-    const url = fileList[0].type==="image/jpeg"?"http://localhost:3000/uploadJPEG":"http://localhost:3000/uploadPDF";
+    const url = fileList[0].type=="image/jpeg"?"http://localhost:8000/uploadJPEG":"http://localhost:8000/uploadPDF";
+
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
     formData.append("fileName", fileList[0].name);
@@ -57,7 +58,7 @@ const UploadForm = () => {
     };
     axios.post(url, formData, config).then((response) => {
       // console.log(response.data);
-      console.log(response.status);
+      console.log(response.data);
     });
   };
   const handleChange = ({ file: newFile, fileList: newFileList }) => {

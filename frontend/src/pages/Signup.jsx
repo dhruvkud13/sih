@@ -18,7 +18,7 @@ const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
   const [cPassShown, setcPassShown] = useState(false);
   //signup functionality
-  const [fullname, setFullname] = useState("");
+  const [name, setname] = useState("");
   const [contact, setContact] = useState("");
   const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
@@ -33,7 +33,7 @@ const SignUp = () => {
     const isValid = validator.isEmail(email);
     const isNumber = validator.isMobilePhone(contact, "en-IN");
     const isDob = validator.isDate(dob, "YYYY-MM-DD");
-    const isName = validator.matches(fullname,/^[a-zA-Z ]*$/);
+    const isName = validator.matches(name,/^[a-zA-Z ]*$/);
     const isPass = validator.isStrongPassword(password, {
       minLength: 8,
       minLowercase: 1,
@@ -65,22 +65,27 @@ const SignUp = () => {
     } else {
       try {
         // await axios.post("/auth/signup", {
-        //   fullname,
+        //   name,
         //   email,
         //   password: confirmPassword,
         //   dob: dob,
         //   contact: contact,
 
         // });
-        const body = { fullname, email, contact, dob, password };
-        console.log(JSON.stringify(body));
-        await fetch("http://localhost:3000/register", {
+        const body = { name, email, contact, dob, password };
+        //console.log(JSON.stringify(body));
+        await fetch("http://localhost:8000/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
         }).then((res) => {
-          console.log(res.body);
-        });
+
+          return res.json();
+       
+        }).then((data)=>{
+
+          console.log(data)
+        })
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -107,12 +112,12 @@ const SignUp = () => {
             <div className="rounded-full mt-2">
               <div className="flex border-none text-sm  text-black bg-white outline-none px-3 pb-3 pt-2 rounded-2xl ">
                 <div className="flex flex-col ">
-                  <div className=" text-txtgrey text-[12px]">Fullname</div>
+                  <div className=" text-txtgrey text-[12px]">name</div>
                   <input
                     type="text"
-                    // value={fullname}
+                    // value={name}
                     className="text-black relative  border-none bg-transparent outline-none w-[22rem]"
-                    onChange={(e) => setFullname(e.target.value)}
+                    onChange={(e) => setname(e.target.value)}
                   />
                 </div>
 
