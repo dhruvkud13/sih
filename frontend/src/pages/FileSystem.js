@@ -1,12 +1,9 @@
-import {
-  FileOutlined, DeleteOutlined
-} from "@ant-design/icons";
+import { FileOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
 import "antd/dist/antd.css";
 import "../css/FileSystem.css";
 import FileTable from "../components/FileTable";
-import OurButton from "../components/OurButton";
 import Fade from "react-reveal/Fade";
 import { useDispatch } from "react-redux";
 import { setFormModal } from "../redux/formModalSlice.js";
@@ -42,6 +39,10 @@ const Filesys = () => {
   const [collapsed, setCollapsed] = useState(false);
   const dispatch = useDispatch();
   const formModal = useSelector((state) => state.formModal);
+  const style = {
+    buttonStyle:
+      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
+  };
   return (
     <div className="">
       <Layout
@@ -96,13 +97,16 @@ const Filesys = () => {
                 }}
               >
                 <div className="flex justify-end">
-                  <OurButton
-                    title="Add New Doc"
+                  <button
                     onClick={() => {
                       dispatch(setFormModal(true));
                       console.log(formModal.isFormModal);
                     }}
-                  />
+                    type="button"
+                    className={style.buttonStyle}
+                  >
+                    Add New Doc
+                  </button>
                 </div>
                 <FileTable />
               </div>
