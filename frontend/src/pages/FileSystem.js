@@ -9,11 +9,10 @@ import "antd/dist/antd.css";
 import "../css/FileSystem.css";
 import FileTable from "../components/FileTable";
 import Fade from "react-reveal/Fade";
-import { useDispatch } from "react-redux";
-import { setFormModal } from "../redux/formModalSlice.js";
 import { useSelector } from "react-redux";
 import UploadForm from "../components/Form";
 import Graphs from "./Graphs";
+import DeletedTable from "../components/DeletedTable";
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -44,32 +43,22 @@ const items = [
 const Filesys = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState("1");
-  const dispatch = useDispatch();
   const formModal = useSelector((state) => state.formModal);
-  const style = {
-    buttonStyle:
-      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
-  };
   return (
     <div className="">
       <Layout
         style={{
-          // paddingTop: "64px",
           minHeight: "100vh",
         }}
       >
         <Sider
           collapsible
-          // style={{ backgroundColor: "#282C83" }}
           collapsed={collapsed}
           onCollapse={(value) => setCollapsed(value)}
-          //   style={{paddingTop: '64px'}}
         >
           <div className="logo" />
           <Menu
             theme="dark"
-            // color="black"
-            // style={{ backgroundColor: "#282C83", color: "white" }}
             defaultSelectedKeys={["1"]}
             mode="inline"
             items={items}
@@ -80,12 +69,6 @@ const Filesys = () => {
           />
         </Sider>
         <Layout className="site-layout">
-          {/* <Header
-        className="site-layout-background"
-        style={{
-          padding: 0,
-        }}
-      /> */}
           <Fade bottom>
             <Content
               style={{
@@ -108,7 +91,7 @@ const Filesys = () => {
                 }}
               >
                 {selectedKey === "1" && <FileTable />}
-                {selectedKey === "2" && <FileTable />}
+                {selectedKey === "2" && <DeletedTable />}
                 {selectedKey === "3" && <Graphs />}
               </div>
             </Content>

@@ -55,7 +55,6 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://www.africau.edu/images/default",
   "devDependencies": {
     "autoprefixer": "^10.4.8",
     "postcss": "^8.4.14",
