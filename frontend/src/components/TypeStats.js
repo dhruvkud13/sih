@@ -1,5 +1,4 @@
 import * as React from "react";
-import { render } from "react-dom";
 import ReactEcharts from "echarts-for-react";
 import { useSelector} from "react-redux";
 

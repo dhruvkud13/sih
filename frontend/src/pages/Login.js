@@ -9,7 +9,6 @@ import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { loginFailure, loginSuccess, loginStart } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 import loginimage from "../images/loginimage.svg";
 import Fade from "react-reveal/Fade";
 import validator from "validator";

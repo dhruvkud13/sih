@@ -23,7 +23,7 @@ import {
 import Fade from "react-reveal/Fade";
 
 const { confirm } = Modal;
-function FileTable() {
+function DeletedTable() {
   // const [data, setData] = useState([]);
   const [data, setData] = useState(loldata);
   // const [loading, setLoading] = useState(true);
@@ -31,73 +31,25 @@ function FileTable() {
   const [row, setrow] = useState();
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
-  // useEffect(() => {
-  //   const url = "http://localhost:8000/getallfiles";
-  //   const fetchData = async () => {
-  //     try {
-
-  //       setData([])
-  //       const response = await fetch(url);
-  //       const json = await response.json();
-  //       const files = []
-  //       for (const i in json) {
-
-  //         console.log(json[i].value)
-  //         files.push(json[i].value)
-
-  //       }
-  //       setData(files)
-  //       setLoading(false);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchData();
-  //   const initStats = () => {
-  //     var pdfCount=0;
-  // var jpegCount=0;
-  //     data.map((file) => {
-  //       if (file.fileType === "image/jpeg") {
-  //         jpegCount++;
-  //       } else {
-  //         pdfCount++;
-  //       }
-  //     })
-  //     dispatch(setjpeg(jpegCount));
-  //     dispatch(setpdf(pdfCount));
-  //   }
-  //   initStats();
-  // const docStats = () => {
-  //   var aadharCount=0;
-  //   var rationCount=0;
-  //   var passportCount=0;
-  //   var panCount=0;
-  //   var drivingCount=0;
-  //   data.map((file)=>{
-  //     if(file.docType==="Aadhar Card"){
-  //       aadharCount++;
-  //     }
-  //     else if(file.docType==="Ration Card"){
-  //       rationCount++;
-  //     }
-  //     else if(file.docType==="Passport"){
-  //       passportCount++;
-  //     }
-  //     else if(file.docType==="PAN Card"){
-  //       panCount++;
-  //     }
-  //     else if(file.docType==="Driving License"){
-  //       drivingCount++;
-  //     }
-  //   })
-  //   dispatch(setAadharCard(aadharCount));
-  //   dispatch(setRationCard(rationCount));
-  //   dispatch(setPassport(passportCount));
-  //   dispatch(setPANCard(panCount));
-  //   dispatch(setDrivingLicense(drivingCount));
-  // }
-  // docStats();
-  // }, []);
+//   useEffect(() => {
+//     const url = "http://localhost:8000/getallfiles";
+//     const fetchData = async () => {
+//       try {
+//         setData([]);
+//         const response = await fetch(url);
+//         const json = await response.json();
+//         const files = [];
+//         for (const i in json) {
+//           if (json[i].value.fileVisiblity) files.push(json[i].value);
+//         }
+//         setData(files);
+//         setLoading(false);
+//       } catch (error) {
+//         console.log(error);
+//       }
+//     };
+//     fetchData();
+//   }, []);
 
   useEffect(() => {
     const initStats = () => {
@@ -113,7 +65,6 @@ function FileTable() {
       dispatch(setjpeg(jpegCount));
 
       dispatch(setpdf(pdfCount));
-
     };
     initStats();
   }, []);
@@ -152,8 +103,8 @@ function FileTable() {
     data,
   };
   const style = {
-    delStyle:
-      "text-white hover:text-red-500 bg-red-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
+    recoverStyle:
+      "text-white hover:text-green-500 bg-green-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
     buttonStyle:
       "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
   };
@@ -185,7 +136,7 @@ function FileTable() {
     };
 
     return (
-      <button onClick={handleDelete} type="button" className={style.delStyle}>
+      <button onClick={handleDelete} type="button" className={style.recoverStyle}>
         Delete
       </button>
     );
@@ -247,4 +198,4 @@ function FileTable() {
   );
 }
 
-export default FileTable;
+export default DeletedTable;

@@ -42,7 +42,7 @@ const UploadForm = () => {
   };
   const handleSubmit = () => {
     const url =
-      fileList[0].type == "image/jpeg"
+      fileList[0].type === "image/jpeg"
         ? "http://localhost:8000/uploadJPEG"
         : "http://localhost:8000/uploadPDF";
 
