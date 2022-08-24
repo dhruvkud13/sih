@@ -31,13 +31,22 @@ function FileTable() {
   const [row, setrow] = useState();
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
+  const user= useSelector(state=>state.user);
   // useEffect(() => {
-  //   const url = "http://localhost:8000/getallfiles";
+    const url = user.userType==="user"?"http://localhost:8000/getfilesbyuser":"http://localhost:8000/getallfiles";
   //   const fetchData = async () => {
   //     try {
 
   //       setData([])
-  //       const response = await fetch(url);
+        // const response = await fetch(url);
+      //   const email=user.useremail;
+      //   const body = user.userType==="user"?{ email }:{};
+
+      //  const response= await fetch(url, {
+      //     method: "GET",
+      //     headers: { "Content-Type": "application/json" },
+      //     body: JSON.stringify(body),
+      //   })
   //       const json = await response.json();
   //       const files = []
   //       for (const i in json) {

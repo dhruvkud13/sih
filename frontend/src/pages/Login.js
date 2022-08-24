@@ -7,7 +7,7 @@ import {
 } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import { loginFailure, loginSuccess, loginStart } from "../redux/userSlice";
+import { loginFailure, loginSuccess, loginStart, setUserType } from "../redux/userSlice";
 import { useNavigate } from "react-router-dom";
 import loginimage from "../images/loginimage.svg";
 import Fade from "react-reveal/Fade";
@@ -55,8 +55,8 @@ const Login = () => {
         }).then((data)=>{
           console.log(data[0].value)
           dispatch(loginSuccess(data[0].value));
-          console.log(user.username);
-          console.log(user.useremail);
+          if(user.adminEmails.contains(email))
+            dispatch(setUserType("admin"))
           navigate("/files");
         });
       } catch (err) {
