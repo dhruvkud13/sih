@@ -15,10 +15,11 @@ import ExistingSch from "./pages/admin/ExistingSch";
 import CreateSch from './pages/admin/CreateSch';
 function App() {
   const user=useSelector(state=>state.user);
+  console.log(user.useremail)
   return (
     <div className="App bg-white scrollbar-hide">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-      {/* {user.useremail==null?<Router>
+      {user.useremail==null?<Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -43,8 +44,8 @@ function App() {
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
           </Routes>
-        </Router>} */}
-        <Router>
+        </Router>}
+        {/* <Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -60,7 +61,7 @@ function App() {
             <Route path="/existing" element={<ExistingSch />} />
             <Route path="/create" element={<CreateSch />} />
           </Routes>
-        </Router>
+        </Router> */}
       </Worker>
       ;
     </div>

@@ -13,10 +13,11 @@ export const FolderForm = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const folModal = useSelector((state) => state.folModal);
+  console.log(folModal)
   const handleSubmit = async () => {
     try {
       const url = "http://localhost:8000/createFolder";
-      const body = { "path": ["Hello","World"], "fileName": fileName, "fileEmail": "tash@gmail.com" };
+      const body = { "path": folModal.path, "fileName": fileName, "fileEmail": "tash@gmail.com" };
       // console.log(JSON.stringify(body))
       await fetch(url, {
         method: "POST",
@@ -24,6 +25,7 @@ export const FolderForm = () => {
         body: JSON.stringify(body),
       }).then((res) => {
         dispatch(setFolModal(false))
+        
         console.log(res)
       });
     } catch (err) {

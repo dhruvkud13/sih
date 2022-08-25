@@ -15,7 +15,7 @@ import { lmaodata } from "./announcementdata";
 //   background: '#364d79',
 // };
 const Cdata=(props)=><div>
-<div style={{backgroundImage:`url(${props.item.announcementType})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
+<div className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
 
   <div className='absolute top-2 text-xs'>ANNOUNCEMENTS</div>
   <div className='font-bold text-3xl mb-5'>{props.item.announcementName}</div>
