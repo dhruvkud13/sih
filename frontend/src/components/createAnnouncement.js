@@ -44,7 +44,7 @@ const CreateAnnouncement = () => {
     );
   };
   const handleSubmit = () => {
-    const url ="http://localhost:8000/createAnnouncement";
+    const url ="http://localhost:8000/uploadAnnouncement";
 
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);

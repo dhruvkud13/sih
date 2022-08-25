@@ -44,6 +44,8 @@ function App() {
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
+            <Route path="/existing" element={<ExistingSch />} />
+            <Route path="/announcement" element={<CreateAnnouncement />} />
           </Routes>
         </Router>}
         {/* <Router>
