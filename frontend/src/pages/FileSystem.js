@@ -25,7 +25,7 @@ import ScholarshipUI from "./ScholarshipUI";
 import ScholarshipForm from "../components/ScholarshipForm";
 import CreateSch from "./admin/CreateSch";
 import ExistingSch from "./admin/ExistingSch";
-import { ContactPhoneSharp } from "@material-ui/icons";
+
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -59,6 +59,7 @@ const Filesys = () => {
       : getItem("Scholarships", "5", <BookOutlined />),
     user.userType === "admin" &&
       getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
+      
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),
     //   getItem("Bill", "4"),

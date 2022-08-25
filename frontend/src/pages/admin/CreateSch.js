@@ -6,6 +6,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { setCreateModal } from "../../redux/schModalSlice.js";
+import axios from "axios";
 
 
 const CreateSch = () => {
@@ -18,35 +19,27 @@ const CreateSch = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const schModal = useSelector((state) => state.schModal);
-//   const handleSubmit = () => {
-//     const url =
-//       fileList[0].type === "image/jpeg"
-//         ? "http://localhost:8000/uploadJPEG"
-//         : "http://localhost:8000/uploadPDF";
+  const handleSubmit =async (e) => {
+    e.preventDefault();
+    const url ="http://localhost:8000/createScholarship";
 
-//     const formData = new FormData();
-//     formData.append("image", fileList[0].originFileObj);
-//     formData.append("fileName", fileList[0].name);
-//     // formData.append("fileType", fileList[0].type);
-//     formData.append("fileDesc", text);
-//     formData.append("docType", dropdown);
-//     formData.append("fileOwner", user.username);
-//     formData.append("fileEmail", user.useremail);
-//     const config = {
-//       headers: {
-//         "content-type": "multipart/form-data",
-//       },
-//     };
-//     try {
-//       axios.post(url, formData, config).then((response) => {
-//         // console.log(response.data);
-//         console.log(response.data);
-//         dispatch(setFormModal(false));
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
+    
+    try {
+        const email=user.useremail;
+      const body={name,scholarship,text,email};
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }).then((res)=>{
+        console.log(res);
+      }).then((data)=>{
+        console.log(data);
+      })
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const oncrossclick = () => {
     console.log(schModal.isCreateModal);
     dispatch(setCreateModal(false));
@@ -95,7 +88,7 @@ const CreateSch = () => {
           <div className="mt-4">
             <button
               className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
-            //   onClick={handleSubmit}
+              onClick={handleSubmit}
             >
               SUBMIT
             </button>

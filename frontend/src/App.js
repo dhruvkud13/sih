@@ -13,6 +13,7 @@ import ScholarshipForm from "./components/ScholarshipForm";
 import Folders from "./components/FolderTable";
 import ExistingSch from "./pages/admin/ExistingSch";
 import CreateSch from './pages/admin/CreateSch';
+import CreateAnnouncement from "././components/createAnnouncement";
 function App() {
   const user=useSelector(state=>state.user);
   return (
@@ -59,6 +60,7 @@ function App() {
             <Route path="/folders" element={<Folders />} />
             <Route path="/existing" element={<ExistingSch />} />
             <Route path="/create" element={<CreateSch />} />
+            <Route path="/announcement" element={<CreateAnnouncement />} />
           </Routes>
         </Router>
       </Worker>
