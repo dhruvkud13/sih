@@ -5,6 +5,7 @@ import formModalReducer from "./formModalSlice";
 import schModalReducer from "./schModalSlice";
 import statReducer from "./statSlice";
 import deetsModalReducer from "./deetsModalSlice";
+import folModalReducer from "./folModalSlice";
 import storage from "redux-persist/lib/storage";
 import {
   persistStore,
@@ -29,6 +30,7 @@ const rootReducer = combineReducers({
   schModal: schModalReducer,
   stat: statReducer,
   deetsModal: deetsModalReducer,
+  folModal: folModalReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

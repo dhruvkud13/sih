@@ -5,6 +5,7 @@ import { columns } from "../data";
 import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
 import { setFormModal, setFolPath, setType } from "../redux/formModalSlice";
+import { setFolModal } from "../redux/folModalSlice";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
@@ -26,7 +27,8 @@ const FolderTable = () => {
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
   const user = useSelector((state) => state.user);
-  const formModal = useSelector((state)=>state.formModal)
+  const folModal = useSelector((state) => state.folModal)
+  const formModal = useSelector((state) => state.formModal)
   useEffect(() => {
     const url = "http://localhost:8000/getallfilesfolders";
     const fetchData = async () => {
@@ -43,7 +45,7 @@ const FolderTable = () => {
           files.push(json[i].value);
         }
         setAllData(files);
-        console.log(files)
+        // console.log(files)
         setLoading(false);
 
       } catch (error) {
@@ -51,16 +53,16 @@ const FolderTable = () => {
       }
     };
     fetchData();
-  }, [path,formModal.isFormModal]);
+  }, [path, formModal.isFormModal, folModal.isFolModal]);
   useEffect(() => {
     setData(
       allData.filter((item) => {
         // if(JSON.stringify(item.path) == JSON.stringify(path))
-        console.log(item)
+        // console.log(item)
         return JSON.stringify(item.path) == JSON.stringify(path);
       }))
-  }, [allData,path])
-  
+  }, [allData, path])
+
   const rowClicked = (selrow) => {
     // console.log(selrow);
     // setrow(row);
@@ -152,8 +154,6 @@ const FolderTable = () => {
 
             onClick={() => {
               dispatch(setFormModal(true));
-              dispatch(setType("file"));
-              // console.log(formModal.isFormModal);
             }}
             type="button"
             className={style.buttonStyle}
@@ -161,10 +161,7 @@ const FolderTable = () => {
             Add New Doc
           </button><button
             onClick={() => {
-              dispatch(setFormModal(true));
-              dispatch(setType("folder"));
-              dispatch(setFolPath(path));
-              // console.log(formModal.isFormModal);
+              dispatch(setFolModal(true));
             }}
             type="button"
             className={style.buttonStyle}

@@ -7,6 +7,7 @@ import axios from "axios";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setFormModal } from "../redux/formModalSlice.js";
+import { setFolModal } from "../redux/folModalSlice.js";
 import { useSelector } from "react-redux";
 
 const getBase64 = (file) =>
@@ -52,7 +53,7 @@ export const UploadForm = () => {
     // formData.append("fileType", fileList[0].type);
     formData.append("fileDesc", text);
     formData.append("docType", dropdown);
-    formData.append("fileOwner", user.username);
+    // formData.append("fileOwner", user.username);
     formData.append("fileEmail", user.useremail);
     const config = {
       headers: {
@@ -167,74 +168,3 @@ export const UploadForm = () => {
     </div>
   );
 };
-export const FolderForm = () => {
-  const { TextArea } = Input;
-  const [fileName, setFileName] = useState("");
-  const dispatch = useDispatch();
-  const user = useSelector((state) => state.user);
-  const formModal = useSelector((state) => state.formModal);
-  const handleSubmit = async () => {
-    try {
-      // console.log(formModal.path)
-      const url = "http://localhost:8000/createFolder";
-      console.log(formModal.path)
-      const body = { "path": ["Hello","World"], "fileName": fileName, "fileEmail": "tash@gmail.com" };
-      // console.log(JSON.stringify(body))
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      }).then((res) => {
-        dispatch(setFormModal(false))
-        console.log(res)
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  const oncrossclick = () => {
-    dispatch(setFormModal(false));
-  };
-  return (
-    <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
-      <Fade bottom>
-        <div className="rounded-xl flex flex-col items-center justify-center  bg-white p-5 shadow-2xl ">
-          <div className="flex justify-around w-[100%]">
-            {" "}
-            <div className="text-[28px] font-bold pr-5">Create New Folder</div>
-            <AiOutlineClose size={20} onClick={oncrossclick} />
-          </div>
-
-          <Form
-            labelCol={{
-              span: 30,
-            }}
-            wrapperCol={{
-              span: 50,
-            }}
-            labelAlign="left"
-            layout="vertical"
-
-          >
-            <Form.Item label="Enter Folder Name">
-              <TextArea
-                rows={1}
-                placeholder="Folder Name"
-                value={fileName}
-                onChange={(e) => setFileName(e.target.value)}
-              />
-            </Form.Item>
-          </Form>
-          <div className="mt-4">
-            <button
-              className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
-              onClick={handleSubmit}
-            >
-              ADD
-            </button>
-          </div>
-        </div>
-      </Fade>
-    </div>
-  );
-}
