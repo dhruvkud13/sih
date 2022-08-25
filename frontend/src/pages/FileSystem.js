@@ -22,6 +22,10 @@ import DeletedTable from "../components/DeletedTable";
 import SchAdminUI from "../pages/admin/SchAdminUI";
 import UserHome from "./user/Home";
 import ScholarshipUI from "./ScholarshipUI";
+import ScholarshipForm from "../components/ScholarshipForm";
+import CreateSch from "./admin/CreateSch";
+import ExistingSch from "./admin/ExistingSch";
+import { ContactPhoneSharp } from "@material-ui/icons";
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -33,15 +37,15 @@ function getItem(label, key, icon, children) {
   };
 }
 
-
-
 const Filesys = () => {
-  const user = useSelector(state => state.user);
+  const user = useSelector((state) => state.user);
+  console.log(user);
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState(
     localStorage.getItem("key") == null ? "0" : localStorage.getItem("key")
   );
   const formModal = useSelector((state) => state.formModal);
+  const schModal = useSelector((state) => state.schModal);
   const folModal = useSelector((state) => state.folModal);
   console.log(folModal);
   const items = [
@@ -54,7 +58,7 @@ const Filesys = () => {
       ? getItem("Existing Scholarships", "5", <BookOutlined />)
       : getItem("Scholarships", "5", <BookOutlined />),
     user.userType === "admin" &&
-    getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
+      getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),
     //   getItem("Bill", "4"),
@@ -123,9 +127,12 @@ const Filesys = () => {
                 {selectedKey === "2" && <DeletedTable />}
                 {selectedKey === "3" && <Folders />}
                 {selectedKey === "4" && <Graphs />}
-                {user.userType === "admin" ? selectedKey === "5" && <SchAdminUI /> : selectedKey === "5" && <ScholarshipUI />}
-                {user.userType === "admin" && selectedKey === "6" && <SchAdminUI />}
-
+                {user.userType === "admin"
+                  ? selectedKey === "5" && <ExistingSch />
+                  : selectedKey === "5" && <ScholarshipUI />}
+                {user.userType === "admin" && selectedKey === "6" && (
+                  <SchAdminUI />
+                )}
               </div>
             </Content>
           </Fade>

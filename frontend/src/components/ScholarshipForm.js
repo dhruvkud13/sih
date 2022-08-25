@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Fade from "react-reveal/Fade";
 import { PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
@@ -8,6 +8,7 @@ import { AiFillExclamationCircle, AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setSchModal } from "../redux/schModalSlice.js";
 import { useSelector } from "react-redux";
+import {TiTick} from "react-icons/ti";
 
 
 const ScholarshipForm = () => {
@@ -20,8 +21,60 @@ const ScholarshipForm = () => {
   const [dropdown2, setDropdown2] = useState("");
   const [isPassport, setIsPassport] = useState(false);
   const [isMarkSheet, setIsMarkSheet] = useState(false);
-  const[data,setData]=useState([]);
+  const [data,setData]=useState([
+    {
+      fileNumber: 1,
+      type:"file",
+      path:[],
+      fileName: "Prats.jpeg",
+      docType: "Ration Card",
+      fileType:"image/jpeg",
+      fileOwner:"Prats",
+      fileDesc: "This is a ration card",
+    },
+    {
+      fileNumber: 2,
+      type:"file",
+      path:[],
+      fileName: "DhruvAadhar.pdf",
+      docType: "Aadhar Card",
+      fileType:"application/pdf",
+      fileOwner:"Dhruv Kud",
+      fileDesc: "Fake Aadhar card for clubbing",
+    },
+    {
+      fileNumber: 3,
+      type:"file",
+      path:[],
+      fileName: "BhavyaAadhar.pdf",
+      docType: "Aadhar Card",
+      fileType:"application/pdf",
+      fileOwner:"Bhavya Gor",
+      fileDesc: "Fake Card",
+    },
+    {
+      fileNumber: 4,
+      type:"file",
+      path:[],
+      fileName: "license.pdf",
+      docType: "MarkSheet",
+      fileType:"application/pdf",
+      fileOwner:"Bhavya Gor",
+      fileDesc: "Fake Card",
+    },
+    {
+      fileNumber: 5,
+      type:"file",
+      path:[],
+      fileName: "RuchiPassport.pdf",
+      docType: "Passpor",
+      fileType:"application/pdf",
+      fileOwner:"Ruchi",
+      fileDesc: "Fake Card",
+    }
+  ]);
   const dispatch = useDispatch();
+
   const user = useSelector((state) => state.user);
 //   const handleSubmit = () => {
 //     const url =
@@ -66,51 +119,71 @@ const ScholarshipForm = () => {
 //   );
 
 
-useEffect(() => {
-    const url="http://localhost:8000/getfilesbyuser";
-    const fetchData = async () => {
-      try{
-        setData([]);
-        const email=user.useremail;
-       const body = { email };
+// useEffect(() => {
+//     const url="http://localhost:8000/getfilesbyuser";
+//     const fetchData = async () => {
+//       try{
+//         setData([]);
+//         const email=user.useremail;
+//        const body = { email };
 
-        const response= await fetch(url, {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(body),
-            })
-            const json = await response.json();
-        const files = []
-        for (const i in json) {
-        files.push(json[i].value);
+//         const response= await fetch(url, {
+//               method: "GET",
+//               headers: { "Content-Type": "application/json" },
+//               body: JSON.stringify(body),
+//             })
+//             const json = await response.json();
+//         const files = []
+//         for (const i in json) {
+//         files.push(json[i].value);
 
-        }
-        setData(files)
+//         }
+//         setData(files)
         
 
-      }catch (error) {
-        //       console.log(error);
-    }
-  };
-  fetchData();
-},[])
+//       }catch (error) {
+//         //       console.log(error);
+//     }
+//   };
+  // fetchData();
+// },[])
+// setData(data);
+
+
+const handleMarksheet=(e)=>{
+  e.preventDefault();
+  if(isMarkSheet===true){
+    document.getElementById("marksheet").innerHTML="<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
+  }
+}
+
+const handlePassport=(e)=>{
+  e.preventDefault();
+  if(isPassport===true){
+    document.getElementById("passport").innerHTML="<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
+  }
+}
+
 
 useEffect(() => {
   data.map((file) => {
+    console.log(file.docType);
     if(file.docType==="Passport"){
-      return setIsPassport(true);
+      setIsPassport(true);
+      console.log("Psd");
     }
-    if(file.docType==="MarkSheet"){
-      return setIsMarkSheet(true);
+    else if(file.docType==="MarkSheet"){
+      setIsMarkSheet(true);
+      console.log("Lavda");
     }
   })
 },[data])
 
-console.log(name);
-console.log(college);
-console.log(dropdown);
-console.log(dropdown2);
-console.log(cgpa);
+// console.log(name);
+// console.log(college);
+// console.log(dropdown);
+// console.log(dropdown2);
+// console.log(cgpa);
 
   const oncrossclick = () => {
     dispatch(setSchModal(false));
@@ -166,10 +239,11 @@ console.log(cgpa);
                 <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)}/>
             </Form.Item>
             <Form.Item label="Passport Status">
-          {isPassport?(<Button>Passport Status</Button>):(<Button>No Passport</Button>)}
+          <Button onClick={(e)=>{handlePassport(e)}} id="passport">Check Passport Status</Button>
         </Form.Item>
         <Form.Item label="Marksheet Status">
-          <Button onClick={()=>{}}>12th Marksheet Status</Button>
+          <Button onClick={(e)=>{handleMarksheet(e)}} id="marksheet">Check 12th Marksheet Status
+          </Button>
         </Form.Item>
           </Form>
           <div className="mt-4">
