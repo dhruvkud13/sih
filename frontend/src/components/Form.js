@@ -179,7 +179,7 @@ const handleSubmit = async() => {
   
   try {
     const url ="http://localhost:8000/createFolder";
-  const body={"type":"folder","fileOwner":user.username,"fileEmail":user.useremail, "path":formModal.path, "fileName":fileName};
+  const body={"type":"folder","fileEmail":user.useremail, "path":formModal.path, "fileName":fileName};
     await fetch("url", {
           method: "POST",
           headers: { "Content-Type": "application/json" },

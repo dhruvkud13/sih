@@ -75,6 +75,7 @@ const Filesys = () => {
                 ? "0"
                 : localStorage.getItem("key"),
             ]}
+            style={{position:"fixed", width:"200px"}}
             mode="inline"
             items={items}
             onClick={({ key: newKey }) => {
