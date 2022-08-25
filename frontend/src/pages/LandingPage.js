@@ -5,6 +5,7 @@ import Landing from "../images/landing.png";
 import "@fontsource/league-spartan";
 import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+  localStorage.clear();
   const navigate=useNavigate();
   const style = {
     loginStyle:

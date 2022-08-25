@@ -8,8 +8,6 @@ import { useSelector} from "react-redux";
 const Stats = () => {
     const jpeg = useSelector((state) => state.stat.jpegCount);
     const pdf = useSelector((state) => state.stat.pdfCount);
-    console.log(jpeg);
-    console.log(pdf);
 const data=[
     {
       "value": pdf,

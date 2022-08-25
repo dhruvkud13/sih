@@ -19,7 +19,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 
-const UploadForm = () => {
+export const UploadForm = () => {
   const { TextArea } = Input;
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
@@ -91,12 +91,13 @@ const UploadForm = () => {
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
       <Fade bottom>
-        <div className="h-[40rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
-          <div className="flex justify-end w-[32rem] pr-5">
+        <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
+          <div className="flex justify-end w-[100%]">
             {" "}
+            <div className="text-[30px] font-bold pr-5">UPLOAD FILE</div>
             <AiOutlineClose size={20} onClick={oncrossclick} />
           </div>
-          <div className="text-[30px] font-bold">DOCUMENT UPLOAD FORM</div>
+          
 
           <Form
             labelCol={{
@@ -168,4 +169,72 @@ const UploadForm = () => {
   );
 };
 
-export default UploadForm;
+export const FolderForm = () => {const { TextArea } = Input;
+const [fileName, setFileName] = useState("");
+const dispatch = useDispatch();
+const user = useSelector((state) => state.user);
+const formModal=useSelector((state)=>state.formModal);
+
+const handleSubmit = async() => {
+  
+  try {
+    const url ="http://localhost:8000/createFolder";
+  const body={"docType":"folder","fileOwner":user.username,"fileEmail":user.useremail, "path":formModal.path, "fileName":fileName};
+    await fetch("url", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }).then((res) => {
+          
+          return res.json()
+        }).then((data)=>{
+         
+        });
+  } catch (err) {
+    console.log(err);
+  }
+};
+const oncrossclick = () => {
+  dispatch(setFormModal(false));
+};
+return (
+  <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <Fade bottom>
+      <div className="rounded-xl flex flex-col items-center justify-center  bg-white p-5 shadow-2xl ">
+        <div className="flex justify-around w-[100%]">
+          {" "}
+          <div className="text-[28px] font-bold pr-5">Create New Folder</div>
+          <AiOutlineClose size={20} onClick={oncrossclick} />
+        </div>
+        
+        <Form
+          labelCol={{
+            span: 30,
+          }}
+          wrapperCol={{
+            span: 50,
+          }}
+          labelAlign="left"
+          layout="vertical"
+        >
+          <Form.Item label="Enter Folder Name">
+            <TextArea
+              rows={1}
+              placeholder="Folder Name"
+              value={fileName}
+              onChange={(e) => setFileName(e.target.value)}
+            />
+          </Form.Item>
+        </Form>
+        <div className="mt-4">
+          <button
+            className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
+            onClick={handleSubmit}
+          >
+            ADD
+          </button>
+        </div>
+      </div>
+    </Fade>
+  </div>
+);}

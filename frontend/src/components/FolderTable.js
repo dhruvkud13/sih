@@ -4,7 +4,7 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import { columns, loldata } from "../data";
 import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
-import { setFormModal } from "../redux/formModalSlice";
+import { setFormModal,setPath,setType } from "../redux/formModalSlice";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
@@ -111,7 +111,7 @@ const FolderTable = () => {
     delStyle:
       "text-white hover:text-red-500 bg-red-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
     buttonStyle:
-      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
+      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-4 py-2.5 text-center mb-2 mx-1",
       backStyle:
       "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-3 py-1.5 text-center mb-2",
   };
@@ -167,17 +167,30 @@ const FolderTable = () => {
           >
             <LeftOutlined />
           </div>
-
-          <button
+            <div><button
+            
             onClick={() => {
               dispatch(setFormModal(true));
+              dispatch(setType("file"));
               // console.log(formModal.isFormModal);
             }}
             type="button"
             className={style.buttonStyle}
           >
             Add New Doc
-          </button>
+          </button><button
+            onClick={() => {
+              dispatch(setFormModal(true));
+              dispatch(setType("folder"));
+              dispatch(setPath(path));
+              // console.log(formModal.isFormModal);
+            }}
+            type="button"
+            className={style.buttonStyle}
+          >
+            Add Folder
+          </button></div>
+          
         </div>
         <div className="">
           <DataTableExtensions {...tableData}>

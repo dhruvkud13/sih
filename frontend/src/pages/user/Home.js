@@ -9,7 +9,7 @@ const contentStyle = {
   textAlign: 'center',
   background: '#364d79',
 };
-const Home = () => {
+const UserHome = () => {
   return (
       <div className='flex flex-col'>
         <div className='flex flex-row'>
@@ -53,4 +53,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default UserHome
