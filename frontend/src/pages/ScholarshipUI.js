@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import SchInfoCard from '../components/SchInfoCard'
 import AppliedSch from '../components/AppliedSch';
 import {MdOutlinePendingActions} from 'react-icons/md'
@@ -9,50 +9,79 @@ import { useSelector } from "react-redux";
 
 const ScholarshipUI = () => {
 
-  const[data,setData]=useState([])
+  const[existData,setexistData]=useState([])
+  const[applyData,setapplyData]=useState([])
+  const[loading,setLoading]=useState(true);
   const user = useSelector((state) => state.user);
-  const handleSubmit=async(e)=>{
-    e.preventDefault();
-    const url="http://localhost:8000/getscholarshipsbyemail";
-    try {
-      const scholarshipEmail=user.useremail;
-      const body = { scholarshipEmail };
-      //console.log(JSON.stringify(body));
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      })
-        .then((res) => {
-          return res.json();
-        })
-        .then((data) => {
-          console.log(data);
+ const schModal = useSelector((state) => state.schModal)
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const url="http://localhost:8000/getallscholarship";
+        setexistData([]);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
         });
-    } catch (err) {
-      console.log(err);
-    }
+        const json = await response.json();
+        const files = [];
+        for (const i in json) {
+          // console.log(json[i].value);
+          files.push(json[i].value);
+        }
+        setexistData(files);
+        console.log(files)
+        setLoading(false);
+
+      } catch (error) {
+        console.log(error);
+      }
+      
+      try {
+        setapplyData([]);
+        const scholarshipEmail = user.useremail;
+        const body = { scholarshipEmail };
+        console.log(JSON.stringify(body));
+        const url1="http://localhost:8000/getscholarshipbyemail"
+        const response = await fetch(url1, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+        const json = await response.json();
+        const files = []
+        for (const i in json) {
+          files.push(json[i].value);
+
+        }
+        setapplyData(files)
+      } catch (error) {
+        console.log(error);
+      }
   };
+    fetchData();
+  },[schModal.isApplyModal])
   return (
     <div>
         <div className='font-raleway px-5 pb-3 font-bold text-[20px] text-govtblue'>Apply for existing government scholarships</div>
         <div className='flex-wrap'>
         <div className=''>
-        <SchInfoCard name="Atal Bihari Vajpayee General Scholarship Scheme (ICCR)" desc="The Council has introduced return airfare for all under this scheme w.e.f 2022-23. The earlier students will continue to be governed by earlier guidelines." />
-        <SchInfoCard name="Suborno Jayanti Scholarship Scheme (ICCR)" desc="The scholarships to Bangladesh nationals will be offered under one scheme Suborno Jayanti Scholarship Scheme subsuming all other schemes under which scholarships were being offered till now." />
+        <SchInfoCard no="555" name="Atal Bihari Vajpayee General Scholarship Scheme (ICCR)" desc="The Council has introduced return airfare for all under this scheme w.e.f 2022-23. The earlier students will continue to be governed by earlier guidelines." />
+        <SchInfoCard no="665" name="Suborno Jayanti Scholarship Scheme (ICCR)" desc="The scholarships to Bangladesh nationals will be offered under one scheme Suborno Jayanti Scholarship Scheme subsuming all other schemes under which scholarships were being offered till now." />
         </div>
         <div className=''>
-        <SchInfoCard name="Dr. A.P.J Abdul Kalam Commonwealth Scholarship Scheme (ICCR)" desc="For the nationals of Commonwealth countries." />
-        <SchInfoCard name="Nehru Memorial Scholarship Scheme (ICCR)" desc="For the nationals of Sri Lanka." />
+        <SchInfoCard no="545" name="Dr. A.P.J Abdul Kalam Commonwealth Scholarship Scheme (ICCR)" desc="For the nationals of Commonwealth countries." />
+        <SchInfoCard no="53" name="Nehru Memorial Scholarship Scheme (ICCR)" desc="For the nationals of Sri Lanka." />
         </div>
         <div className=''>
-        <SchInfoCard name="Dr. S. Radhakrishnan Cultural Exchange Scholarship Scheme (ICCR)" desc="For the nationals of 29 countries namely, Australia, Belarus, Brazil, Cambodia, Canada, China, Colombia, Cuba, France, Guyana, Hungary, Indonesia, Israel, Kuwait, Laos, Malaysia, Mexico, Mongolia, Myanmar, Norway, Romania, Russia, Slovenia, Spain, Syria, Turkmenistan, Uzbekistan, Vietnam and Yemen." />
-        <SchInfoCard name="Africa Scholarship Scheme (MEA)" desc="For the nationals of 54 countries in the African continent" />
+        <SchInfoCard no="5435" name="Dr. S. Radhakrishnan Cultural Exchange Scholarship Scheme (ICCR)" desc="For the nationals of 29 countries namely, Australia, Belarus, Brazil, Cambodia, Canada, China, Colombia, Cuba, France, Guyana, Hungary, Indonesia, Israel, Kuwait, Laos, Malaysia, Mexico, Mongolia, Myanmar, Norway, Romania, Russia, Slovenia, Spain, Syria, Turkmenistan, Uzbekistan, Vietnam and Yemen." />
+        <SchInfoCard no="445645" name="Africa Scholarship Scheme (MEA)" desc="For the nationals of 54 countries in the African continent" />
         </div>
+        {existData.map((item)=><SchInfoCard name={item.scholarshipName} desc={item.scholarshipDesc} no={item.scholarshipNumber}/>)}
         <div className='font-raleway px-5 py-3 font-bold text-[20px] text-govtblue'>Applied Scholarships</div>
         <div>
-        
-        {data.map((item)=><AppliedSch name={item.scholarshipName} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
+        {/* {existData.map((item)=>console.log(item.scholarshipNumber))} */}
+        {applyData.map((item)=><AppliedSch name={item.scholarshipName} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
         </div>
         </div>
     </div>
