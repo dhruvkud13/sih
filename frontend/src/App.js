@@ -11,6 +11,8 @@ import Graphs from "./pages/Graphs";
 import { useSelector } from 'react-redux';
 import ScholarshipForm from "./components/ScholarshipForm";
 import Folders from "./components/FolderTable";
+import ExistingSch from "./pages/admin/ExistingSch";
+import CreateSch from './pages/admin/CreateSch';
 function App() {
   const user=useSelector(state=>state.user);
   console.log(user.useremail)
@@ -56,6 +58,8 @@ function App() {
             <Route path="/graphs" element={<Graphs />} />
             <Route path="/scholarship" element={<ScholarshipForm />} />
             <Route path="/folders" element={<Folders />} />
+            <Route path="/existing" element={<ExistingSch />} />
+            <Route path="/create" element={<CreateSch />} />
           </Routes>
         </Router> */}
       </Worker>
