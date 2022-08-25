@@ -5,6 +5,7 @@ import {
   FolderOutlined,
   HomeOutlined,
   BookOutlined,
+  QuestionCircleOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
@@ -17,7 +18,7 @@ import { UploadForm, FolderForm } from "../components/Form";
 import Graphs from "./Graphs";
 import Folders from "../components/FolderTable";
 import DeletedTable from "../components/DeletedTable";
-import ScholarshipUI from "./ScholarshipUI";
+import SchAdminUI from "../pages/admin/SchAdminUI";
 import UserHome from "./user/Home";
 const { Content, Footer, Sider } = Layout;
 
@@ -36,7 +37,8 @@ const items = [
   getItem("Deleted Files", "2", <DeleteOutlined />),
   getItem("Folders", "3", <FolderOutlined />),
   getItem("Statistics", "4", <PieChartOutlined />),
-  getItem("Scholarships", "5", <BookOutlined />),
+  getItem("Existing Scholarships", "5", <BookOutlined />),
+  getItem("Scholarship Applications", "6", <QuestionCircleOutlined  />),
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
   //   getItem("Bill", "4"),
@@ -112,7 +114,8 @@ const Filesys = () => {
                 {selectedKey === "2" && <DeletedTable />}
                 {selectedKey === "3" && <Folders />}
                 {selectedKey === "4" && <Graphs />}
-                {selectedKey === "5" && <ScholarshipUI />}
+                {selectedKey === "5" && <SchAdminUI />}
+                {selectedKey === "6" && <SchAdminUI />}
               </div>
             </Content>
           </Fade>

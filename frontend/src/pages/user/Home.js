@@ -16,41 +16,42 @@ import { lmaodata } from "./announcementdata";
 // };
 const Cdata=(props)=><div>
 <div style={{backgroundImage:`url(${props.item.announcementType})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
+<div className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
   <div className='absolute top-2 text-xs'>ANNOUNCEMENTS</div>
   <div className='font-bold text-3xl mb-5'>{props.item.announcementName}</div>
   <div >{props.item.announcementDesc}</div>
   </div>
-
+</div>
 </div>
 const UserHome = () => {
 
   const[data,setData]= useState(lmaodata);
-  // const[loading,setLoading]= useState(false);
-  // const url="http://localhost:8000/getallannouncement"
-  // useEffect(()=>{
-  // const fetchData = async () => {
-  //       try {
+
+  const[loading,setLoading]= useState(false);
+  const url="http://localhost:8000/getallannouncement"
+  useEffect(()=>{
+  const fetchData = async () => {
+        try {
+          setData([]);
   
-  //         setData([]);
+     const response= await fetch(url, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+          const json = await response.json();
+          const announcements = []
+          for (const i in json) {
+    if (json[i].value.announcementVisibility===true) announcements.push(json[i].value);
   
-  //    const response= await fetch(url, {
-  //       method: "GET",
-  //       headers: { "Content-Type": "application/json" },
-  //     })
-  //         const json = await response.json();
-  //         const announcements = []
-  //         for (const i in json) {
-  //   if (json[i].value.announcementVisibility===true) announcements.push(json[i].value);
-  
-  //         }
-  //         setData(announcements)
-  //         setLoading(false);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     };
-  //     fetchData();
-  // },[])
+          }
+          setData(announcements)
+          setLoading(false);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchData();
+  },[])
   const user= useSelector((state) => state.user);
 
 

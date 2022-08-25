@@ -1,3 +1,4 @@
+
 import React from 'react'
 import SchInfoCard from '../components/SchInfoCard'
 import AppliedSch from '../components/AppliedSch';
@@ -34,3 +35,4 @@ const ScholarshipUI = () => {
 }
 
 export default ScholarshipUI
+

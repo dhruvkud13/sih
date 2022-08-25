@@ -55,8 +55,9 @@ const Login = () => {
         }).then((data)=>{
           console.log(data[0].value)
           dispatch(loginSuccess(data[0].value));
-          if(user.adminEmails.contains(email))
-            dispatch(setUserType("admin"))
+          console.log(email)
+          console.log(user.admins);
+          console.log(user)
           navigate("/files");
         });
       } catch (err) {
