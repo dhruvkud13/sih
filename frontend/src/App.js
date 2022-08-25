@@ -11,6 +11,7 @@ import { Worker } from "@react-pdf-viewer/core";
 import Form from "./components/Form";
 import Graphs from "./pages/Graphs";
 import { useSelector } from 'react-redux';
+import ScholarshipForm from "./components/ScholarshipForm";
 function App() {
   const user=useSelector(state=>state.user);
   console.log(user.useremail);
@@ -54,6 +55,7 @@ function App() {
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
+            <Route path="/scholarship" element={<ScholarshipForm />} />
           </Routes>
         </Router>
       </Worker>
