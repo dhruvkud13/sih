@@ -33,7 +33,9 @@ const ScholarshipForm = () => {
   const user = useSelector((state) => state.user);
   const handleSubmit = async () => {
     try {
-      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,"scholarshipNumber":user.schNumber };
+      const scholarshipNumber=schModal.schNo;
+      // const scholarshipNumber=5435454;
+      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,scholarshipNumber };
       console.log(JSON.stringify(body));
       await fetch("http://localhost:8000/applyforscholarship", {
         method: "POST",

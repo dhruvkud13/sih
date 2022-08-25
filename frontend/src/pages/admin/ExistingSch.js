@@ -96,7 +96,7 @@ const ExistingSch = () => {
       {data.map((item)=>(
         <SchInfoCard name={item.scholarshipName} desc={item.scholarshipDesc}/>
       ))}
-      {schModal.isCreateModal && <CreateSch/>}
+      
     </div>
   );
 };

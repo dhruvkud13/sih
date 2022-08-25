@@ -4,7 +4,8 @@ const initialState = {
   isSchModal: false,
   isCreateModal: false,
   isApply:false,
-  defname:null
+  defname:null,
+  schNo:null,
 };
 
 export const schModalSlice = createSlice({
@@ -22,11 +23,14 @@ export const schModalSlice = createSlice({
     },
     setdefname:(state,action)=>{
       state.defname=action.payload;
+    },
+    setschNo:(state,action)=>{
+      state.schNo=action.payload;
     }
   },
 });
 
-export const { setSchModal,setCreateModal, setApplyModal,setdefname } =
+export const { setSchModal,setCreateModal, setApplyModal,setdefname, setschNo } =
   schModalSlice.actions;
 
 export default schModalSlice.reducer;

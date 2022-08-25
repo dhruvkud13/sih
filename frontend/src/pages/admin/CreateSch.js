@@ -64,6 +64,7 @@ const CreateSch = () => {
       axios.post(url, formData, config).then((response) => {
         // console.log(response.data);
         console.log(response.data);
+        dispatch(setCreateModal(false));
         // dispatch(setFormModal(false));
       });
     } catch (err) {
