@@ -1,12 +1,38 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import SchInfoCard from '../components/SchInfoCard'
 import AppliedSch from '../components/AppliedSch';
 import {MdOutlinePendingActions} from 'react-icons/md'
 import {TiTickOutline} from 'react-icons/ti'
 import {ImCross} from 'react-icons/im'
+import { useSelector } from "react-redux";
 
 const ScholarshipUI = () => {
+
+  const[data,setData]=useState([])
+  const user = useSelector((state) => state.user);
+  const handleSubmit=async(e)=>{
+    e.preventDefault();
+    const url="http://localhost:8000/getscholarshipsbyemail";
+    try {
+      const scholarshipEmail=user.useremail;
+      const body = { scholarshipEmail };
+      //console.log(JSON.stringify(body));
+      await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      })
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
     <div>
         <div className='font-raleway px-5 pb-3 font-bold text-[20px] text-govtblue'>Apply for existing government scholarships</div>
@@ -25,9 +51,8 @@ const ScholarshipUI = () => {
         </div>
         <div className='font-raleway px-5 py-3 font-bold text-[20px] text-govtblue'>Applied Scholarships</div>
         <div>
-        <AppliedSch name="Atal Bihari Vajpayee General Scholarship Scheme (ICCR)" appliedDate="DD/MM/YYYY" status="Pending" icon=<MdOutlinePendingActions size={20} /> />
-        <AppliedSch name="Dr. A.P.J Abdul Kalam Commonwealth Scholarship Scheme (ICCR)" appliedDate="DD/MM/YYYY" status="Accepted" icon=<TiTickOutline size={20} color="green" /> />
-        <AppliedSch name="Dr. S. Radhakrishnan Cultural Exchange Scholarship Scheme (ICCR)" appliedDate="DD/MM/YYYY" status="Rejected" icon=<ImCross size={15} color="red" /> />
+        
+        {data.map((item)=><AppliedSch name={item.scholarshipName} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
         </div>
         </div>
     </div>
