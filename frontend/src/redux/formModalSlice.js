@@ -16,13 +16,13 @@ export const formModalSlice = createSlice({
     setType: (state, action) => {
       state.type = action.payload;
     },
-    setPath: (state, action) => {
+    setFolPath: (state, action) => {
       state.path = action.payload;
     }
   },
 });
 
-export const { setFormModal,setPath,setType } =
+export const { setFormModal,setFolPath,setType } =
   formModalSlice.actions;
 
 export default formModalSlice.reducer;
