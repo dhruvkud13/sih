@@ -254,9 +254,9 @@ function FileTable() {
         </div>
         {modal.isModal ? (
           <FileView
-            type={"pdf"}
+            type={"img"}
             // rellink={row.hash}
-            rellink="QmSFr7mfrbiijCTCT8kw3vuqHg2xq86uJkHomY21KLkfNA"
+            rellink="Qmd1653sJPkRFUMUFX6315S4TwiwbdSuNXofExD3TNCSMo"
           />
         ) : (
           <div></div>

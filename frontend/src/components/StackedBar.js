@@ -38,7 +38,7 @@ export default function StackedBarChart() {
       },
       {
         data: [93, 30, 100, 230, 104, 60],
-        type: "bar",
+        type: "line",
         stack: "total"
       }
     ]

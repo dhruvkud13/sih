@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Fade from "react-reveal/Fade";
 import { PlusOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
-import { Form, Input, Select, Upload, Modal } from "antd";
+import { Form, Input, Select, Upload, Modal, Button } from "antd";
 import axios from "axios";
-import { AiOutlineClose } from "react-icons/ai";
+import { AiFillExclamationCircle, AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setSchModal } from "../redux/schModalSlice.js";
 import { useSelector } from "react-redux";
@@ -18,6 +18,9 @@ const ScholarshipForm = () => {
   const [cgpa, setCgpa] = useState("");
   const [dropdown, setDropdown] = useState("");
   const [dropdown2, setDropdown2] = useState("");
+  const [isPassport, setIsPassport] = useState(false);
+  const [isMarkSheet, setIsMarkSheet] = useState(false);
+  const[data,setData]=useState([]);
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 //   const handleSubmit = () => {
@@ -61,19 +64,62 @@ const ScholarshipForm = () => {
 //       </div>
 //     </div>
 //   );
+
+
+useEffect(() => {
+    const url="http://localhost:8000/getfilesbyuser";
+    const fetchData = async () => {
+      try{
+        setData([]);
+        const email=user.useremail;
+       const body = { email };
+
+        const response= await fetch(url, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            })
+            const json = await response.json();
+        const files = []
+        for (const i in json) {
+        files.push(json[i].value);
+
+        }
+        setData(files)
+        
+
+      }catch (error) {
+        //       console.log(error);
+    }
+  };
+  fetchData();
+},[])
+
+useEffect(() => {
+  data.map((file) => {
+    if(file.docType==="Passport"){
+      return setIsPassport(true);
+    }
+    if(file.docType==="MarkSheet"){
+      return setIsMarkSheet(true);
+    }
+  })
+},[data])
+
 console.log(name);
 console.log(college);
 console.log(dropdown);
 console.log(dropdown2);
 console.log(cgpa);
+
   const oncrossclick = () => {
     dispatch(setSchModal(false));
   };
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
       <Fade bottom>
-        <div className="h-[40rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
-          <div className="flex justify-end w-[32rem] pr-5">
+        <div className="h-[48rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
+          <div className="flex justify-end w-[32rem] pr-5 pt-10">
             {" "}
             <AiOutlineClose size={20} onClick={oncrossclick} />
           </div>
@@ -119,6 +165,12 @@ console.log(cgpa);
             <Form.Item label="Enter CGPA (out of 10)">
                 <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)}/>
             </Form.Item>
+            <Form.Item label="Passport Status">
+          {isPassport?(<Button>Passport Status</Button>):(<Button>No Passport</Button>)}
+        </Form.Item>
+        <Form.Item label="Marksheet Status">
+          <Button onClick={()=>{}}>12th Marksheet Status</Button>
+        </Form.Item>
           </Form>
           <div className="mt-4">
             <button
