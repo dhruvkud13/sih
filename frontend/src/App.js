@@ -14,6 +14,7 @@ import Folders from "./components/FolderTable";
 import ExistingSch from "./pages/admin/ExistingSch";
 import CreateSch from './pages/admin/CreateSch';
 import CreateAnnouncement from "././components/createAnnouncement";
+import BankForm from "./components/bankForm";
 function App() {
   const user = useSelector(state => state.user);
   console.log(user.useremail)
@@ -47,6 +48,8 @@ function App() {
             <Route path="/scholarship" element={<ScholarshipForm />} />
             <Route path="/existing" element={<ExistingSch />} />
             <Route path="/announcement" element={<CreateAnnouncement />} />
+            <Route path="/bankform" element={<BankForm />} />
+
 
           </Routes>
         </Router>}
