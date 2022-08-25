@@ -75,7 +75,7 @@ const UserHome = () => {
       <p>Date of Birth: {user.dob}</p>
     </Card>
   </div>
-        <div className='w-1/2'>
+        <div className='w-1/2 mt-2 mr-2'>
         <Carousel autoplay>
 
       {data.map((item)=>(
