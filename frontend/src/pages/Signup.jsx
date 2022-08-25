@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useState } from "react";
 import {
   AiOutlineUser,
@@ -33,7 +32,7 @@ const SignUp = () => {
     const isValid = validator.isEmail(email);
     const isNumber = validator.isMobilePhone(contact, "en-IN");
     const isDob = validator.isDate(dob, "YYYY-MM-DD");
-    const isName = validator.matches(name,/^[a-zA-Z ]*.{2,}$/);
+    const isName = validator.matches(name, /^[a-zA-Z ]*.{2,}$/);
     const isPass = validator.isStrongPassword(password, {
       minLength: 8,
       minLowercase: 1,
@@ -65,14 +64,13 @@ const SignUp = () => {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(body),
-        }).then((res) => {
-
-          return res.json();
-       
-        }).then((data)=>{
-
-          console.log(data)
         })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+          });
         navigate("/login");
       } catch (err) {
         console.log(err);
@@ -86,7 +84,7 @@ const SignUp = () => {
         <img src={signupimage} alt="login" height="800" width="800" />
       </div>
       <Fade right>
-        <div className="flex flex-col items-center justify-center w-1/2 font-raleway">
+        <div className="flex flex-col items-center justify-start w-1/2 font-raleway">
           <div className="h-[40rem] w-[32rem] rounded-xl bg-bgblue flex flex-col items-center justify-center mt-10">
             <div className="flex flex-row mb-2">
               <div className="flex justify-center items-center pr-2">
@@ -236,26 +234,20 @@ const SignUp = () => {
                 </div>
               </div>
             </div>
-            {!error ? (
-              <div
-                className="hover:font-semibold duration-100 mb-2 text-white cursor-pointer mt-3"
-                onClick={() => navigate("/login")}
-              >
-                Already a user? Login
-              </div>
-            ) : (
-              <div className="text-red-500 text-sm mt-4 px-10 mb-3">
+
+            <div
+              className="hover:font-semibold duration-100 text-white cursor-pointer mt-3"
+              onClick={() => navigate("/login")}
+            >
+              Already a user? Login
+            </div>
+
+            {error && (
+              <div className="text-red-500 text-sm mt-1 px-10 mb-3">
                 {error}
               </div>
             )}
-            {/* {error!==""  && <div className="text-white text-sm mt-4 px-10">{error}</div>} */}
             <div className="">
-              {/* <div 
-                className="hover:font-semibold duration-100 mb-4 text-white cursor-pointer"
-                onClick={()=>navigate("/login")}
-              >
-                Already a user? Login
-              </div> */}
               <button
                 onClick={handleSignup}
                 className=" bg-white  hover:bg-bgblue duration-200 hover:text-white px-6 py-2 rounded-2xl text-[18px] font-semibold ml-5 mb-1"

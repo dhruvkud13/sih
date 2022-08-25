@@ -9,153 +9,100 @@ import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
-import { ExclamationCircleOutlined } from "@ant-design/icons";
+import { ExclamationCircleOutlined, LeftOutlined } from "@ant-design/icons";
 import { Modal } from "antd";
-import {
-  setjpeg,
-  setpdf,
-  setAadharCard,
-  setRationCard,
-  setDrivingLicense,
-  setPassport,
-  setPANCard,
-} from "../redux/statSlice";
-import Fade from "react-reveal/Fade";
 
+import Fade from "react-reveal/Fade";
 const { confirm } = Modal;
-function FileTable() {
+const FolderTable = () => {
   // const [data, setData] = useState([]);
-  const [data, setData] = useState(loldata);
+
   // const [loading, setLoading] = useState(true);
   const [loading, setLoading] = useState(false);
   const [row, setrow] = useState();
+  const [path, setPath] = useState([]);
+  const [allData, setallData] = useState(loldata);
+  const [data, setData] = useState(allData);
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
   const user = useSelector((state) => state.user);
   // useEffect(() => {
-  const url =
-    user.userType === "user"
-      ? "http://localhost:8000/getfilesbyuser"
-      : "http://localhost:8000/getallfiles";
+  //   const url =
+  //     user.userType === "user"
+  //       ? "http://localhost:8000/getfilesbyuser"
+  //       : "http://localhost:8000/getfolderdata";
   //   const fetchData = async () => {
   //     try {
+  //       setAllData([]);
+  //       const email = user.useremail;
+  //       const body = user.userType === "user" ? { email } : {};
 
-  //       setData([])
-  // const response = await fetch(url);
-  //   const email=user.useremail;
-  //   const body = user.userType==="user"?{ email }:{};
-
-  //  const response= await fetch(url, {
-  //     method: "GET",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(body),
-  //   })
+  //       const response = await fetch(url, {
+  //         method: "GET",
+  //         headers: { "Content-Type": "application/json" },
+  //         body: JSON.stringify(body),
+  //       });
   //       const json = await response.json();
-  //       const files = []
+  //       const files = [];
   //       for (const i in json) {
-  // if (json[i].value.fileVisiblity===true) files.push(json[i].value);
-
+  //         console.log(json[i].value);
+  //         files.push(json[i].value);
   //       }
-  //       setData(files)
+  //       setAllData(files);
   //       setLoading(false);
   //     } catch (error) {
   //       console.log(error);
   //     }
   //   };
   //   fetchData();
-  //   const initStats = () => {
-  //     var pdfCount=0;
-  // var jpegCount=0;
-  //     data.map((file) => {
-  //       if (file.fileType === "image/jpeg") {
-  //         jpegCount++;
-  //       } else {
-  //         pdfCount++;
-  //       }
-  //     })
-  //     dispatch(setjpeg(jpegCount));
-  //     dispatch(setpdf(pdfCount));
-  //   }
-  //   initStats();
-  // const docStats = () => {
-  //   var aadharCount=0;
-  //   var rationCount=0;
-  //   var passportCount=0;
-  //   var panCount=0;
-  //   var drivingCount=0;
-  //   data.map((file)=>{
-  //     if(file.docType==="Aadhar Card"){
-  //       aadharCount++;
-  //     }
-  //     else if(file.docType==="Ration Card"){
-  //       rationCount++;
-  //     }
-  //     else if(file.docType==="Passport"){
-  //       passportCount++;
-  //     }
-  //     else if(file.docType==="PAN Card"){
-  //       panCount++;
-  //     }
-  //     else if(file.docType==="Driving License"){
-  //       drivingCount++;
-  //     }
-  //   })
-  //   dispatch(setAadharCard(aadharCount));
-  //   dispatch(setRationCard(rationCount));
-  //   dispatch(setPassport(passportCount));
-  //   dispatch(setPANCard(panCount));
-  //   dispatch(setDrivingLicense(drivingCount));
-  // }
-  // docStats();
   // }, []);
-
+  // useEffect(() => {
+  //     const initData=()=>{
+  //       var tempData=[];
+  //       allData.map((item)=>{
+  //         if(item.path===path){
+  //           tempData.push(item);
+  //         }
+  //       })
+  //       setData(tempData);
+  //       tempData=[];
+  //     }
+  //     initData();
+  // }, [])
   useEffect(() => {
-    const initStats = () => {
-      var pdfCount = 0;
-      var jpegCount = 0;
-      data.map((file) => {
-        if (file.fileType === "image/jpeg") {
-          jpegCount++;
-        } else {
-          pdfCount++;
-        }
+    setData(
+      allData.filter((item) => {
+        // console.log(JSON.stringify(path))
+        // console.log(JSON.stringify(item.path));
+        // console.log(path.length+" "+item.path.length)
+        return JSON.stringify(item.path) == JSON.stringify(path);
+      })
+    );
+  }, [path]);
+
+  const rowClicked = (selrow) => {
+    // console.log(selrow);
+    // setrow(row);
+    if (selrow.type === "file") dispatch(setModal(true));
+    else {
+      let fname = "";
+      allData.map((item) => {
+        if (item.fileNumber === selrow.fileNumber) fname = item.fileName;
       });
-      dispatch(setjpeg(jpegCount));
-
-      dispatch(setpdf(pdfCount));
-    };
-    initStats();
-  }, []);
-
-  useEffect(() => {
-    const docStats = () => {
-      var aadharCount = 0;
-      var rationCount = 0;
-      var passportCount = 0;
-      var panCount = 0;
-      var drivingCount = 0;
-      data.map((file) => {
-        if (file.docType === "Aadhar Card") {
-          aadharCount++;
-        } else if (file.docType === "Ration Card") {
-          rationCount++;
-        } else if (file.docType === "Passport") {
-          passportCount++;
-        } else if (file.docType === "PAN Card") {
-          panCount++;
-        } else if (file.docType === "Driving License") {
-          drivingCount++;
-        }
-      });
-      dispatch(setAadharCard(aadharCount));
-      dispatch(setRationCard(rationCount));
-      dispatch(setPassport(passportCount));
-      dispatch(setPANCard(panCount));
-      dispatch(setDrivingLicense(drivingCount));
-    };
-    docStats();
-  });
-
+      var tempPath = [];
+      tempPath = path;
+      tempPath.push(fname);
+      setPath(tempPath);
+      setData(
+        allData.filter((item) => {
+          // console.log(JSON.stringify(path))
+          // console.log(JSON.stringify(item.path));
+          // console.log(path.length+" "+item.path.length)
+          return JSON.stringify(item.path) == JSON.stringify(path);
+        })
+      );
+    }
+  };
   const tableData = {
     columns,
     data,
@@ -165,6 +112,8 @@ function FileTable() {
       "text-white hover:text-red-500 bg-red-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
     buttonStyle:
       "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
+      backStyle:
+      "text-white hover:text-govtblue bg-bgblue hover:bg-white duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-3 py-1.5 text-center mb-2",
   };
   const handleRowSelected = React.useCallback((state) => {
     setSelectedRows(state.selectedRows);
@@ -207,7 +156,18 @@ function FileTable() {
   ) : (
     <Fade right>
       <div className="">
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <div
+            className={style.backStyle}
+            onClick={() => {
+              let temp = [...path];
+              temp.pop();
+              return setPath(temp);
+            }}
+          >
+            <LeftOutlined />
+          </div>
+
           <button
             onClick={() => {
               dispatch(setFormModal(true));
@@ -222,7 +182,7 @@ function FileTable() {
         <div className="">
           <DataTableExtensions {...tableData}>
             <DataTable
-              title="All files"
+              title="Files and folders"
               columns={columns}
               data={data}
               // noHeader
@@ -230,11 +190,7 @@ function FileTable() {
               defaultSortAsc={false}
               pagination
               highlightOnHover
-              onRowClicked={(selrow) => {
-                dispatch(setModal(true));
-                // console.log(selrow);
-                // setrow(row);
-              }}
+              onRowClicked={rowClicked}
               selectableRows
               contextActions={contextActions}
               onSelectedRowsChange={handleRowSelected}
@@ -254,6 +210,6 @@ function FileTable() {
       </div>
     </Fade>
   );
-}
+};
 
-export default FileTable;
+export default FolderTable;

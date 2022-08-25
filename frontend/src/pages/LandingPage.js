@@ -16,7 +16,7 @@ const LandingPage = () => {
     <div className="">
       <Fade bottom>
         <div className="min-w-full px-72 pt-5">
-          <img src={logo}></img>
+          <img src={logo} alt="logo"></img>
         </div>
 
         <div className="text-5xl font-league font-extrabold text-logoblue min-w-full flex justify-center tracking-wide">

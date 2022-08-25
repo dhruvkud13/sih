@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   username: null,
   useremail: null,
+  adminEmails:[""],
+  usertype: "user",
   loading: false,
   error: false,
 };
@@ -19,6 +21,9 @@ export const userSlice = createSlice({
       state.username = action.payload.name;
       state.useremail = action.payload.email;
     },
+    setUserType: (state,action)=>{
+      state.usertype= action.payload
+    },
     loginFailure: (state) => {
       state.loading = false;
       state.error = true;
@@ -32,7 +37,7 @@ export const userSlice = createSlice({
   },
 });
 
-export const { loginStart, loginSuccess, loginFailure, logout } =
+export const { loginStart, loginSuccess, loginFailure, logout, setUserType } =
   userSlice.actions;
 
 export default userSlice.reducer;

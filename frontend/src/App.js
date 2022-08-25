@@ -6,12 +6,11 @@ import Signup from "./pages/Signup";
 import AdminHome from "./pages/admin/Home";
 import UserHome from "./pages/user/Home";
 import Filesys from "./pages/FileSystem";
-import { FileView } from "./components/FileViewer";
 import { Worker } from "@react-pdf-viewer/core";
-import Form from "./components/Form";
 import Graphs from "./pages/Graphs";
 import { useSelector } from 'react-redux';
 import ScholarshipForm from "./components/ScholarshipForm";
+import Folders from "./components/FolderTable";
 function App() {
   const user=useSelector(state=>state.user);
   console.log(user.useremail);
@@ -56,6 +55,7 @@ function App() {
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
             <Route path="/scholarship" element={<ScholarshipForm />} />
+            <Route path="/folders" element={<Folders />} />
           </Routes>
         </Router>
       </Worker>
