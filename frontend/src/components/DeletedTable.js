@@ -40,7 +40,7 @@ function DeletedTable() {
 //         const json = await response.json();
 //         const files = [];
 //         for (const i in json) {
-//           if (json[i].value.fileVisiblity) files.push(json[i].value);
+//           if (json[i].value.fileVisiblity===false) files.push(json[i].value);
 //         }
 //         setData(files);
 //         setLoading(false);
@@ -164,7 +164,7 @@ function DeletedTable() {
         <div className="">
           <DataTableExtensions {...tableData}>
             <DataTable
-              title="Documents"
+              title="Deleted Documents"
               columns={columns}
               data={data}
               // noHeader

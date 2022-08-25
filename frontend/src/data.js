@@ -38,6 +38,8 @@ export const columns = [
 export const loldata = [
   {
     fileNumber: 1,
+    type:"file",
+    path:[],
     fileName: "Prats.jpeg",
     docType: "Ration Card",
     fileType:"image/jpeg",
@@ -46,6 +48,8 @@ export const loldata = [
   },
   {
     fileNumber: 2,
+    type:"file",
+    path:[],
     fileName: "DhruvAadhar.pdf",
     docType: "Aadhar Card",
     fileType:"application/pdf",
@@ -54,6 +58,8 @@ export const loldata = [
   },
   {
     fileNumber: 3,
+    type:"file",
+    path:[],
     fileName: "BhavyaAadhar.pdf",
     docType: "Aadhar Card",
     fileType:"application/pdf",
@@ -62,6 +68,8 @@ export const loldata = [
   },
   {
     fileNumber: 4,
+    type:"file",
+    path:[],
     fileName: "license.pdf",
     docType: "Driving License",
     fileType:"application/pdf",
@@ -70,6 +78,8 @@ export const loldata = [
   },
   {
     fileNumber: 5,
+    type:"file",
+    path:[],
     fileName: "RuchiPassport.pdf",
     docType: "Passport",
     fileType:"application/pdf",
@@ -78,6 +88,8 @@ export const loldata = [
   },
   {
     fileNumber: 6,
+    type:"file",
+    path:[],
     fileName: "BhavyaPan.pdf",
     docType: "PAN Card",
     fileType:"image/jpeg",
@@ -86,6 +98,8 @@ export const loldata = [
   },
   {
     fileNumber: 7,
+    type:"file",
+    path:[],
     fileName: "pan.pdf",
     docType: "PAN Card",
     fileType:"image/jpeg",
@@ -94,6 +108,8 @@ export const loldata = [
   },
   {
     fileNumber: 8,
+    type:"file",
+    path:[],
     fileName: "Bhavya.pdf",
     docType: "Driving License",
     fileType:"application/pdf",
@@ -102,11 +118,23 @@ export const loldata = [
   },
   {
     fileNumber: 9,
+    type:"file",
+    path:['f1'],
     fileName: "rux.pdf",
     docType: "Driving License",
     fileType:"application/pdf",
     fileOwner:"ruxgav",
     fileDesc: "Drink Drive arrest",
+  },
+  {
+    fileNumber: 10,
+    type:"folder",
+    path:[],
+    fileName: "f1",
+    docType: "Folder",
+    fileType:"-",
+    fileOwner:"ruxgav",
+    fileDesc: "Mera Drive",
   },
 ];
 // const file = {

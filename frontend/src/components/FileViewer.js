@@ -8,7 +8,6 @@ import img from "../images/kj.jpeg";
 export const FileView = (props) => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
-  console.log(modal.isModal);
   const oncrossclick = () => {
     dispatch(setModal(false));
   };

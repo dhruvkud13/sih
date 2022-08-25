@@ -2,6 +2,7 @@ import {
   FileOutlined,
   DeleteOutlined,
   PieChartOutlined,
+  FolderOutlined
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu } from "antd";
 import React, { useState } from "react";
@@ -12,6 +13,7 @@ import Fade from "react-reveal/Fade";
 import { useSelector } from "react-redux";
 import UploadForm from "../components/Form";
 import Graphs from "./Graphs";
+import Folders from "../components/FolderTable";
 import DeletedTable from "../components/DeletedTable";
 const { Content, Footer, Sider } = Layout;
 
@@ -28,6 +30,7 @@ const items = [
   getItem("All Files", "1", <FileOutlined />),
   getItem("Deleted Files", "2", <DeleteOutlined />),
   getItem("Statistics", "3", <PieChartOutlined />),
+  getItem("Folders","4",<FolderOutlined />)
   // getItem("User", "sub1", <UserOutlined />, [
   //   getItem("Tom", "3"),
   //   getItem("Bill", "4"),
@@ -93,6 +96,7 @@ const Filesys = () => {
                 {selectedKey === "1" && <FileTable />}
                 {selectedKey === "2" && <DeletedTable />}
                 {selectedKey === "3" && <Graphs />}
+                {selectedKey === "4" && <Folders />}
               </div>
             </Content>
           </Fade>
