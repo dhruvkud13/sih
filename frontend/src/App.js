@@ -13,7 +13,6 @@ import ScholarshipForm from "./components/ScholarshipForm";
 import Folders from "./components/FolderTable";
 function App() {
   const user=useSelector(state=>state.user);
-  console.log(user.useremail);
   return (
     <div className="App bg-white scrollbar-hide">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">

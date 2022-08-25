@@ -155,7 +155,6 @@ function FileTable() {
     };
     docStats();
   });
-
   const tableData = {
     columns,
     data,
@@ -183,6 +182,17 @@ function FileTable() {
         onOk() {
           console.log("OK");
           //TODO: Delete from database
+          const url = "http://localhost:8000/deletefile";
+          selectedRows.map((selRow)=>{
+            const body = {
+              fileNumber: selRow.fileNumber,
+            };
+            fetch(url, {
+              method: "PATCH",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            })
+          })
           setToggleCleared(!toggleCleared);
           setData(differenceBy(data, selectedRows, "fileName"));
         },

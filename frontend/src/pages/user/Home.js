@@ -22,7 +22,7 @@ const Cdata=(props)=><div>
   </div>
 
 </div>
-const Home = () => {
+const UserHome = () => {
 
   const[data,setData]= useState(lmaodata);
   // const[loading,setLoading]= useState(false);
@@ -52,6 +52,7 @@ const Home = () => {
   //     fetchData();
   // },[])
   const user= useSelector((state) => state.user);
+
 
 
 
@@ -96,4 +97,4 @@ const Home = () => {
   )
 }
 
-export default Home
+export default UserHome
