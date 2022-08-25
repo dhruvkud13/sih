@@ -3,6 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isSchModal: false,
   isCreateModal: false,
+  isApply:false,
+  defname:null
 };
 
 export const schModalSlice = createSlice({
@@ -14,11 +16,17 @@ export const schModalSlice = createSlice({
     },
     setCreateModal: (state, action) => {
       state.isCreateModal = action.payload;
+    },
+    setApplyModal:(state,action)=>{
+      state.isApply=action.payload;
+    },
+    setdefname:(state,action)=>{
+      state.defname=action.payload;
     }
   },
 });
 
-export const { setSchModal,setCreateModal } =
+export const { setSchModal,setCreateModal, setApplyModal,setdefname } =
   schModalSlice.actions;
 
 export default schModalSlice.reducer;
