@@ -44,6 +44,7 @@ function App() {
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
+            <Route path="/scholarship" element={<ScholarshipForm />} />
           </Routes>
         </Router>}
         {/* <Router>

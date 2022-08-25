@@ -152,6 +152,9 @@ const Filesys = () => {
       {folModal.isFolModal ? (
         <FolderForm />
       ) : (<div></div>)}
+      {schModal.isSchModal ? (
+        <ScholarshipForm  />
+      ) : (<div></div>)}
     </div>
   );
 };

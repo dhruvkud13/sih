@@ -8,183 +8,103 @@ import { AiFillExclamationCircle, AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { setSchModal } from "../redux/schModalSlice.js";
 import { useSelector } from "react-redux";
-import {TiTick} from "react-icons/ti";
+import { TiTick } from "react-icons/ti";
+import { setFormModal } from "../redux/formModalSlice.js";
+import { UploadForm } from "./Form.js";
 
 
 const ScholarshipForm = () => {
-//   const { TextArea } = Input;
-//   const [fileList, setFileList] = useState([]);
+  //   const { TextArea } = Input;
+  //   const [fileList, setFileList] = useState([]);
   const [name, setName] = useState("");
   const [college, setCollege] = useState("");
   const [cgpa, setCgpa] = useState("");
   const [dropdown, setDropdown] = useState("");
-  const [dropdown2, setDropdown2] = useState("");
+
   const [isPassport, setIsPassport] = useState(false);
   const [isMarkSheet, setIsMarkSheet] = useState(false);
   const [data, setData] = useState([]);
-  // const [data,setData]=useState([
-  //   {
-  //     fileNumber: 1,
-  //     type:"file",
-  //     path:[],
-  //     fileName: "Prats.jpeg",
-  //     docType: "Ration Card",
-  //     fileType:"image/jpeg",
-  //     fileOwner:"Prats",
-  //     fileDesc: "This is a ration card",
-  //   },
-  //   {
-  //     fileNumber: 2,
-  //     type:"file",
-  //     path:[],
-  //     fileName: "DhruvAadhar.pdf",
-  //     docType: "Aadhar Card",
-  //     fileType:"application/pdf",
-  //     fileOwner:"Dhruv Kud",
-  //     fileDesc: "Fake Aadhar card for clubbing",
-  //   },
-  //   {
-  //     fileNumber: 3,
-  //     type:"file",
-  //     path:[],
-  //     fileName: "BhavyaAadhar.pdf",
-  //     docType: "Aadhar Card",
-  //     fileType:"application/pdf",
-  //     fileOwner:"Bhavya Gor",
-  //     fileDesc: "Fake Card",
-  //   },
-  //   {
-  //     fileNumber: 4,
-  //     type:"file",
-  //     path:[],
-  //     fileName: "license.pdf",
-  //     docType: "MarkSheet",
-  //     fileType:"application/pdf",
-  //     fileOwner:"Bhavya Gor",
-  //     fileDesc: "Fake Card",
-  //   },
-  //   {
-  //     fileNumber: 5,
-  //     type:"file",
-  //     path:[],
-  //     fileName: "RuchiPassport.pdf",
-  //     docType: "Passpor",
-  //     fileType:"application/pdf",
-  //     fileOwner:"Ruchi",
-  //     fileDesc: "Fake Card",
-  //   }
-  // ]);
+  const schModal = useSelector((state) => state.schModal)
+  const formModal = useSelector((state => state.formModal))
+  const [dropdown2, setDropdown2] = useState(schModal.defname);
+
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
-//   const handleSubmit = () => {
-//     const url =
-//       fileList[0].type == "image/jpeg"
-//         ? "http://localhost:8000/uploadJPEG"
-//         : "http://localhost:8000/uploadPDF";
-
-//     const formData = new FormData();
-//     formData.append("image", fileList[0].originFileObj);
-//     formData.append("fileName", fileList[0].name);
-//     // formData.append("fileType", fileList[0].type);
-//     formData.append("fileDesc", text);
-//     formData.append("docType", dropdown);
-//     formData.append("fileOwner", user.username);
-//     formData.append("fileEmail", user.useremail);
-//     const config = {
-//       headers: {
-//         "content-type": "multipart/form-data",
-//       },
-//     };
-//     try {
-//       axios.post(url, formData, config).then((response) => {
-//         // console.log(response.data);
-//         console.log(response.data);
-//         dispatch(setFormModal(false));
-//       });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-//   const uploadButton = (
-//     <div>
-//       <PlusOutlined />
-//       <div
-//         style={{
-//           marginTop: 8,
-//         }}
-//       >
-//         Upload
-//       </div>
-//     </div>
-//   );
+  const handleSubmit = async () => {
+    try {
+      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,"scholarshipNumber":user.schNumber };
+      console.log(JSON.stringify(body));
+      await fetch("http://localhost:8000/applyforscholarship", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      }).then((res) => {
+        // console.log(res);
+        return res.json()
+      }).then((data) => {
+        console.log(data);
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 
-useEffect(() => {
-    const url="http://localhost:8000/getfilesbyuser";
+  useEffect(() => {
+    const url = "http://localhost:8000/getfilesbyuser";
     const fetchData = async () => {
-      try{
+      try {
         setData([]);
-        const email=user.useremail;
-       const body = { email };
+        const fileEmail = user.useremail;
+        const body = { fileEmail };
 
-        const response= await fetch(url, {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(body),
-            })
-            const json = await response.json();
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+        const json = await response.json();
         const files = []
         for (const i in json) {
-        files.push(json[i].value);
+          files.push(json[i].value);
 
         }
         setData(files)
-        
 
-      }catch (error) {
-              console.log(error);
-    }
-  };
-  fetchData();
-},[])
-// setData(data);
-useEffect(() => {
-  data.map((file) => {
-    console.log(file.docType);
-    if(file.docType==="Passport"){
-      setIsPassport(true);
-      console.log("Psd");
-    }
-    else if(file.docType==="MarkSheet"){
-      setIsMarkSheet(true);
-      console.log("Lavda");
-    }
-  })
-},[data])
 
-const handleMarksheet=(e)=>{
-  e.preventDefault();
-  if(isMarkSheet===true){
-    document.getElementById("marksheet").innerHTML="<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [formModal.isFormModal])
+  // setData(data);
+  useEffect(() => {
+    data.map((file) => {
+      console.log(file.docType);
+      if (file.docType === "Passport") {
+        setIsPassport(true);
+      }
+      else if (file.docType === "Marksheet") {
+        setIsMarkSheet(true);
+      }
+    })
+  }, [data])
+
+  const handleMarksheet = (e) => {
+    e.preventDefault();
+    if (isMarkSheet === true) {
+      document.getElementById("marksheet").innerHTML = "<span style='color: red;'>Document Already Submitted!<span><TiTick /></span></span>";
+    } else { dispatch(setFormModal(true)) }
   }
-}
 
-const handlePassport=(e)=>{
-  e.preventDefault();
-  if(isPassport===true){
-    document.getElementById("passport").innerHTML="<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
+  const handlePassport = (e) => {
+    e.preventDefault();
+    if (isPassport === true) {
+      document.getElementById("passport").innerHTML = "<span style='color: red;'>Document Already Submitted!<span><TiTick /></span></span>";
+    } else { dispatch(setFormModal(true)) }
   }
-}
-
-
-
-
-// console.log(name);
-// console.log(college);
-// console.log(dropdown);
-// console.log(dropdown2);
-// console.log(cgpa);
 
   const oncrossclick = () => {
     dispatch(setSchModal(false));
@@ -210,10 +130,10 @@ const handlePassport=(e)=>{
             layout="vertical"
           >
             <Form.Item label="Enter Full Name">
-                <Input value={name} onChange={(e) => setName(e.target.value)}/>
+              <Input value={name} onChange={(e) => setName(e.target.value)} />
             </Form.Item>
             <Form.Item label="Enter College Name">
-                <Input value={college} onChange={(e) => setCollege(e.target.value)}/>
+              <Input value={college} onChange={(e) => setCollege(e.target.value)} />
             </Form.Item>
             <Form.Item label="Select Year of Graduation">
               <Select value={dropdown} onChange={(e) => setDropdown(e)}>
@@ -227,7 +147,7 @@ const handlePassport=(e)=>{
               </Select>
             </Form.Item>
             <Form.Item label="Select Scholarship Scheme">
-              <Select style={{width:300}} value={dropdown2} onChange={(e) => setDropdown2(e)}>
+              <Select style={{ width: 300 }} value={dropdown2} onChange={(e) => setDropdown2(e)}>
                 <Select.Option value="ABV">Atal Bihari Vajpayee General Scholarship</Select.Option>
                 <Select.Option value="SJS">Suborno Jayanti Scholarship</Select.Option>
                 <Select.Option value="APJ">Dr. Kalam Commonwealth Scholarship </Select.Option>
@@ -237,26 +157,29 @@ const handlePassport=(e)=>{
               </Select>
             </Form.Item>
             <Form.Item label="Enter CGPA (out of 10)">
-                <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)}/>
+              <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)} />
             </Form.Item>
             <Form.Item label="Passport Status">
-          <Button onClick={(e)=>{handlePassport(e)}} id="passport">Check Passport Status</Button>
-        </Form.Item>
-        <Form.Item label="Marksheet Status">
-          <Button onClick={(e)=>{handleMarksheet(e)}} id="marksheet">Check 12th Marksheet Status
-          </Button>
-        </Form.Item>
+              <Button onClick={(e) => { handlePassport(e) }} id="passport">Check Passport Status</Button>
+            </Form.Item>
+            <Form.Item label="Marksheet Status">
+              <Button onClick={(e) => { handleMarksheet(e) }} id="marksheet">Check 12th Marksheet Status
+              </Button>
+            </Form.Item>
           </Form>
           <div className="mt-4">
             <button
               className=" bg-white hover:bg-bgblue duration-200 hover:text-white px-4 py-2 rounded-2xl text-[16px] font-semibold"
-            //   onClick={handleSubmit}
+              onClick={handleSubmit}
             >
               Apply
             </button>
           </div>
         </div>
       </Fade>
+      {formModal.isFormModal ? (
+        <UploadForm />
+      ) : (<div></div>)}
     </div>
   );
 };

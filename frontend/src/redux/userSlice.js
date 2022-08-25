@@ -8,6 +8,7 @@ const initialState = {
   error: false,
   mobileNo: null,
   dob: null,
+  schNumber: null
 };
 
 export const userSlice = createSlice({
@@ -21,9 +22,9 @@ export const userSlice = createSlice({
       state.loading = false;
       state.username = action.payload.name;
       state.useremail = action.payload.email;
-      state.mobileNo= action.payload.contact;
-      state.dob= action.payload.dob;
-      state.usertype=action.payload.user;
+      state.mobileNo = action.payload.contact;
+      state.dob = action.payload.dob;
+      state.usertype = action.payload.user;
     },
 
     loginFailure: (state) => {
@@ -36,6 +37,9 @@ export const userSlice = createSlice({
       state.loading = false;
       state.error = false;
     },
+    setSchNumber: (state, action) => {
+      state.schNumber = action.payload
+    }
   },
 });
 
