@@ -15,23 +15,23 @@ import { lmaodata } from "./announcementdata";
 //   background: '#364d79',
 // };
 const Cdata=(props)=><div>
+<div style={{backgroundImage:`url(${props.item.announcementType})`,backgroundRepeat:"no-repeat",backgroundSize:"cover"}} className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
 <div className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
-  <img src='{props.item.announcementType}' alt='hello' />
   <div className='absolute top-2 text-xs'>ANNOUNCEMENTS</div>
   <div className='font-bold text-3xl mb-5'>{props.item.announcementName}</div>
   <div >{props.item.announcementDesc}</div>
   </div>
-
+</div>
 </div>
 const UserHome = () => {
 
   const[data,setData]= useState(lmaodata);
+
   const[loading,setLoading]= useState(false);
   const url="http://localhost:8000/getallannouncement"
   useEffect(()=>{
   const fetchData = async () => {
         try {
-  
           setData([]);
   
      const response= await fetch(url, {
@@ -76,8 +76,8 @@ const UserHome = () => {
       <p>Date of Birth: {user.dob}</p>
     </Card>
   </div>
-        <div className='w-1/2 mt-2 mr-2'>
-        <Carousel autoplay>
+        <div className='w-1/2 mr-2 rounded-lg shadow-2xl'>
+        <Carousel autoplay effect='scrollx'>
 
       {data.map((item)=>(
        <Cdata item={item} />

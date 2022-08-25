@@ -18,11 +18,11 @@ export const FileView = (props) => {
         <div className=" h-[800px] w-[900px] flex">
           {props.type === "pdf" ? (
             <div className=" h-[800px] w-[900px] flex">
-              <Viewer fileUrl={link} />
+              {/* <Viewer fileUrl={link} /> */}
             </div>
           ) : (
             <div className="bg-white flex items-center justify-center">
-              <img src={img} alt="" height={"800px"} width={"900px"} />
+              <img src={link} alt="" height={"800px"} width={"900px"} />
             </div>
           )}
           <div className="absolute pl-2 pt-2">
