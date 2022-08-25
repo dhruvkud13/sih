@@ -7,6 +7,8 @@ const initialState = {
   usertype: "user",
   loading: false,
   error: false,
+  mobileNo: null,
+  dob: null,
 };
 
 export const userSlice = createSlice({
@@ -20,6 +22,8 @@ export const userSlice = createSlice({
       state.loading = false;
       state.username = action.payload.name;
       state.useremail = action.payload.email;
+      state.mobileNo= action.payload.contact;
+      state.dob= action.payload.dob;
     },
     setUserType: (state,action)=>{
       state.usertype= action.payload
