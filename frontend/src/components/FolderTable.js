@@ -4,8 +4,8 @@ import DataTableExtensions from "react-data-table-component-extensions";
 import { columns } from "../data";
 import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
-import { setFormModal, setFolPath, setType } from "../redux/formModalSlice";
-import { setFolModal } from "../redux/folModalSlice";
+import { setFormModal} from "../redux/formModalSlice";
+import { setFolModal, setFolPath } from "../redux/folModalSlice";
 import { useSelector } from "react-redux";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
@@ -55,10 +55,12 @@ const FolderTable = () => {
     fetchData();
   }, [path, formModal.isFormModal, folModal.isFolModal]);
   useEffect(() => {
+    console.log(path);
     setData(
       allData.filter((item) => {
         // if(JSON.stringify(item.path) == JSON.stringify(path))
         // console.log(item)
+       
         return JSON.stringify(item.path) == JSON.stringify(path);
       }))
   }, [allData, path])
@@ -162,6 +164,7 @@ const FolderTable = () => {
           </button><button
             onClick={() => {
               dispatch(setFolModal(true));
+              dispatch(setFolPath(path));
             }}
             type="button"
             className={style.buttonStyle}

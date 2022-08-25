@@ -56,8 +56,8 @@ const Login = () => {
           console.log(data[0].value)
           dispatch(loginSuccess(data[0].value));
           console.log(email)
-          console.log(user.admins);
           console.log(user)
+          console.log(user.userType)
           navigate("/files");
         });
       } catch (err) {

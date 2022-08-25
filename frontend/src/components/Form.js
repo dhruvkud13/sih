@@ -46,15 +46,20 @@ export const UploadForm = () => {
       fileList[0].type === "image/jpeg"
         ? "http://localhost:8000/uploadJPEG"
         : "http://localhost:8000/uploadPDF";
-
+    console.log(fileList[0].name)
+    console.log(fileList[0].originFileObj)
+    console.log(text)
+    console.log(dropdown)
+    console.log(user.useremail)
     const formData = new FormData();
     formData.append("image", fileList[0].originFileObj);
     formData.append("fileName", fileList[0].name);
     // formData.append("fileType", fileList[0].type);
     formData.append("fileDesc", text);
     formData.append("docType", dropdown);
-    // formData.append("fileOwner", user.username);
+    formData.append("fileOwner", user.username);
     formData.append("fileEmail", user.useremail);
+    formData.append("path", []);
     const config = {
       headers: {
         "content-type": "multipart/form-data",
@@ -81,7 +86,7 @@ export const UploadForm = () => {
           marginTop: 8,
         }}
       >
-        Uplo
+        Upload
       </div>
     </div>
   );
