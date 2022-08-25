@@ -106,19 +106,17 @@ console.log(cgpa);
                 <Select.Option value="2026">2026</Select.Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Select Degree">
-              <Select value={dropdown2} onChange={(e) => setDropdown2(e)}>
-                <Select.Option value="PhD">PhD</Select.Option>
-                <Select.Option value="MS">MS</Select.Option>
-                <Select.Option value="LLM">
-                  LLM
-                </Select.Option>
-                <Select.Option value="MFA">MFA</Select.Option>
-                <Select.Option value="MBA">MBA</Select.Option>
-                <Select.Option value="MArch">MArch</Select.Option>
+            <Form.Item label="Select Scholarship Scheme">
+              <Select style={{width:300}} value={dropdown2} onChange={(e) => setDropdown2(e)}>
+                <Select.Option value="ABV">Atal Bihari Vajpayee General Scholarship</Select.Option>
+                <Select.Option value="SJS">Suborno Jayanti Scholarship</Select.Option>
+                <Select.Option value="APJ">Dr. Kalam Commonwealth Scholarship </Select.Option>
+                <Select.Option value="NMS">Nehru Memorial Scholarship</Select.Option>
+                <Select.Option value="SRC">Dr. S. Radhakrishnan Cultural Exchange Scholarship</Select.Option>
+                <Select.Option value="ASS">Africa Scholarship Scheme</Select.Option>
               </Select>
             </Form.Item>
-            <Form.Item label="Enter CGPA">
+            <Form.Item label="Enter CGPA (out of 10)">
                 <Input value={cgpa} onChange={(e) => setCgpa(e.target.value)}/>
             </Form.Item>
           </Form>
