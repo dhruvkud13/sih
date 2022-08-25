@@ -14,13 +14,15 @@ import Folders from "./components/FolderTable";
 import ExistingSch from "./pages/admin/ExistingSch";
 import CreateSch from './pages/admin/CreateSch';
 import CreateAnnouncement from "././components/createAnnouncement";
+import Todo from "./pages/todo"
+import Bankform from "./components/bankForm";
 function App() {
   const user=useSelector(state=>state.user);
   console.log(user.useremail)
   return (
     <div className="App bg-white scrollbar-hide">
       <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.15.349/build/pdf.worker.min.js">
-      {user.useremail==null?<Router>
+      {/* {user.useremail==null?<Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -45,8 +47,8 @@ function App() {
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
           </Routes>
-        </Router>}
-        {/* <Router>
+        </Router>} */}
+        <Router>
           <Navbar />
           <Routes>
             <Route path="/" element={<LandingPage />} />
@@ -62,8 +64,10 @@ function App() {
             <Route path="/existing" element={<ExistingSch />} />
             <Route path="/create" element={<CreateSch />} />
             <Route path="/announcement" element={<CreateAnnouncement />} />
+            <Route path="/todo" element={<Todo />} />
+            <Route path="/bankform" element={<Bankform />} />
           </Routes>
-        </Router> */}
+        </Router>
       </Worker>
       ;
     </div>
