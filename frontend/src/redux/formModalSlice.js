@@ -2,6 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isFormModal: false,
+  type: "file",
+  path:[]
 };
 
 export const formModalSlice = createSlice({
@@ -11,10 +13,16 @@ export const formModalSlice = createSlice({
     setFormModal: (state, action) => {
       state.isFormModal = action.payload;
     },
+    setType: (state, action) => {
+      state.type = action.payload;
+    },
+    setPath: (state, action) => {
+      state.path = action.payload;
+    }
   },
 });
 
-export const { setFormModal } =
+export const { setFormModal,setPath,setType } =
   formModalSlice.actions;
 
 export default formModalSlice.reducer;
