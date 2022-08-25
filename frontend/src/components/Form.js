@@ -167,16 +167,13 @@ export const UploadForm = () => {
     </div>
   );
 };
-
 export const FolderForm = () => {
   const { TextArea } = Input;
   const [fileName, setFileName] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const formModal = useSelector((state) => state.formModal);
-
   const handleSubmit = async () => {
-
     try {
       // console.log(formModal.path)
       const url = "http://localhost:8000/createFolder";
@@ -217,6 +214,7 @@ export const FolderForm = () => {
             }}
             labelAlign="left"
             layout="vertical"
+
           >
             <Form.Item label="Enter Folder Name">
               <TextArea
