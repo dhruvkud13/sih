@@ -14,7 +14,8 @@ import "../css/FileSystem.css";
 import FileTable from "../components/FileTable";
 import Fade from "react-reveal/Fade";
 import { useSelector } from "react-redux";
-import { UploadForm, FolderForm } from "../components/Form";
+import { UploadForm } from "../components/Form";
+import { FolderForm } from "../components/FolderForm";
 import Graphs from "./Graphs";
 import Folders from "../components/FolderTable";
 import DeletedTable from "../components/DeletedTable";
@@ -45,6 +46,8 @@ const Filesys = () => {
   );
   const formModal = useSelector((state) => state.formModal);
   const schModal = useSelector((state) => state.schModal);
+  const folModal = useSelector((state) => state.folModal);
+  console.log(folModal);
   const items = [
     getItem("DashBoard", "0", <HomeOutlined />),
     getItem("All Files", "1", <FileOutlined />),
@@ -143,16 +146,11 @@ const Filesys = () => {
         </Layout>
       </Layout>
       {formModal.isFormModal ? (
-        formModal.type == "file" ? (
-          <UploadForm />
-        ) : (
-          <FolderForm />
-        )
-      ) : (
-        <div></div>
-      )}
-      {schModal.isSchModal && <ScholarshipForm />}
-      {schModal.isCreateModal && <CreateSch/>}
+        <UploadForm />
+      ) : (<div></div>)}
+      {folModal.isFolModal ? (
+        <FolderForm />
+      ) : (<div></div>)}
     </div>
   );
 };
