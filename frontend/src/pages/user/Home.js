@@ -1,15 +1,60 @@
 import { Carousel } from 'antd';
 import { Card } from 'antd';
-import React from 'react';
-import DocStats from '../../components/DocStats';
-const contentStyle = {
-  height: '300px',
-  color: '#fff',
-  lineHeight: '250px',
-  textAlign: 'center',
-  background: '#364d79',
-};
+import React, { useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import DocStats from '../../components/LineGraph';
+import BarCharts from '../../components/StackedBar';
+import { useState } from 'react';
+import { lmaodata } from "./announcementdata";
+// const contentStyle = {
+//   height: '300px',
+//   color: '#fff',
+//   lineHeight: '150px',
+  
+//   textAlign: 'center',
+//   background: '#364d79',
+// };
+const Cdata=(props)=><div>
+<div className='bg-logoblue h-[300px] text-white font-raleway flex flex-col items-center justify-center'>
+  <div className='absolute top-2 text-xs'>ANNOUNCEMENTS</div>
+  <div className='font-bold text-3xl mb-5'>{props.item.announcementName}</div>
+  <div >{props.item.announcementDesc}</div>
+  </div>
+
+</div>
 const Home = () => {
+
+  const[data,setData]= useState(lmaodata);
+  // const[loading,setLoading]= useState(false);
+  // const url="http://localhost:8000/getallannouncements"
+  // useEffect(()=>{
+  // const fetchData = async () => {
+  //       try {
+  
+  //         setData([]);
+  
+  //    const response= await fetch(url, {
+  //       method: "GET",
+  //       headers: { "Content-Type": "application/json" },
+  //     })
+  //         const json = await response.json();
+  //         const announcements = []
+  //         for (const i in json) {
+  //   if (json[i].value.announcementVisibility===true) announcements.push(json[i].value);
+  
+  //         }
+  //         setData(announcements)
+  //         setLoading(false);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     };
+  //     fetchData();
+  // },[])
+  const user= useSelector((state) => state.user);
+
+
+
   return (
       <div className='flex flex-col'>
         <div className='flex flex-row'>
@@ -23,31 +68,29 @@ const Home = () => {
         height: 300,
       }}
     >
-      <p>Name: Dhruv Kudalkar</p>
-      <p>Email: dhruv@gmail.com</p>
-      <p>Mobile No: 9876543210</p>
-      <p>Date of Birth: DD/MM/YYYY</p>
+      <p>Name: {user.username}</p>
+      <p>Email: {user.useremail}</p>
+      <p>Mobile No: {user.mobileNo}</p>
+      <p>Date of Birth: {user.dob}</p>
     </Card>
   </div>
         <div className='w-1/2'>
         <Carousel autoplay>
-    <div>
-      <h3 style={contentStyle}>Announcement 1</h3>
-    </div>
-    <div>
-      <h3 style={contentStyle}>Announcement 2</h3>
-    </div>
-    <div>
-      <h3 style={contentStyle}>Announcement 3</h3>
-    </div>
-    <div>
-      <h3 style={contentStyle}>Announcement 4</h3>
-    </div>
+
+      {data.map((item)=>(
+       <Cdata item={item} />
+        )
+      )}
   </Carousel>
   </div>
   </div>
+  <div className='flex'>
   <div className='w-full'>
     <DocStats />
+  </div>
+  {/* <div className='w-1/2'>
+    <BarCharts />
+  </div> */}
   </div>
       </div>
   )
