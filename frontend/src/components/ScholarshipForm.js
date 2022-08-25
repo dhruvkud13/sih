@@ -21,58 +21,59 @@ const ScholarshipForm = () => {
   const [dropdown2, setDropdown2] = useState("");
   const [isPassport, setIsPassport] = useState(false);
   const [isMarkSheet, setIsMarkSheet] = useState(false);
-  const [data,setData]=useState([
-    {
-      fileNumber: 1,
-      type:"file",
-      path:[],
-      fileName: "Prats.jpeg",
-      docType: "Ration Card",
-      fileType:"image/jpeg",
-      fileOwner:"Prats",
-      fileDesc: "This is a ration card",
-    },
-    {
-      fileNumber: 2,
-      type:"file",
-      path:[],
-      fileName: "DhruvAadhar.pdf",
-      docType: "Aadhar Card",
-      fileType:"application/pdf",
-      fileOwner:"Dhruv Kud",
-      fileDesc: "Fake Aadhar card for clubbing",
-    },
-    {
-      fileNumber: 3,
-      type:"file",
-      path:[],
-      fileName: "BhavyaAadhar.pdf",
-      docType: "Aadhar Card",
-      fileType:"application/pdf",
-      fileOwner:"Bhavya Gor",
-      fileDesc: "Fake Card",
-    },
-    {
-      fileNumber: 4,
-      type:"file",
-      path:[],
-      fileName: "license.pdf",
-      docType: "MarkSheet",
-      fileType:"application/pdf",
-      fileOwner:"Bhavya Gor",
-      fileDesc: "Fake Card",
-    },
-    {
-      fileNumber: 5,
-      type:"file",
-      path:[],
-      fileName: "RuchiPassport.pdf",
-      docType: "Passpor",
-      fileType:"application/pdf",
-      fileOwner:"Ruchi",
-      fileDesc: "Fake Card",
-    }
-  ]);
+  const [data, setData] = useState([]);
+  // const [data,setData]=useState([
+  //   {
+  //     fileNumber: 1,
+  //     type:"file",
+  //     path:[],
+  //     fileName: "Prats.jpeg",
+  //     docType: "Ration Card",
+  //     fileType:"image/jpeg",
+  //     fileOwner:"Prats",
+  //     fileDesc: "This is a ration card",
+  //   },
+  //   {
+  //     fileNumber: 2,
+  //     type:"file",
+  //     path:[],
+  //     fileName: "DhruvAadhar.pdf",
+  //     docType: "Aadhar Card",
+  //     fileType:"application/pdf",
+  //     fileOwner:"Dhruv Kud",
+  //     fileDesc: "Fake Aadhar card for clubbing",
+  //   },
+  //   {
+  //     fileNumber: 3,
+  //     type:"file",
+  //     path:[],
+  //     fileName: "BhavyaAadhar.pdf",
+  //     docType: "Aadhar Card",
+  //     fileType:"application/pdf",
+  //     fileOwner:"Bhavya Gor",
+  //     fileDesc: "Fake Card",
+  //   },
+  //   {
+  //     fileNumber: 4,
+  //     type:"file",
+  //     path:[],
+  //     fileName: "license.pdf",
+  //     docType: "MarkSheet",
+  //     fileType:"application/pdf",
+  //     fileOwner:"Bhavya Gor",
+  //     fileDesc: "Fake Card",
+  //   },
+  //   {
+  //     fileNumber: 5,
+  //     type:"file",
+  //     path:[],
+  //     fileName: "RuchiPassport.pdf",
+  //     docType: "Passpor",
+  //     fileType:"application/pdf",
+  //     fileOwner:"Ruchi",
+  //     fileDesc: "Fake Card",
+  //   }
+  // ]);
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
@@ -119,36 +120,48 @@ const ScholarshipForm = () => {
 //   );
 
 
-// useEffect(() => {
-//     const url="http://localhost:8000/getfilesbyuser";
-//     const fetchData = async () => {
-//       try{
-//         setData([]);
-//         const email=user.useremail;
-//        const body = { email };
+useEffect(() => {
+    const url="http://localhost:8000/getfilesbyuser";
+    const fetchData = async () => {
+      try{
+        setData([]);
+        const email=user.useremail;
+       const body = { email };
 
-//         const response= await fetch(url, {
-//               method: "GET",
-//               headers: { "Content-Type": "application/json" },
-//               body: JSON.stringify(body),
-//             })
-//             const json = await response.json();
-//         const files = []
-//         for (const i in json) {
-//         files.push(json[i].value);
+        const response= await fetch(url, {
+              method: "GET",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(body),
+            })
+            const json = await response.json();
+        const files = []
+        for (const i in json) {
+        files.push(json[i].value);
 
-//         }
-//         setData(files)
+        }
+        setData(files)
         
 
-//       }catch (error) {
-//         //       console.log(error);
-//     }
-//   };
-  // fetchData();
-// },[])
+      }catch (error) {
+              console.log(error);
+    }
+  };
+  fetchData();
+},[])
 // setData(data);
-
+useEffect(() => {
+  data.map((file) => {
+    console.log(file.docType);
+    if(file.docType==="Passport"){
+      setIsPassport(true);
+      console.log("Psd");
+    }
+    else if(file.docType==="MarkSheet"){
+      setIsMarkSheet(true);
+      console.log("Lavda");
+    }
+  })
+},[data])
 
 const handleMarksheet=(e)=>{
   e.preventDefault();
@@ -165,19 +178,7 @@ const handlePassport=(e)=>{
 }
 
 
-useEffect(() => {
-  data.map((file) => {
-    console.log(file.docType);
-    if(file.docType==="Passport"){
-      setIsPassport(true);
-      console.log("Psd");
-    }
-    else if(file.docType==="MarkSheet"){
-      setIsMarkSheet(true);
-      console.log("Lavda");
-    }
-  })
-},[data])
+
 
 // console.log(name);
 // console.log(college);
