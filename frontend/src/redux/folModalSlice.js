@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  isFolModal: false
+  isFolModal: false,
+  path: [],
 };
 
 export const folModalSlice = createSlice({
@@ -11,10 +12,13 @@ export const folModalSlice = createSlice({
     setFolModal: (state, action) => {
       state.isFolModal = action.payload;
     },
+    setFolPath: (state, action) => {
+      state.path = action.payload;
+    }
   },
 });
 
-export const { setFolModal } =
+export const { setFolModal, setFolPath } =
   folModalSlice.actions;
 
 export default folModalSlice.reducer;

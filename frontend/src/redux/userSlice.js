@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   username: null,
   useremail: null,
-  usertype: "admin",
+  usertype: null,
   loading: false,
   error: false,
   mobileNo: null,
@@ -23,7 +23,7 @@ export const userSlice = createSlice({
       state.useremail = action.payload.email;
       state.mobileNo= action.payload.contact;
       state.dob= action.payload.dob;
-      state.usertype=action.payload.user
+      state.usertype=action.payload.user;
     },
 
     loginFailure: (state) => {

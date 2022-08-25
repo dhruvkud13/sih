@@ -107,7 +107,7 @@ function FileTable() {
       dispatch(setDrivingLicense(drivingCount));
     }
     docStats();
-  }, []);
+  }, [formModal.isFormModal]);
 
   // useEffect(() => {
   //   const initStats = () => {
