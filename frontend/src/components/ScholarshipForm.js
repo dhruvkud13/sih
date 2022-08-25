@@ -43,6 +43,7 @@ const ScholarshipForm = () => {
         body: JSON.stringify(body),
       }).then((res) => {
         // console.log(res);
+        dispatch(setSchModal(false))
         return res.json()
       }).then((data) => {
         console.log(data);
