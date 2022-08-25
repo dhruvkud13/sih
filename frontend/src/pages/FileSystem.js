@@ -37,6 +37,7 @@ function getItem(label, key, icon, children) {
 
 const Filesys = () => {
   const user = useSelector(state => state.user);
+  console.log(user)
   const [collapsed, setCollapsed] = useState(false);
   const [selectedKey, setSelectedKey] = useState(
     localStorage.getItem("key") == null ? "0" : localStorage.getItem("key")
@@ -50,10 +51,10 @@ const Filesys = () => {
     getItem("Deleted Files", "2", <DeleteOutlined />),
     getItem("Folders", "3", <FolderOutlined />),
     getItem("Statistics", "4", <PieChartOutlined />),
-    user.userType === "admin"
+    user.usertype === "admin"
       ? getItem("Existing Scholarships", "5", <BookOutlined />)
       : getItem("Scholarships", "5", <BookOutlined />),
-    user.userType === "admin" &&
+    user.usertype === "admin" &&
     getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),
@@ -123,8 +124,8 @@ const Filesys = () => {
                 {selectedKey === "2" && <DeletedTable />}
                 {selectedKey === "3" && <Folders />}
                 {selectedKey === "4" && <Graphs />}
-                {user.userType === "admin" ? selectedKey === "5" && <SchAdminUI /> : selectedKey === "5" && <ScholarshipUI />}
-                {user.userType === "admin" && selectedKey === "6" && <SchAdminUI />}
+                {user.usertype === "admin" ? selectedKey === "5" && <SchAdminUI /> : selectedKey === "5" && <ScholarshipUI />}
+                {user.usertype === "admin" && selectedKey === "6" && <SchAdminUI />}
 
               </div>
             </Content>
