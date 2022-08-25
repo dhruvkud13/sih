@@ -9,6 +9,7 @@ import Filesys from "./pages/FileSystem";
 import { Worker } from "@react-pdf-viewer/core";
 import Graphs from "./pages/Graphs";
 import { useSelector } from 'react-redux';
+import Folders from "./components/FolderTable";
 function App() {
   const user=useSelector(state=>state.user);
   console.log(user.useremail);
@@ -52,6 +53,7 @@ function App() {
             <Route path="/user" element={<UserHome />} />
             <Route path="/files" element={<Filesys />} />
             <Route path="/graphs" element={<Graphs />} />
+            <Route path="/folders" element={<Folders />} />
           </Routes>
         </Router>
       </Worker>
