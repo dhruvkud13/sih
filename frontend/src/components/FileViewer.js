@@ -13,16 +13,16 @@ export const FileView = (props) => {
   };
   const link = "https://ishaanhello.infura-ipfs.io/ipfs/" + props.rellink
   return (
-    <div className="absolute flex items-center justify-center min-w-full min-h-screen">
+    <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen">
       <div className="flex items-center justify-center shadow-2xl">
         <div className=" h-[800px] w-[900px] flex">
           {props.type === "pdf" ? (
             <div className=" h-[800px] w-[900px] flex">
-              {/* <Viewer fileUrl={link} /> */}
+              <Viewer fileUrl={link} />
             </div>
           ) : (
             <div className="bg-white flex items-center justify-center">
-              <img src={link} alt="" height={"800px"} width={"900px"} />
+              <img src={img} alt="" height={"800px"} width={"900px"} />
             </div>
           )}
           <div className="absolute pl-2 pt-2">
