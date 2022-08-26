@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setFormModal } from "../redux/formModalSlice.js";
 import { setFolModal } from "../redux/folModalSlice.js";
 import { useSelector } from "react-redux";
-
+import { Spin } from "antd";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -26,7 +26,7 @@ export const BankForm = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
-
+  const [loading, setLoading] = useState(false);
 
     const [bankaccountnumber, setBankaccountnumber] = useState("");
     const [bankname, setBankname] = useState("");
@@ -47,6 +47,7 @@ export const BankForm = () => {
     );
   };
   const handleSubmit = () => {
+    setLoading(true);
     const url = "http://localhost:8000/approvForm";
     console.log(fileList[0].name)
     console.log(fileList[0].originFileObj)
@@ -70,8 +71,10 @@ export const BankForm = () => {
         // console.log(response.data);
         console.log(response.data);
         dispatch(setFormModal(false));
+        setLoading(false);
       });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -95,6 +98,7 @@ export const BankForm = () => {
   };
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <div className="absolute"><Spin/></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
           <div className="flex justify-end w-[100%]">
