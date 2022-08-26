@@ -44,28 +44,6 @@ function ScholarshipFiles() {
     };
     fetchData();
   }, []);
-
-  const handleApprove = async (e) => {
-    const url = "http://localhost:8000/approvescholar";
-    try {
-      const email = user.useremail;
-      const scholarshipID = row.scholarshipID
-      console.log(scholarshipID);
-      const body = { email, scholarshipID };
-      await fetch(url, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      }).then((res) => {
-        return res.json();
-      }).then((data) => {
-        console.log(data);
-      })
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
   const style = {
     approveStyle:
       "text-white hover:text-red-500 bg-red-500 hover:bg-[#E3F2FD] duration-300 focus:outline-none text-raleway font-medium rounded-full text-sm px-5 py-2.5 text-center mb-2",
