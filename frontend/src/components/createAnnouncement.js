@@ -5,7 +5,7 @@ import { Form, Input, Modal, Upload} from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import  Spin  from "antd";
+import { Spin } from "antd";
 // import { setCreateModal } from "../../redux/schModalSlice.js";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";

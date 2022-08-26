@@ -12,17 +12,19 @@ import { useNavigate } from "react-router-dom";
 import loginimage from "../images/loginimage.svg";
 import Fade from "react-reveal/Fade";
 import validator from "validator";
-
+import { Spin } from "antd";
 const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordShown, setPasswordShown] = useState(false);
+  const [loading,setLoading] = useState(false);
   const [error, setError] = useState("");
   const user = useSelector((state) => state.user)
   const dispatch = useDispatch();
 
   const handleLogin = async (e) => {
+    
     e.preventDefault();
     dispatch(loginStart());
     const isEmail = validator.isEmail(email);
@@ -43,6 +45,7 @@ const Login = () => {
       setError("Password Format is invalid");
     } else {
       try {
+        setLoading(true);
         const body = { email, password };
         console.log(JSON.stringify(body));
         await fetch("http://localhost:8000/login", {
@@ -58,16 +61,19 @@ const Login = () => {
           console.log(email)
           console.log(user)
           console.log(user.userType)
+          setLoading(false);
           navigate("/files");
         });
       } catch (err) {
         console.log(err);
+        setLoading(false);
         dispatch(loginFailure());
       }
     }
   };
   return (
     <div className="flex">
+      
       <div className="min-h-screen justify-center items-center flex w-1/2">
         <img src={loginimage} alt="login" height="800" width="800" />
       </div>
@@ -156,6 +162,7 @@ const Login = () => {
           </div>
         </div>
       </Fade>
+      {loading&&<div className="absolute flex min-h-full min-w-full items-center justify-center"><Spin/></div>}
     </div>
   );
 };

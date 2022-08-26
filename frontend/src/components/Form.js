@@ -43,7 +43,7 @@ export const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
-    setLoading(true);
+
     const url =
       fileList[0].type === "image/jpeg"
         ? "http://localhost:8000/uploadJPEG"
@@ -68,6 +68,7 @@ export const UploadForm = () => {
       },
     };
     try {
+      setLoading(true);
       axios.post(url, formData, config).then((response) => {
         // console.log(response.data);
         console.log(response.data);
@@ -98,9 +99,8 @@ export const UploadForm = () => {
     dispatch(setFormModal(false));
   };
   return (
-    
+
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
-    <div className="absolute"> <Spin/></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
           <div className="flex justify-end w-[100%]">
@@ -177,6 +177,7 @@ export const UploadForm = () => {
           </div>
         </div>
       </Fade>
+      {loading && <div className="absolute flex min-h-full min-w-full items-center justify-center"><Spin /></div>}
     </div>
   );
 };
