@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useState} from 'react'
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { ExclamationCircleOutlined } from '@ant-design/icons';
@@ -8,6 +8,8 @@ const { confirm } = Modal;
 
 
 const AppliedSch = (props) => {
+  const [loading, setLoading] = useState(false);
+  const [visible, setVisible] = useState(false);
   const user = useSelector((state) => state.user);
   const handleApprove=async(e)=>{
     const url="http://localhost:8000/approvescholar";
@@ -55,19 +57,41 @@ const AppliedSch = (props) => {
     confirm({
       title: 'Do you want to approve or dissapprove?',
       icon: <ExclamationCircleOutlined />,
-      content: 'Some descriptions',
+      content: `CGPA: ${props.cgpa} , Colllege name: ${props.coll}`,
       okText:"Approve",
       cancelText:"Reject",
       onOk() {
         console.log('OK');
         handleApprove();
       },
-  
       onCancel() {
         console.log('Cancel');
         handleReject();
       },
     });
+    // <Modal
+    //     visible={visible}
+    //     title="Reject Or Approve Scholarship"
+    //     onOk={handleApprove}
+    //     onCancel={handleReject}
+    //     okText="Approve"
+    //     cancelText="Reject"
+    //     footer={[
+    //       <Button key="submit" type="primary"  onClick={()=>{}}>
+    //         Submit
+    //       </Button>,
+    //       <Button
+    //         key="link"
+    //         href={`"https://ishaanhello.infura-ipfs.io/ipfs/"${props.hash}`}
+    //         type="primary"
+    //         onClick={()=>{}}
+    //       >
+    //        View MarkSheet
+    //       </Button>,
+    //     ]}
+    //   >
+    //     <p>`CGPA: ${props.cgpa} , Colllege name: ${props.coll}`</p>
+    //   </Modal>
   };
   return (
     <div onClick={showConfirm}>
@@ -75,6 +99,7 @@ const AppliedSch = (props) => {
       
       <div className="font-bold text-[18px]">{props.name}</div>
       <div>{props.date}</div>
+      <div>{props.degree}</div>
       <div className='flex flex-row'>Status: {props.status}</div>
       <div className="text-txtgrey"></div>
   </div>
