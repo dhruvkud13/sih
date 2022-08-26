@@ -5,6 +5,7 @@ import { Form, Input, Modal, Upload} from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
+import  Spin  from "antd";
 // import { setCreateModal } from "../../redux/schModalSlice.js";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
@@ -27,6 +28,7 @@ const CreateAnnouncement = () => {
   const [previewVisible, setPreviewVisible] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
+  const [loading, setLoading] = useState(false);
   const [fileList, setFileList] = useState([]);
 //   const [dropdown, setDropdown] = useState("");
   const dispatch = useDispatch();
@@ -44,6 +46,7 @@ const CreateAnnouncement = () => {
     );
   };
   const handleSubmit = () => {
+    setLoading(true);
     const url ="http://localhost:8000/uploadAnnouncement";
 
     const formData = new FormData();
@@ -61,9 +64,11 @@ const CreateAnnouncement = () => {
       axios.post(url, formData, config).then((response) => {
         // console.log(response.data);
         console.log(response.data);
+        setLoading(false);
         // dispatch(setFormModal(false));
       });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -91,9 +96,10 @@ const CreateAnnouncement = () => {
     console.log(text);
     console.log(fileList);
   return (
-    <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <div className=" flex items-center justify-center min-w-full min-h-screen font-raleway">
+    <div className="absolute"><Spin/></div>
       <Fade bottom>
-        <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
+        <div className=" rounded-xl flex flex-col items-center justify-center bg-white p-5 shadow-2xl ">
           <div className="flex justify-end w-[100%]">
             {" "}
             <div className="text-[30px] font-bold pr-5">CREATE ANNOUNCEMENT</div>

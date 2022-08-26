@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 import { TiTick } from "react-icons/ti";
 import { setFormModal } from "../redux/formModalSlice.js";
 import { UploadForm } from "./Form.js";
-
+import Spin from "antd/lib/spin";
 
 const ScholarshipForm = () => {
   //   const { TextArea } = Input;
@@ -22,7 +22,7 @@ const ScholarshipForm = () => {
   const [dropdown, setDropdown] = useState("");
   const [marksheethash, setMarksheethash] = useState();
   const [passporthash, setPassporthash] = useState();
-
+  const [loading, setLoading] = useState(false);
   const [isPassport, setIsPassport] = useState(false);
   const [isMarkSheet, setIsMarkSheet] = useState(false);
   const [data, setData] = useState([]);
@@ -35,6 +35,7 @@ const ScholarshipForm = () => {
   const user = useSelector((state) => state.user);
   const handleSubmit = async () => {
     try {
+      setLoading(true);
       const scholarshipNumber=schModal.schNo;
       // const scholarshipNumber=5435454;
       const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,scholarshipNumber , "MarksheetHash": marksheethash, "PassportHash": passporthash };
@@ -45,12 +46,14 @@ const ScholarshipForm = () => {
         body: JSON.stringify(body),
       }).then((res) => {
         // console.log(res);
+        setLoading(false);
         dispatch(setSchModal(false))
         return res.json()
       }).then((data) => {
         console.log(data);
       });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
@@ -118,6 +121,7 @@ const ScholarshipForm = () => {
   };
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <div className="absolute"><Spin/></div>
       <Fade bottom>
         <div className="h-[48rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
           <div className="flex justify-end w-[32rem] pr-5 pt-10">

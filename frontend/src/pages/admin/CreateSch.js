@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 import { setCreateModal } from "../../redux/schModalSlice.js";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
-
+import { Spin } from "antd";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -29,6 +29,7 @@ const CreateSch = () => {
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
+  const [loading, setLoading] = useState(false);
 //   const [dropdown, setDropdown] = useState("");
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
@@ -45,6 +46,7 @@ const CreateSch = () => {
     );
   };
   const handleSubmit = () => {
+    setLoading(true);
     const url ="http://localhost:8000/createScholarship";
 
     //req.body.scholarshipName, req.body.scholarshipOrg, req.body.scholarshipDesc, hash.cid, req.body.adminEmail, date)
@@ -64,10 +66,12 @@ const CreateSch = () => {
       axios.post(url, formData, config).then((response) => {
         // console.log(response.data);
         console.log(response.data);
+        setLoading(false);
         dispatch(setCreateModal(false));
         // dispatch(setFormModal(false));
       });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -98,6 +102,7 @@ const CreateSch = () => {
     console.log(fileList);
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <div className="absolute"><Spin/></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
           <div className="flex justify-end w-[100%]">

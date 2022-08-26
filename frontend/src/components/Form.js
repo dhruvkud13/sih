@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setFormModal } from "../redux/formModalSlice.js";
 import { setFolModal } from "../redux/folModalSlice.js";
 import { useSelector } from "react-redux";
-
+import { Spin } from "antd";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -27,6 +27,7 @@ export const UploadForm = () => {
   const [previewTitle, setPreviewTitle] = useState("");
   const [fileList, setFileList] = useState([]);
   const [text, setText] = useState("");
+  const [loading, setLoading] = useState(false);
   const [dropdown, setDropdown] = useState("");
   const handleCancel = () => setPreviewVisible(false);
   const dispatch = useDispatch();
@@ -42,6 +43,7 @@ export const UploadForm = () => {
     );
   };
   const handleSubmit = () => {
+    setLoading(true);
     const url =
       fileList[0].type === "image/jpeg"
         ? "http://localhost:8000/uploadJPEG"
@@ -69,9 +71,11 @@ export const UploadForm = () => {
       axios.post(url, formData, config).then((response) => {
         // console.log(response.data);
         console.log(response.data);
+        setLoading(false);
         dispatch(setFormModal(false));
       });
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   };
@@ -94,7 +98,9 @@ export const UploadForm = () => {
     dispatch(setFormModal(false));
   };
   return (
+    
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
+    <div className="absolute"> <Spin/></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
           <div className="flex justify-end w-[100%]">
