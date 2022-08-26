@@ -18,6 +18,7 @@ const AppliedSch = (props) => {
   const handleApprove = async (e) => {
     const url = "http://localhost:8000/approvescholar";
     try {
+      setLoading(true);
       const email = props.email;
       const scholarshipID = props.no
       console.log(scholarshipID);
@@ -30,15 +31,19 @@ const AppliedSch = (props) => {
       }).then((res) => {
         return res.json();
       }).then((data) => {
+        setLoading(false);
         console.log(data);
+        localStorage.setItem("key",'0')
       })
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
   const handleReject = async (e) => {
     const url = "http://localhost:8000/rejectscholar";
     try {
+      setLoading(true);
       const email = props.email;
       const scholarshipID = props.no
       console.log(scholarshipID);
@@ -51,9 +56,12 @@ const AppliedSch = (props) => {
       }).then((res) => {
         return res.json();
       }).then((data) => {
+        setLoading(false);
         console.log(data);
+        localStorage.setItem("key",'0')
       })
     } catch (err) {
+      setLoading(false);
       console.log(err);
     }
   }
@@ -73,38 +81,15 @@ const AppliedSch = (props) => {
         handleReject();
       },
     });
-    // <Modal
-    //     visible={visible}
-    //     title="Reject Or Approve Scholarship"
-    //     onOk={handleApprove}
-    //     onCancel={handleReject}
-    //     okText="Approve"
-    //     cancelText="Reject"
-    //     footer={[
-    //       <Button key="submit" type="primary"  onClick={()=>{}}>
-    //         Submit
-    //       </Button>,
-    //       <Button
-    //         key="link"
-    //         href={`"https://ishaanhello.infura-ipfs.io/ipfs/"${props.hash}`}
-    //         type="primary"
-    //         onClick={()=>{}}
-    //       >
-    //        View MarkSheet
-    //       </Button>,
-    //     ]}
-    //   >
-    //     <p>`CGPA: ${props.cgpa} , Colllege name: ${props.coll}`</p>
-    //   </Modal>
   };
   return (
     <div >
-      <div className="rounded-xl shadow-md px-5 py-3 font-raleway flex flex-col">
+      <div className="rounded-xl shadow-md px-5 py-3 font-raleway flex flex-col items-center justify-center">
         <div onClick={() => { dispatch(setModal(true)) }}>View Marksheet</div>
         <div className="font-bold text-[18px]">{props.name}</div>
         <div>{props.date}</div>
         <div>{props.degree}</div>
-        <div  className='flex flex-row'>Status: {props.status}</div>
+        <div  className='flex'>Status: {props.status}</div>
         <div onClick={showConfirm} className="text-txtgrey">Decide</div>
       </div>
       {modal.isModal ? (

@@ -36,9 +36,9 @@ const ScholarshipForm = () => {
   const handleSubmit = async () => {
     try {
       setLoading(true);
-      const scholarshipNumber=schModal.schNo;
+      const scholarshipNumber = schModal.schNo;
       // const scholarshipNumber=5435454;
-      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,scholarshipNumber , "MarksheetHash": marksheethash, "PassportHash": passporthash };
+      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2, scholarshipNumber };
       console.log(JSON.stringify(body));
       await fetch("http://localhost:8000/applyforscholarship", {
         method: "POST",
@@ -121,7 +121,6 @@ const ScholarshipForm = () => {
   };
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
-    <div className="absolute"><Spin/></div>
       <Fade bottom>
         <div className="h-[48rem] w-[32rem] rounded-xl flex flex-col items-center justify-center  bg-white p-20 shadow-2xl ">
           <div className="flex justify-end w-[32rem] pr-5 pt-10">
@@ -191,6 +190,7 @@ const ScholarshipForm = () => {
       {formModal.isFormModal ? (
         <UploadForm />
       ) : (<div></div>)}
+      {loading && <div className="absolute flex min-h-full min-w-full items-center justify-center"><Spin /></div>}
     </div>
   );
 };

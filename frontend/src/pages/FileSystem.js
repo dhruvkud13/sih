@@ -60,7 +60,7 @@ const Filesys = () => {
       : getItem("Scholarships", "5", <BookOutlined />),
     user.usertype === "admin" &&
     getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
-    getItem("Annoucement Upload", "7", <MdOutlineAnnouncement />),
+    user.usertype ==="admin"&&getItem("Annoucement Upload", "7", <MdOutlineAnnouncement />),
 
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),

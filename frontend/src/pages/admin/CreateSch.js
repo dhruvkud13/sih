@@ -102,7 +102,6 @@ const CreateSch = () => {
     console.log(fileList);
   return (
     <div className="absolute flex items-center justify-center top-0 min-w-full min-h-screen font-raleway">
-    <div className="absolute"><Spin/></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center  bg-white p-10 shadow-2xl ">
           <div className="flex justify-end w-[100%]">
@@ -173,6 +172,7 @@ const CreateSch = () => {
           </div>
         </div>
       </Fade>
+      {loading&&<div className="absolute flex min-h-full min-w-full items-center justify-center"><Spin/></div>}
     </div>
   );
 };

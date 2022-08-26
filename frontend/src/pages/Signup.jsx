@@ -263,7 +263,7 @@ const SignUp = () => {
           </div>
         </div>
       </Fade>
-      {loading && <div className="absolute top-0"><Spin /></div>}
+      {loading && <div className="absolute flex min-h-full min-w-full items-center justify-center"><Spin /></div>}
     </div>
   );
 };
