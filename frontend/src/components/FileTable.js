@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { setModal } from "../redux/fileModalSlice.js";
 import { setFormModal } from "../redux/formModalSlice";
 import { useSelector } from "react-redux";
-import {setFolModal} from "../redux/folModalSlice";
+import { setFolModal } from "../redux/folModalSlice";
 import { FileView } from "./FileViewer";
 import "./FileTable.css";
 import differenceBy from "lodash/differenceBy";
@@ -34,34 +34,40 @@ function FileTable() {
   const [selectedRows, setSelectedRows] = React.useState([]);
   const [toggleCleared, setToggleCleared] = React.useState(false);
   const user = useSelector((state) => state.user);
-  const formModal = useSelector((state)=>state.formModal)
+  const formModal = useSelector((state) => state.formModal)
   useEffect(() => {
     const url =
-      // user.userType === "user"
-      //   ? "http://localhost:8000/getfilesbyuser"
-        // : 
+      user.usertype === "user"
+        ? "http://localhost:8000/getfilesbyuser"
+        :
         "http://localhost:8000/getallfiles";
-        const fetchData = async () => {
-          try {
-            setData([]);
-            const response = await fetch(url, {
-              method: "GET",
-              headers: { "Content-Type": "application/json" },
-            });
-            const json = await response.json();
-            const files = [];
-            for (const i in json) {
-              // console.log(json[i].value);
-              files.push(json[i].value);
-            }
-            setData(files);
-            console.log(files)
-            setLoading(false);
-    
-          } catch (error) {
-            console.log(error);
-          }
-        };
+    const fetchData = async () => {
+      try {
+        const fileEmail = user.useremail
+        const body = { fileEmail }
+        setData([]);
+        const response = user.usertype === "user" ? await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body)
+        }) : await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        const json = await response.json();
+        const files = [];
+        for (const i in json) {
+          // console.log(json[i].value);
+          files.push(json[i].value);
+        }
+        setData(files);
+        console.log(files)
+        setLoading(false);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
     const initStats = () => {
       var pdfCount = 0;
@@ -243,7 +249,7 @@ function FileTable() {
               onRowClicked={(selrow) => {
                 dispatch(setModal(true));
                 // console.log(selrow);
-                // setrow(row);
+                setrow(row);
               }}
               selectableRows
               contextActions={contextActions}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SchInfoCard from "../../components/SchInfoCard";
 import { setFormModal } from "../../redux/formModalSlice";
@@ -13,6 +13,33 @@ const ExistingSch = () => {
   const dispatch = useDispatch();
   const modal = useSelector((state) => state.modal);
   const schModal = useSelector((state) => state.schModal);
+  const[data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    const url="http://localhost:8000/getallscholarship";
+    const fetchData = async () => {
+      try {
+        setData([]);
+        const response = await fetch(url, {
+          method: "GET",
+          headers: { "Content-Type": "application/json" },
+        });
+        const json = await response.json();
+        const files = [];
+        for (const i in json) {
+          // console.log(json[i].value);
+          files.push(json[i].value);
+        }
+        setData(files);
+        console.log(files)
+        setLoading(false);
+
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  },[schModal.isCreateModal])
   return (
     <div>
       <div className="flex justify-between">
@@ -65,7 +92,11 @@ const ExistingSch = () => {
           />
         </div>
       </div>
-      {schModal.isCreateModal && <CreateSch/>}
+      <div>New Scholarships</div>
+      {data.map((item)=>(
+        <SchInfoCard name={item.scholarshipName} desc={item.scholarshipDesc}/>
+      ))}
+      
     </div>
   );
 };

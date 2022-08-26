@@ -25,7 +25,6 @@ import ScholarshipUI from "./ScholarshipUI";
 import ScholarshipForm from "../components/ScholarshipForm";
 import CreateSch from "./admin/CreateSch";
 import ExistingSch from "./admin/ExistingSch";
-
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -59,6 +58,7 @@ const Filesys = () => {
       : getItem("Scholarships", "5", <BookOutlined />),
     user.usertype === "admin" &&
     getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
+
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),
     //   getItem("Bill", "4"),
@@ -152,6 +152,10 @@ const Filesys = () => {
       {folModal.isFolModal ? (
         <FolderForm />
       ) : (<div></div>)}
+      {user.usertype == "user" && schModal.isSchModal ? (
+        <ScholarshipForm />
+      ) : (<div></div>)}
+      {schModal.isCreateModal && <CreateSch />}
     </div>
   );
 };

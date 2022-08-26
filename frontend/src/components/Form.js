@@ -123,6 +123,7 @@ export const UploadForm = () => {
                 </Select.Option>
                 <Select.Option value="Passport">Passport</Select.Option>
                 <Select.Option value="PAN Card">PAN Card</Select.Option>
+                <Select.Option value="Marksheet">Marksheet</Select.Option>
               </Select>
             </Form.Item>
             <Form.Item label="Enter Description">
