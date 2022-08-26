@@ -17,7 +17,7 @@ export const FolderForm = () => {
   const handleSubmit = async () => {
     try {
       const url = "http://localhost:8000/createFolder";
-      const body = { "path": folModal.path, "fileName": fileName, "fileEmail": "tash@gmail.com" };
+      const body = { "path": folModal.path, "fileName": fileName, "fileEmail": user.useremail };
       // console.log(JSON.stringify(body))
       await fetch(url, {
         method: "POST",

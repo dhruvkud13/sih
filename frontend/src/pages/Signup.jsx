@@ -12,6 +12,7 @@ import signupimage from "../images/signupimage.svg";
 import Fade from "react-reveal/Fade";
 import "./Signup.css";
 import validator from "validator";
+import { Spin } from "antd";
 
 const SignUp = () => {
   const [passwordShown, setPasswordShown] = useState(false);
@@ -22,12 +23,14 @@ const SignUp = () => {
   const [dob, setDob] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);  
   const [confirmPassword, setConfirmPassword] = useState("");
   const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
   const handleSignup = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const isValid = validator.isEmail(email);
     const isNumber = validator.isMobilePhone(contact, "en-IN");
@@ -69,10 +72,12 @@ const SignUp = () => {
             return res.json();
           })
           .then((data) => {
+            setLoading(false);
             console.log(data);
           });
         navigate("/login");
       } catch (err) {
+        setLoading(false);
         console.log(err);
       }
     }
@@ -258,6 +263,7 @@ const SignUp = () => {
           </div>
         </div>
       </Fade>
+      {loading && <div className="absolute top-0"><Spin /></div>}
     </div>
   );
 };
