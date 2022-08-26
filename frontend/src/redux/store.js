@@ -3,6 +3,7 @@ import userReducer from "./userSlice";
 import fileModalReducer from "./fileModalSlice";
 import formModalReducer from "./formModalSlice";
 import schModalReducer from "./schModalSlice";
+import jobModalReducer from "./jobModalSlice";
 import statReducer from "./statSlice";
 import deetsModalReducer from "./deetsModalSlice";
 import folModalReducer from "./folModalSlice";
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   modal: fileModalReducer,
   formModal: formModalReducer,
   schModal: schModalReducer,
+  jobModal: jobModalReducer,
   stat: statReducer,
   deetsModal: deetsModalReducer,
   folModal: folModalReducer,
