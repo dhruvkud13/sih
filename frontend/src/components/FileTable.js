@@ -249,7 +249,7 @@ function FileTable() {
               onRowClicked={(selrow) => {
                 dispatch(setModal(true));
                 // console.log(selrow);
-                // setrow(row);
+                setrow(row);
               }}
               selectableRows
               contextActions={contextActions}
