@@ -6,6 +6,7 @@ import {MdOutlinePendingActions} from 'react-icons/md'
 import {TiTickOutline} from 'react-icons/ti'
 import {ImCross} from 'react-icons/im'
 import { useSelector } from "react-redux";
+import AppliedSchU from './user/userApplied';
 
 const ScholarshipUI = () => {
 
@@ -54,6 +55,7 @@ const ScholarshipUI = () => {
           files.push(json[i].value);
 
         }
+        console.log(files);
         setapplyData(files)
       } catch (error) {
         console.log(error);
@@ -81,7 +83,7 @@ const ScholarshipUI = () => {
         <div className='font-raleway px-5 py-3 font-bold text-[20px] text-govtblue'>Applied Scholarships</div>
         <div>
         {/* {existData.map((item)=>console.log(item.scholarshipNumber))} */}
-        {applyData.map((item)=><AppliedSch name={item.scholarshipName} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
+        {applyData.map((item)=><AppliedSchU name={item.Degree} status={item.approved}  />)}
         </div>
         </div>
     </div>

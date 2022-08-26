@@ -33,6 +33,7 @@ function ScholarshipFiles() {
         const json = await response.json();
         const files = []
         for (const i in json) {
+          if(json[i].value.cgpa>=7)
           files.push(json[i].value);
         }
         console.log(files)
@@ -55,7 +56,10 @@ function ScholarshipFiles() {
   return loading === true ? (
     <div>loading </div>
   ) : (
-    <div className="flex flex-wrap">{data.map((item) => <AppliedSch name={item.Name} status={item.approved} no={item.scholarshipID} email={item.scholarshipEmail}/>)}</div>
+    <div className="flex flex-col ">
+      <div className="text-2xl font-raleway font-bold">Eligible Candidates:</div>
+      <div className="flex flex-wrap">{data.map((item) => <AppliedSch name={item.Name} degree={item.Degree} cgpa={item.cgpa} coll={item.CollegeName} status={item.approved} no={item.scholarshipID} email={item.scholarshipEmail}/>)}</div>
+      </div>
   );
 }
 

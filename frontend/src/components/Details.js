@@ -42,7 +42,7 @@ const Details = (props) => {
             <div className="text-[28px] font-bold pr-5">Student Details</div>
             <AiOutlineClose size={20} onClick={oncrossclick} />
           </div>
-          <div onClick={() => dispatch(setModal(true))}>rip scenes</div>
+          <div onClick={() => dispatch(setModal(true))}></div>
           <div onClick={() => { handleApprove() }}>Aprove</div>
           {modal.isModal ? (
             <FileView

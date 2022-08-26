@@ -25,6 +25,8 @@ import ScholarshipUI from "./ScholarshipUI";
 import ScholarshipForm from "../components/ScholarshipForm";
 import CreateSch from "./admin/CreateSch";
 import ExistingSch from "./admin/ExistingSch";
+import CreateAnnouncement from "../components/createAnnouncement";
+import { MdOutlineAnnouncement } from "react-icons/md";
 const { Content, Footer, Sider } = Layout;
 
 function getItem(label, key, icon, children) {
@@ -58,6 +60,7 @@ const Filesys = () => {
       : getItem("Scholarships", "5", <BookOutlined />),
     user.usertype === "admin" &&
     getItem("Scholarship Applications", "6", <QuestionCircleOutlined />),
+    getItem("Annoucement Upload", "7", <MdOutlineAnnouncement />),
 
     // getItem("User", "sub1", <UserOutlined />, [
     //   getItem("Tom", "3"),
@@ -133,6 +136,9 @@ const Filesys = () => {
                   : selectedKey === "5" && <ScholarshipUI />}
                 {user.usertype === "admin" && selectedKey === "6" && (
                   <SchAdminUI />
+                )}
+                {user.usertype === "admin" && selectedKey === "7" && (
+                  <CreateAnnouncement />
                 )}
               </div>
             </Content>
