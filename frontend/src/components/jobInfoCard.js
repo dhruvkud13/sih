@@ -1,6 +1,6 @@
 import React from 'react'
 import { useDispatch } from 'react-redux'
-import { setdefname, setJobModal,setJobID } from '../redux/schModalSlice'
+import { setdefname, setJobModal,setJobID } from '../redux/jobModalSlice'
 const JobInfoCard = (props) => {
   console.log(props.no)
   const dispatch = useDispatch();
