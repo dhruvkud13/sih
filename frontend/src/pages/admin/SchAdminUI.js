@@ -56,9 +56,9 @@ function ScholarshipFiles() {
   return loading === true ? (
     <div>loading </div>
   ) : (
-    <div className="flex flex-col ">
+    <div className="flex flex-col w-full">
       <div className="text-2xl font-raleway font-bold">Eligible Candidates:</div>
-      <div className="flex flex-wrap">{data.map((item) => <AppliedSch name={item.Name} degree={item.Degree} cgpa={item.cgpa} coll={item.CollegeName} status={item.approved} no={item.scholarshipID} email={item.scholarshipEmail}/>)}</div>
+      <div className="flex flex-wrap w-full">{data.map((item) => <AppliedSch name={item.Name} degree={item.Degree} cgpa={item.cgpa} coll={item.CollegeName} status={item.approved} no={item.scholarshipID} email={item.scholarshipEmail}/>)}</div>
       </div>
   );
 }

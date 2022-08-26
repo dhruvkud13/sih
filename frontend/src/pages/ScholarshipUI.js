@@ -1,10 +1,6 @@
 
 import React, { useState, useEffect } from 'react'
 import SchInfoCard from '../components/SchInfoCard'
-import AppliedSch from '../components/AppliedSch';
-import {MdOutlinePendingActions} from 'react-icons/md'
-import {TiTickOutline} from 'react-icons/ti'
-import {ImCross} from 'react-icons/im'
 import { useSelector } from "react-redux";
 import AppliedSchU from './user/userApplied';
 
@@ -62,7 +58,7 @@ const ScholarshipUI = () => {
       }
   };
     fetchData();
-  },[schModal.isApplyModal])
+  },[schModal.isApplyModal, schModal.isSchModal]);
   return (
     <div>
         <div className='font-raleway px-5 pb-3 font-bold text-[20px] text-govtblue'>Apply for existing government scholarships</div>
