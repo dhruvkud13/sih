@@ -8,6 +8,7 @@ const initialState = {
     passportCount:0,
     panCount:0,
     drivingCount:0,
+    marksheetCount:0,
 };
 
 export const statSlice = createSlice({
@@ -35,10 +36,13 @@ export const statSlice = createSlice({
       setDrivingLicense: (state,action) => {
         state.drivingCount = action.payload;
       },
+      setMarksheet: (state,action) => {
+        state.marksheetCount = action.payload;
+      }
   },
 });
 
-export const { setpdf,setjpeg, setAadharCard,setRationCard,setDrivingLicense,setPANCard,setPassport} =
+export const { setpdf,setjpeg, setAadharCard,setRationCard,setDrivingLicense,setPANCard,setPassport, setMarksheet} =
   statSlice.actions;
 
 export default statSlice.reducer;

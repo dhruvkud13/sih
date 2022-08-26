@@ -20,6 +20,7 @@ import {
   setDrivingLicense,
   setPassport,
   setPANCard,
+  setMarksheet,
 } from "../redux/statSlice";
 import Fade from "react-reveal/Fade";
 import { FolderForm } from "./Form";
@@ -69,51 +70,59 @@ function FileTable() {
       }
     };
     fetchData();
-    const initStats = () => {
-      var pdfCount = 0;
-      var jpegCount = 0;
-      data.map((file) => {
-        if (file.fileType === "image/jpeg") {
-          jpegCount++;
-        } else {
-          pdfCount++;
-        }
-      })
-      dispatch(setjpeg(jpegCount));
-      dispatch(setpdf(pdfCount));
-    }
-    initStats();
-    const docStats = () => {
-      var aadharCount = 0;
-      var rationCount = 0;
-      var passportCount = 0;
-      var panCount = 0;
-      var drivingCount = 0;
-      data.map((file) => {
-        if (file.docType === "Aadhar Card") {
-          aadharCount++;
-        }
-        else if (file.docType === "Ration Card") {
-          rationCount++;
-        }
-        else if (file.docType === "Passport") {
-          passportCount++;
-        }
-        else if (file.docType === "PAN Card") {
-          panCount++;
-        }
-        else if (file.docType === "Driving License") {
-          drivingCount++;
-        }
-      })
-      dispatch(setAadharCard(aadharCount));
-      dispatch(setRationCard(rationCount));
-      dispatch(setPassport(passportCount));
-      dispatch(setPANCard(panCount));
-      dispatch(setDrivingLicense(drivingCount));
-    }
-    docStats();
+    
   }, [formModal.isFormModal]);
+useEffect(() => {
+  const initStats = () => {
+    var pdfCount = 0;
+    var jpegCount = 0;
+    data.map((file) => {
+      if (file.fileType === "image/jpeg") {
+        jpegCount++;
+      } else {
+        pdfCount++;
+      }
+    })
+    dispatch(setjpeg(jpegCount));
+    dispatch(setpdf(pdfCount));
+  }
+  initStats();
+  const docStats = () => {
+    var aadharCount = 0;
+    var rationCount = 0;
+    var passportCount = 0;
+    var panCount = 0;
+    var drivingCount = 0;
+    var marksheetCount=0;
+    data.map((file) => {
+      if (file.docType === "Aadhar Card") {
+        aadharCount++;
+      }
+      else if (file.docType === "Ration Card") {
+        rationCount++;
+      }
+      else if (file.docType === "Passport") {
+        passportCount++;
+      }
+      else if (file.docType === "PAN Card") {
+        panCount++;
+      }
+      else if (file.docType === "Driving License") {
+        drivingCount++;
+      }
+      else if(file.docType === "Marksheet"){
+        marksheetCount++;
+      }
+    })
+    dispatch(setAadharCard(aadharCount));
+    dispatch(setRationCard(rationCount));
+    dispatch(setPassport(passportCount));
+    dispatch(setPANCard(panCount));
+    dispatch(setDrivingLicense(drivingCount));
+    dispatch(setMarksheet(marksheetCount));
+  }
+  docStats();
+}, [data])
 
   // useEffect(() => {
   //   const initStats = () => {
