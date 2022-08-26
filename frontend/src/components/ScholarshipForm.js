@@ -105,14 +105,14 @@ const ScholarshipForm = () => {
   const handleMarksheet = (e) => {
     e.preventDefault();
     if (isMarkSheet === true) {
-      document.getElementById("marksheet").innerHTML = "<span style='color: red;'>Document Already Submitted!<span><TiTick /></span></span>";
+      document.getElementById("marksheet").innerHTML = "<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
     } else { dispatch(setFormModal(true)) }
   }
 
   const handlePassport = (e) => {
     e.preventDefault();
     if (isPassport === true) {
-      document.getElementById("passport").innerHTML = "<span style='color: red;'>Document Already Submitted!<span><TiTick /></span></span>";
+      document.getElementById("passport").innerHTML = "<span style='color: green;'>Document Already Submitted!<span><TiTick /></span></span>";
     } else { dispatch(setFormModal(true)) }
   }
 

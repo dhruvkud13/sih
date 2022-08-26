@@ -11,6 +11,7 @@ const DocStats = () => {
     const passport=useSelector((state) => state.stat.passportCount);
     const pan=useSelector((state) => state.stat.panCount);
     const driving=useSelector((state) => state.stat.drivingCount);
+    const marksheet=useSelector((state) => state.stat.marksheetCount);
 
   const data2=[
     {
@@ -55,6 +56,15 @@ const DocStats = () => {
       "itemStyle": {
         "normal": {
           "color": "#f6d54a"
+        }
+      }
+    },
+    {
+      "value": marksheet,
+      "name": "Marksheet",
+      "itemStyle": {
+        "normal": {
+          "color": "#f66d4a"
         }
       }
     },
