@@ -77,11 +77,12 @@ const ScholarshipUI = () => {
         <SchInfoCard no="5435" name="Dr. S. Radhakrishnan Cultural Exchange Scholarship Scheme (ICCR)" desc="For the nationals of 29 countries namely, Australia, Belarus, Brazil, Cambodia, Canada, China, Colombia, Cuba, France, Guyana, Hungary, Indonesia, Israel, Kuwait, Laos, Malaysia, Mexico, Mongolia, Myanmar, Norway, Romania, Russia, Slovenia, Spain, Syria, Turkmenistan, Uzbekistan, Vietnam and Yemen." />
         <SchInfoCard no="445645" name="Africa Scholarship Scheme (MEA)" desc="For the nationals of 54 countries in the African continent" />
         </div>
+        <div className='font-raleway px-5 py-3 font-bold text-[20px] text-govtblue'>New Scholarships</div>
         {existData.map((item)=><SchInfoCard name={item.scholarshipName} desc={item.scholarshipDesc} no={item.scholarshipNumber}/>)}
         <div className='font-raleway px-5 py-3 font-bold text-[20px] text-govtblue'>Applied Scholarships</div>
         <div>
         {/* {existData.map((item)=>console.log(item.scholarshipNumber))} */}
-        {applyData.map((item)=><AppliedSch name={item.scholarshipName} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
+        {applyData.map((item)=><AppliedSch name={item.scholarshipEmail} desc={item.scholarshipDesc} date={item.date} approved={item.approved} />)}
         </div>
         </div>
     </div>

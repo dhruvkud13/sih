@@ -20,6 +20,8 @@ const ScholarshipForm = () => {
   const [college, setCollege] = useState("");
   const [cgpa, setCgpa] = useState("");
   const [dropdown, setDropdown] = useState("");
+  const [marksheethash, setMarksheethash] = useState();
+  const [passporthash, setPassporthash] = useState();
 
   const [isPassport, setIsPassport] = useState(false);
   const [isMarkSheet, setIsMarkSheet] = useState(false);
@@ -35,7 +37,7 @@ const ScholarshipForm = () => {
     try {
       const scholarshipNumber=schModal.schNo;
       // const scholarshipNumber=5435454;
-      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,scholarshipNumber };
+      const body = { "Name": user.username, "Collegename": college, "YoG": dropdown, cgpa, "scholarshipEmail": user.useremail, "Degree": dropdown2,scholarshipNumber , "MarksheetHash": marksheethash, "PassportHash": passporthash };
       console.log(JSON.stringify(body));
       await fetch("http://localhost:8000/applyforscholarship", {
         method: "POST",
@@ -88,9 +90,11 @@ const ScholarshipForm = () => {
       console.log(file.docType);
       if (file.docType === "Passport") {
         setIsPassport(true);
+        setPassporthash(file.hash);
       }
       else if (file.docType === "Marksheet") {
         setIsMarkSheet(true);
+        setMarksheethash(file.hash);
       }
     })
   }, [data])
