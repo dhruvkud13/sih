@@ -17,6 +17,7 @@ import CreateAnnouncement from "././components/createAnnouncement";
 import BankForm from "./components/bankForm";
 import HiringApply from './components/HiringApply';
 import CreateHiring from "./components/HiringCreate";
+import ExistingJobs from "./pages/admin/ExistingJobs";
 function App() {
   const user = useSelector(state => state.user);
   console.log(user.useremail)
@@ -74,6 +75,7 @@ function App() {
             <Route path="/announcement" element={<CreateAnnouncement />} />
             <Route path="/hiring" element={<HiringApply />} />
             <Route path="/createhiring" element={<CreateHiring />} />
+            <Route path="/exist" element={<ExistingJobs />} />
           </Routes>
         </Router>
       </Worker>

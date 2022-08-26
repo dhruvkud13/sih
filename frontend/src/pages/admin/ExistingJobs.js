@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import JobInfoCard from "../../components/JobInfoCard";
+import JobInfoCard from "../../components/jobInfoCard";
 import { setFormModal } from "../../redux/formModalSlice";
 import { setCreateModal } from "../../redux/jobModalSlice";
 import HiringCreate from "../../components/HiringCreate";
@@ -16,7 +16,7 @@ const ExistingJobs = () => {
   const[data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    const url="http://localhost:8000/getallscholarship";
+    const url="http://localhost:8000/getalljob";
     const fetchData = async () => {
       try {
         setData([]);
@@ -61,21 +61,13 @@ const ExistingJobs = () => {
         </div>
       </div>
       <div className="flex-wrap">
-        <div className="">
-          <JobInfoCard
-            name="Atal Bihari Vajpayee General Scholarship Scheme (ICCR)"
-            desc="The Council has introduced return airfare for all under this scheme w.e.f 2022-23. The earlier students will continue to be governed by earlier guidelines."
-          />
-          <JobInfoCard
-            name="Suborno Jayanti Scholarship Scheme (ICCR)"
-            desc="The scholarships to Bangladesh nationals will be offered under one scheme Suborno Jayanti Scholarship Scheme subsuming all other schemes under which scholarships were being offered till now."
-          />
-        </div>
-        
+      {data.map((item)=>(
+        <JobInfoCard name={item.JobDesc} desc={item.JobDesc}/>
+      ))}
       </div>
       <div>New Jobs</div>
       {data.map((item)=>(
-        <JobInfoCard name={item.jobName} desc={item.jobDesc}/>
+        <JobInfoCard name={item.jobName} desc={item.jobDesc} no={item.JobNumber}/>
       ))}
       
     </div>

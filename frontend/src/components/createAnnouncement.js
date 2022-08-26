@@ -5,7 +5,7 @@ import { Form, Input, Modal, Upload} from "antd";
 import { AiOutlineClose } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
-import  Spin  from "antd";
+// import  Spin  from "antd";
 // import { setCreateModal } from "../../redux/schModalSlice.js";
 import axios from "axios";
 import { PlusOutlined } from "@ant-design/icons";
@@ -97,7 +97,7 @@ const CreateAnnouncement = () => {
     console.log(fileList);
   return (
     <div className=" flex items-center justify-center min-w-full min-h-screen font-raleway">
-    <div className="absolute"><Spin/></div>
+    <div className="absolute"></div>
       <Fade bottom>
         <div className=" rounded-xl flex flex-col items-center justify-center bg-white p-5 shadow-2xl ">
           <div className="flex justify-end w-[100%]">

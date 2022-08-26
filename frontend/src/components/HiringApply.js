@@ -35,11 +35,11 @@ const JobForm = () => {
   const user = useSelector((state) => state.user);
   const handleSubmit = async () => {
     try {
-      const JobID=jobModal.jobNo;
+      const JobID=jobModal.JobNumber;
       // const JobNumber=5435454;
-      const body = { "name": user.username, "age": age, "contact": contact, "degree":degree, "JobEmail": user.useremail, "workex":workex };
+      const body = { "name": user.username, "age": age, "contact": contact, "degree":degree, "JobEmail": user.useremail,JobID, "workex":workex };
       console.log(JSON.stringify(body));
-      await fetch("http://localhost:8000/applyforjob", {
+      await fetch("http://localhost:8000/applyforJob", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
@@ -56,48 +56,49 @@ const JobForm = () => {
   }
 
 
-//   useEffect(() => {
-//     const url = "http://localhost:8000/getfilesbyuser";
-//     const fetchData = async () => {
-//       try {
-//         setData([]);
-//         const JobEmail = user.useremail;
-//         const body = { JobEmail };
+  useEffect(() => {
+    const url = "http://localhost:8000/getfilesbyuser";
+    const fetchData = async () => {
+      try {
+        setData([]);
+        const fileEmail = user.useremail;
+        const body = { fileEmail };
 
-//         const response = await fetch(url, {
-//           method: "POST",
-//           headers: { "Content-Type": "application/json" },
-//           body: JSON.stringify(body),
-//         })
-//         const json = await response.json();
-//         const files = []
-//         for (const i in json) {
-//           files.push(json[i].value);
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        })
+        const json = await response.json();
+        const files = []
+        for (const i in json) {
+          files.push(json[i].value);
 
-//         }
-//         setData(files)
+        }
+        console.log(files);
+        setData(files)
 
 
-//       } catch (error) {
-//         console.log(error);
-//       }
-//     };
-//     fetchData();
-//   }, [formModal.isFormModal])
-//   // setData(data);
-//   useEffect(() => {
-//     data.map((file) => {
-//       console.log(file.docType);
-//       if (file.docType === "Passport") {
-//         setIsPassport(true);
-//         setPassporthash(file.hash);
-//       }
-//       else if (file.docType === "Marksheet") {
-//         setIsMarkSheet(true);
-//         setMarksheethash(file.hash);
-//       }
-//     })
-//   }, [data])
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchData();
+  }, [formModal.isFormModal])
+  // setData(data);
+  useEffect(() => {
+    data.map((file) => {
+      console.log(file.docType);
+      if (file.docType === "Passport") {
+        setIsPassport(true);
+        setPassporthash(file.hash);
+      }
+      else if (file.docType === "Marksheet") {
+        setIsMarkSheet(true);
+        setMarksheethash(file.hash);
+      }
+    })
+  }, [data])
 
   const handleMarksheet = (e) => {
     e.preventDefault();
